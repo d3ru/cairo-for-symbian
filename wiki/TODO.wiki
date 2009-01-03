@@ -6,7 +6,7 @@ This is just a brain dump of what to do next in no particular order.
 
 = Details =
 
- * Build Cairo as DLL instead of static library. This is just a matter of sorting out which DLL import/export macros to use for function declaration and definition.
+ * Build Cairo as DLL instead of static library. This is just a matter of sorting out various compiler DLL import/export keyword to use for function declaration and definition.
  * Add support for GCCE and ARMv5 target.
  * Create PKG/SIS installer to allow testing on Nokia phones
  * Implement Symbian OS surface backend (if it makes sense to do that), or is it enough to just use current approach of binding Cairo surface to a pixmap? Perhaps for convenience it would be better to have something like `cairo_symbian_surface_create_for_bitmap(CFbsBitmap*)`. It may be also desirable to be able to do on-screen rendering by creating Cairo surface that binds to a window. In a similar way to [http://www.khronos.org EGL], it may be necessary to support surface creation from a pixmap (`eglCreatePixmapSurface`) and a window (`eglCreateWindowSurface`). The problem is that Cairo does not support double-buffering (which is likely needed for a window surface) and relies on external module to do that. It will be difficult to do that in Symbian OS without introducing unique API to perform swap buffers (may be we can use `cairo_surface_finish` to do that?)
