@@ -8,7 +8,7 @@ This is just a brain dump of what to do next in no particular order.
 
  * Build Cairo as DLL instead of static library. This is just a matter of sorting out various compiler DLL import/export keyword to use for function declaration and definition.
  * Add support for ARMV5 target.
- * Implement Symbian OS surface backend to allow Cairo rendering to a window (RWindow). For off-screen rendering to a pixmap (CFbsBitmap), I think current approach using image surface functionality is sufficient.
+ * Improve Symbian OS surface backend to allow window surface creation and destruction outside `CCoeControl::Draw` function.
  * Learn more about Cairo font/text rendering mechanics
  * Implement Symbian OS font rendering backend (if possible at all). This is a very complex area which might be a real blocking issue. May end up requiring [http://www.freetype.org Freetype] to be used in addition to built-in font rasterizer.
  * Build and run existing Cairo regression test-suite
