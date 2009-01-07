@@ -1,0 +1,36 @@
+target		pixman-1.lib
+targettype	lib
+
+systeminclude	/epoc32/include/stdapis
+systeminclude	../../pixman
+
+userinclude	../../pixman
+
+sourcepath	../../pixman
+
+MACRO		PACKAGE=pixman-1
+MACRO		PACKAGE_VERSION=""
+MACRO		PACKAGE_BUGREPORT=""
+
+source		pixman-image.c
+source		pixman-access.c
+source		pixman-access-accessors.c
+source		pixman-region16.c
+source		pixman-region32.c
+source		pixman-compose.c
+source		pixman-compose-accessors.c
+source		pixman-combine32.c
+source		pixman-combine64.c
+source		pixman-pict.c
+source		pixman-source.c
+source		pixman-transformed.c
+source		pixman-transformed-accessors.c
+source		pixman-utils.c
+source		pixman-edge.c
+source		pixman-edge-accessors.c
+source		pixman-trap.c
+source		pixman-compute-region.c
+source		pixman-timer.c
+source		pixman-matrix.c
+
+library		libc.lib

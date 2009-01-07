@@ -1,0 +1,49 @@
+target		hellocairo.exe
+targettype	exe
+uid			0x100039ce 0xa000018f
+
+systeminclude	/epoc32/include
+systeminclude	/epoc32/include/stdapis
+systeminclude	/epoc32/include/cairo
+userinclude		.
+
+sourcepath	.
+source		main.cpp
+source		myapp.cpp
+source		myappview.cpp
+source		myappui.cpp
+source		mydoc.cpp
+source		cairo_samples.cpp
+
+start resource hellocairo.rss
+targetpath resource/apps
+end
+
+start resource hellocairo_reg.rss
+#ifdef WINSCW
+targetpath /private/10003a3f/apps
+#else
+targetpath /private/10003a3f/import/apps
+#endif
+end
+
+library	euser.lib
+library	apparc.lib
+library	eikcore.lib
+library cone.lib
+library	avkon.lib
+library fbscli.lib
+library ws32.lib
+
+library			libc.lib
+staticlibrary	cairo-static.lib
+
+#ifndef __WINSCW__
+library			gdi.lib
+library			libm.lib
+library			libpthread.lib
+library			libz.lib
+staticlibrary	libpng.lib
+staticlibrary	pixman-1.lib
+#endif
+

@@ -1,0 +1,15 @@
+prj_platforms
+winscw gcce armv5
+
+prj_mmpfiles
+cairo-static.mmp
+
+prj_exports
+../../cairo-version.h		/epoc32/include/cairo/cairo-version.h
+../../src/cairo-features.h	/epoc32/include/cairo/cairo-features.h
+../../src/cairo.h		/epoc32/include/cairo/cairo.h
+../../src/cairo-deprecated.h	/epoc32/include/cairo/cairo-deprecated.h
+../../src/cairo-ps.h		/epoc32/include/cairo/cairo-ps.h
+../../src/cairo-pdf.h		/epoc32/include/cairo/cairo-pdf.h
+../../src/cairo-svg.h		/epoc32/include/cairo/cairo-svg.h
+../../src/cairo-symbian.h	/epoc32/include/cairo/cairo-symbian.h

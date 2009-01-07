@@ -1,0 +1,4 @@
+#include "../lpng1234/projects/symbian/bld.inf"
+#include "../pixman-0.13.2/projects/symbian/bld.inf"
+#include "../cairo-1.8.6/projects/symbian/bld.inf"
+#include "../hellocairo/bld.inf"

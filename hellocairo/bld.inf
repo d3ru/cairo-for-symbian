@@ -1,0 +1,8 @@
+prj_platforms
+winscw gcce armv5
+
+prj_mmpfiles
+hellocairo.mmp
+
+prj_exports
+data\romedalen.png	c:\romedalen.png

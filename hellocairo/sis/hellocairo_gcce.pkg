@@ -1,0 +1,20 @@
+&EN
+
+; standard SIS file header
+#{"HelloCairo"},(0xA000018F),1,0,0
+
+;Localised Vendor name
+%{"Vendor-EN"}
+
+;Unique Vendor name
+:"iwanj@users.sourceforge.net"
+
+;Supports Series 60 v 3.0
+[0x101F7961], 0, 0, 0, {"S60ProductID"}
+
+;Files to install
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\release\gcce\urel\hellocairo.exe" -"!:\sys\bin\hellocairo.exe"
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\data\z\resource\apps\hellocairo.rsc" - "!:\resource\apps\hellocairo.rsc"
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\data\z\private\10003a3f\import\apps\hellocairo_reg.rsc" - "!:\private\10003a3f\import\apps\hellocairo_reg.rsc"
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\data\c\romedalen.png" - "!:\data\romedalen.png"
+
