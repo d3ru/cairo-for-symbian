@@ -62,19 +62,6 @@ CMyAppView::~CMyAppView()
     delete iTimer;
     }
 
-LOCAL_C cairo_format_t cairo_format(TDisplayMode mode)
-	{
-	switch (mode)
-		{
-		case EColor16MU:
-			return CAIRO_FORMAT_RGB24;
-		case EColor16MA:
-			return CAIRO_FORMAT_ARGB32;
-		}
-
-	__ASSERT_ALWAYS(EFalse, User::Invariant());	
-	}
-
 void CMyAppView::Draw( const TRect& aRect) const
     {
     if (!iStarted)
