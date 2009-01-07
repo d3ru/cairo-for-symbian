@@ -1,0 +1,5 @@
+prj_platforms
+winscw gcce armv5
+
+prj_mmpfiles
+libpng.mmp

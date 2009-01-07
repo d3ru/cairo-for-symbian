@@ -1,0 +1,52 @@
+NAME abcd
+
+#include <eikon.rh>
+#include <avkon.rh>
+#include <avkon.rsg>
+#include <appinfo.rh>
+#include "myappcmd.h"
+
+RESOURCE RSS_SIGNATURE
+    {
+    }
+
+RESOURCE TBUF r_default_document_name
+    {
+    buf="abcd";
+    }
+
+RESOURCE EIK_APP_INFO
+    {
+    menubar = r_myapp_menubar;
+    cba = R_AVKON_SOFTKEYS_OPTIONS_EXIT;
+    }
+
+RESOURCE MENU_BAR r_myapp_menubar
+    {
+    titles =
+        {
+        MENU_TITLE { menu_pane = r_myapp_menu; }
+        };
+    }
+
+RESOURCE MENU_PANE r_myapp_menu
+    {
+    items =
+        {
+        MENU_ITEM
+            {
+            command = EUserCmdStart;
+            txt = "Start";
+            },
+        MENU_ITEM
+            {
+            command = EUserCmdStop;
+            txt = "Stop";
+            },
+        MENU_ITEM
+            {
+            command = EAknSoftkeyExit;
+            txt = "Exit";
+            }
+        };
+    }

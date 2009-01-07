@@ -1,0 +1,9 @@
+#include <appinfo.rh>
+
+UID2 KUidAppRegistrationResourceFile
+UID3 0xa000018f
+
+RESOURCE APP_REGISTRATION_INFO
+  {
+  app_file="hellocairo";
+  }

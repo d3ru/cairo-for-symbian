@@ -1,0 +1,90 @@
+target		cairo-static.lib
+targettype	lib
+
+MACRO		HAVE_PTHREAD_H
+MACRO		HAVE_STDINT_H
+
+systeminclude 	/epoc32/include
+systeminclude	/epoc32/include/stdapis
+systeminclude	../../../lpng1234
+systeminclude	../../../pixman-0.13.2/pixman
+userinclude		../../src
+
+sourcepath	../../src
+
+source		cairo-analysis-surface.c
+source		cairo-arc.c
+source		cairo-array.c
+source		cairo-atomic.c
+source		cairo-base85-stream.c
+source		cairo-bentley-ottmann.c
+source		cairo-cache.c
+source		cairo-cff-subset.c
+source		cairo-clip.c
+source		cairo-color.c
+source		cairo-debug.c
+source		cairo-deflate-stream.c
+source		cairo-fixed.c
+source		cairo-font-face-twin-data.c
+source		cairo-font-face-twin.c
+source		cairo-font-face.c
+source		cairo-font-options.c
+source		cairo-freelist.c
+source		cairo-gstate.c
+source		cairo-hash.c
+source		cairo-hull.c
+source		cairo-image-surface.c
+source		cairo-lzw.c
+source		cairo-matrix.c
+source		cairo-meta-surface.c
+source		cairo-misc.c
+source		cairo-mutex.c
+source		cairo-output-stream.c
+source		cairo-paginated-surface.c
+source		cairo-path-bounds.c
+source		cairo-path-fill.c
+source		cairo-path-fixed.c
+source		cairo-path-stroke.c
+source		cairo-path.c
+source		cairo-pattern.c
+source		cairo-pdf-operators.c
+source		cairo-pdf-surface.c
+source		cairo-pen.c
+source		cairo-png.c
+source		cairo-polygon.c
+source		cairo-ps-surface.c
+source		cairo-rectangle.c
+source		cairo-region.c
+source		cairo-scaled-font-subsets.c
+source		cairo-scaled-font.c
+source		cairo-skiplist.c
+source		cairo-slope.c
+source		cairo-spline.c
+source		cairo-stroke-style.c
+source		cairo-surface-fallback.c
+source		cairo-surface.c
+source		cairo-svg-surface.c
+source		cairo-traps.c
+source		cairo-truetype-subset.c
+source		cairo-type1-fallback.c
+source		cairo-type1-subset.c
+source		cairo-type3-glyph-surface.c
+source		cairo-unicode.c
+source		cairo-user-font.c
+source		cairo-version.c
+source		cairo-wideint.c
+source		cairo.c
+
+source		cairo-symbian-surface.cpp
+source		cairo-symbian-surface-private.cpp
+
+library		euser.lib
+library		gdi.lib
+library		fbscli.lib
+
+library		libc.lib
+library		libpthread.lib
+library		libz.lib
+
+staticlibrary	libpng.lib
+staticlibrary	pixman-1.lib
