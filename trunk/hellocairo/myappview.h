@@ -25,6 +25,7 @@
 
 #include <e32base.h>
 #include <coecntrl.h>
+#include <cairo.h>
 
 class CMyAppView : public CCoeControl
     {
@@ -45,12 +46,16 @@ public:
 private:
     void ConstructL(const TRect& aRect);
     CMyAppView();
+    cairo_t* Context() const {return iContext;}
 
 private:
 	CPeriodic* iTimer;
 	mutable TInt iIdx;
 	TInt iNumberOfSamples;
 	TBool iStarted;
+	
+	cairo_surface_t* iSurface;
+	cairo_t* iContext;
     };
 
 #endif
