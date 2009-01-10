@@ -8,7 +8,7 @@ This is some kind of roadmap for this project.
 
  * Build Cairo as DLL instead of static library. Hopefully this is just a matter of sorting out various compiler DLL import/export keyword to use for function declaration and definition, and doesn't need to deal with various writable static data.
  * Add support for ARMV5 target.
- * Improve Symbian OS surface backend to allow Cairo context and surface creation/destruction outside `CCoeControl::Draw` function. Current backend implementation should just work but I'm having various problem with Cairo implementation itself at the moment.
+ * Improve Symbian OS surface backend to allow Cairo context and surface creation/destruction outside `CCoeControl::Draw` function. Current Symbian OS backend implementation should just work but I'm having various issues with Cairo implementation itself at the moment e.g. memory leaks.
  * Learn more about Cairo font/text rendering mechanics
  * Implement Symbian OS font rendering backend. This is a complex area which might take a long time to deal with. May end up requiring [http://www.freetype.org FreeType] to be used in addition to Symbian OS built-in font rasterizer.
  * Build and run existing Cairo regression test-suite
