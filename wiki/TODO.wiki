@@ -14,4 +14,6 @@ This is some kind of roadmap for this project.
  * Build and run existing Cairo regression test-suite
  * Bugs fixing
  * Migrate to Makefile build system
+ * Code review
+ * Optimisation
  * Integrate back to Cairo mainline
