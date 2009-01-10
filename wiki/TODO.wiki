@@ -16,3 +16,4 @@ This is some kind of roadmap for this project.
  * Code review
  * Backend optimisation
  * Integrate back to Cairo mainline
+ * Study the feasibility of using [http://www.khronos.org/openvg/ OpenVG] to implement Symbian OS surface backend to enable hardware accelerated rendering.
