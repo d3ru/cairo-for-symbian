@@ -406,12 +406,17 @@ static void draw_text(cairo_t* cr)
 	cairo_show_text (cr, "Hello");
 
 	cairo_move_to (cr, 70.0, 165.0);
+#ifdef HAS_CAIRO_TEXT_PATH_FIX
 	cairo_text_path (cr, "void");
 	cairo_set_source_rgb (cr, 0.5, 0.5, 1);
 	cairo_fill_preserve (cr);
 	cairo_set_source_rgb (cr, 0, 0, 0);
 	cairo_set_line_width (cr, 2.56);
 	cairo_stroke (cr);
+#else
+	cairo_set_source_rgb (cr, 0.5, 0.5, 1);	
+	cairo_show_text (cr, "void");
+#endif
 
 	/* draw helping lines */
 	cairo_set_source_rgba (cr, 1, 0.2, 0.2, 0.6);
