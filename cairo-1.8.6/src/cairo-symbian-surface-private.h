@@ -47,8 +47,6 @@ class TCairoSymbianUtil
 public:
 	static cairo_content_t ToCairoContent(TDisplayMode);
 	static cairo_format_t ToCairoFormat(TDisplayMode);
-	static TDisplayMode ToDisplayMode(cairo_format_t);
-	static TDisplayMode ToDisplayMode(cairo_content_t, int);
 	};
 
 class RWsSession;
@@ -93,7 +91,7 @@ private:
 	RWindow* iWin;
 	CWindowGc* iGc;
 	CWsScreenDevice* iScr;
-	CWsBitmap* iBuffer;
+	CWsBitmap* iCache;
 	};
 
 #endif /* CAIRO_SYMBIAN_SURFACE_PRIVATE_H */
