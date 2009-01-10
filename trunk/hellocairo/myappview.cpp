@@ -49,6 +49,17 @@ void CMyAppView::ConstructL( const TRect& aRect )
     SetRect( aRect );
     ActivateL();
 
+    iSurface = cairo_symbian_surface_create(&Window());
+    User::LeaveIfNull(iSurface);
+    
+    iContext = cairo_create(iSurface);
+    User::LeaveIfNull(iContext);
+    cairo_status_t err = cairo_status(iContext);
+    if (err == CAIRO_STATUS_NO_MEMORY)
+    	{
+    	User::Leave(KErrNoMemory);
+    	}
+
     iNumberOfSamples = number_of_cairo_samples();
     iTimer = CPeriodic::NewL(CActive::EPriorityLow);
     }
@@ -60,29 +71,37 @@ CMyAppView::CMyAppView()
 CMyAppView::~CMyAppView()
     {
     delete iTimer;
+    
+	__ASSERT_DEBUG(cairo_get_reference_count(iContext) == 1, User::Invariant());
+    cairo_destroy(iContext);
+    cairo_surface_destroy(iSurface);
+    cairo_debug_reset_static_data();
     }
 
 void CMyAppView::Draw( const TRect& aRect) const
     {
+    /* do not mix native and Cairo rendering to the same window, it is not supported */
     if (!iStarted)
     	{
     	SystemGc().Clear();
     	return;
     	}
 
-    cairo_surface_t* surface = cairo_symbian_surface_create(&Window());
-    cairo_t* cr = cairo_create(surface);
-    
+    cairo_t* cr = Context();
+    cairo_save(cr);
+
+    /* clear surface to opaque white */
+    cairo_set_source_rgb(cr, 1, 1, 1);
+    cairo_paint(cr);
+    cairo_set_source_rgb(cr, 0, 0, 0);
+
+    /* draw Cairo samples */
 	draw_function draw = cairo_samples(iIdx);
 	draw(cr);
-    
-	cairo_destroy(cr);
-	cairo_surface_destroy(surface);
 
-    if (++iIdx >= iNumberOfSamples)
-    	{
-    	iIdx = 0;
-    	}
+	cairo_restore(cr);
+
+    iIdx = (iIdx+1) % iNumberOfSamples;
     }
 
 void CMyAppView::SizeChanged()
