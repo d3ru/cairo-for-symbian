@@ -52,6 +52,29 @@ _cairo_symbian_surface_finish(void *surface) {
 }
 
 static cairo_status_t
+_cairo_symbian_surface_acquire_source_image (void *abstract_surface,
+			 						cairo_image_surface_t **image_out,
+			 						void **image_extra) {
+
+	XCairoSymbianSurface *sym_surface = (XCairoSymbianSurface *) abstract_surface;
+	*image_out = sym_surface->Lock();
+	*image_extra = NULL;
+
+	return CAIRO_STATUS_SUCCESS;	
+}
+
+static void
+_cairo_symbian_surface_release_source_image (void *abstract_surface,
+			 							cairo_image_surface_t *image,
+				 							void *image_extra) {
+
+	cairo_surface_destroy((cairo_surface_t*) image);
+
+	XCairoSymbianSurface *sym_surface = (XCairoSymbianSurface *) abstract_surface;
+	sym_surface->Unlock();
+}
+
+static cairo_status_t
 _cairo_symbian_surface_acquire_dest_image (void *abstract_surface,
 			 						cairo_rectangle_int_t *interest_rect,
 			 						cairo_image_surface_t **image_out,
@@ -77,6 +100,8 @@ _cairo_symbian_surface_release_dest_image (void *abstract_surface,
 
 	XCairoSymbianSurface *sym_surface = (XCairoSymbianSurface *) abstract_surface;
 	sym_surface->Unlock();
+
+	sym_surface->Flush();
 }
 
 static cairo_int_status_t
@@ -93,8 +118,8 @@ static const cairo_surface_backend_t cairo_symbian_surface_backend = {
 	CAIRO_SURFACE_TYPE_SYMBIAN,
 	NULL, //create_similar,
 	_cairo_symbian_surface_finish,
-	NULL, //acquire_source_image,
-	NULL, //release_source_image,
+	_cairo_symbian_surface_acquire_source_image,
+	_cairo_symbian_surface_release_source_image,
 	_cairo_symbian_surface_acquire_dest_image,
 	_cairo_symbian_surface_release_dest_image,
 	NULL, //clone_similar,
@@ -109,7 +134,7 @@ static const cairo_surface_backend_t cairo_symbian_surface_backend = {
 	NULL, //old_show_glyphs
 	NULL, //get_font_options
 	NULL, //flush,
-	NULL, //mark_dirty_rectangle
+	NULL, //mark_dirty_rectangle,
 	NULL, //scaled_font_fini
 	NULL, //scaled_glyph_fini
 	NULL, //paint
@@ -142,6 +167,7 @@ cairo_content_t TCairoSymbianUtil::ToCairoContent(TDisplayMode aMode)
 		}
 	
 	__ASSERT_ALWAYS(EFalse, User::Invariant());
+	return CAIRO_CONTENT_COLOR_ALPHA; // to get rid of warning
 	}
 
 cairo_format_t TCairoSymbianUtil::ToCairoFormat(TDisplayMode aMode) 
@@ -159,38 +185,7 @@ cairo_format_t TCairoSymbianUtil::ToCairoFormat(TDisplayMode aMode)
 		}
 
 	__ASSERT_ALWAYS(EFalse, User::Invariant());
-	}
-
-TDisplayMode TCairoSymbianUtil::ToDisplayMode(cairo_format_t aFormat)
-	{
-	switch (aFormat)
-		{
-		case CAIRO_FORMAT_ARGB32:
-			return EColor16MA;
-		case CAIRO_FORMAT_RGB24:
-			return EColor16MU;
-		case CAIRO_FORMAT_A8:
-			return EGray256;
-		case CAIRO_FORMAT_A1:
-			return EGray2;
-		}
-
-	__ASSERT_ALWAYS(EFalse, User::Invariant());
-	}
-
-TDisplayMode TCairoSymbianUtil::ToDisplayMode(cairo_content_t aContent, int aDepth)
-	{
-	switch (aContent)
-		{
-		case CAIRO_CONTENT_COLOR_ALPHA:
-			return EColor16MA;
-		case CAIRO_CONTENT_COLOR:
-			return EColor16MU;
-		case CAIRO_CONTENT_ALPHA:
-			return aDepth == 1 ? EGray2 : EGray256;
-		}
-
-	__ASSERT_ALWAYS(EFalse, User::Invariant());
+	return CAIRO_FORMAT_ARGB32; // to get rid of warning
 	}
 
 /**
@@ -211,6 +206,7 @@ XCairoSymbianSurface* XCairoSymbianSurface::Create(symbian_window_t aWindow)
 	TInt err = self->Construct();
 	if (err != KErrNone)
 		{
+		/* if Construct() fails, all internal allocations must have been freed before that func returns */
 		free(buf);
 		self = NULL;
 		}
@@ -225,9 +221,9 @@ XCairoSymbianSurface::XCairoSymbianSurface(RWindow *aWindow):
 
 XCairoSymbianSurface::~XCairoSymbianSurface()
 	{
-	__ASSERT_DEBUG(iBuffer, User::Invariant());
+	__ASSERT_DEBUG(iCache, User::Invariant());
 
-	delete iBuffer;
+	delete iCache;
 	}
 
 TInt XCairoSymbianSurface::Construct() 
@@ -244,19 +240,23 @@ TInt XCairoSymbianSurface::Construct()
 	iScr = CCoeEnv::Static()->ScreenDevice();
 	iGc = &CCoeEnv::Static()->SystemGc();
 	
-	iBuffer = new CWsBitmap(*iWs);
-	if (!iBuffer)
+	iCache = new CWsBitmap(*iWs);
+	if (!iCache)
 		{
 		return KErrNoMemory;
 		}
 
-	TInt err = iBuffer->Create(iSize, dm);
+	TInt err = iCache->Create(iSize, dm);
 	if (err != KErrNone)
 		{
-		delete iBuffer;
-		iBuffer = NULL;
+		delete iCache;
+		iCache = NULL;
 		return err;
 		}
+
+	iCache->LockHeap();
+	Mem::FillZ(iCache->DataAddress(), iCache->DataStride() * iSize.iHeight);
+	iCache->UnlockHeap();
 
 	_cairo_surface_init (&iBase, &cairo_symbian_surface_backend, TCairoSymbianUtil::ToCairoContent(dm));
 	return KErrNone;
@@ -269,8 +269,8 @@ void XCairoSymbianSurface::Resize(const TSize& aNewSize)
 		return;
 		}
 
-	TInt err = iBuffer->Resize(aNewSize);
-	iSize = iBuffer->SizeInPixels();
+	TInt err = iCache->Resize(aNewSize);
+	iSize = iCache->SizeInPixels();
 	}
 
 cairo_rectangle_int_t XCairoSymbianSurface::Extents() const
@@ -285,25 +285,25 @@ cairo_rectangle_int_t XCairoSymbianSurface::Extents() const
 
 cairo_image_surface_t* XCairoSymbianSurface::Lock()
 	{
-	iBuffer->LockHeap();
-	cairo_surface_t* s = cairo_image_surface_create_for_data((unsigned char*)iBuffer->DataAddress(),
-																	TCairoSymbianUtil::ToCairoFormat(iBuffer->DisplayMode()),
+	iCache->LockHeap();
+	cairo_surface_t* s = cairo_image_surface_create_for_data((unsigned char*)iCache->DataAddress(),
+																	TCairoSymbianUtil::ToCairoFormat(iCache->DisplayMode()),
 																	iSize.iWidth,
 																	iSize.iHeight,
-																	iBuffer->DataStride());
+																	iCache->DataStride());
 
 	return (cairo_image_surface_t*)s;
 	}
 
 void XCairoSymbianSurface::Unlock()
 	{
-	iBuffer->UnlockHeap();
-	Flush();
+	iCache->UnlockHeap();
 	}
 
 void XCairoSymbianSurface::Flush()
 	{
-	/* for now must be called when GC is active and within RWindow::BeginRedraw/EndRedraw block */
-	iGc->BitBlt(TPoint(), iBuffer);
+	/* must be called when GC is active and within RWindow::BeginRedraw/EndRedraw block */
+	iGc->BitBlt(TPoint(), iCache);
 	iWs->Flush();
 	}
+
