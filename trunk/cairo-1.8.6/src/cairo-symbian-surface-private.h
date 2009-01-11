@@ -73,7 +73,7 @@ public:
 	int Depth() const {return iDepth;}
 	cairo_rectangle_int_t Extents() const;
 
-	void Resize(const TSize&);	
+	void SetSize(TInt, TInt);	
 	cairo_image_surface_t* Lock();
 	void Unlock();
 	void Flush();
