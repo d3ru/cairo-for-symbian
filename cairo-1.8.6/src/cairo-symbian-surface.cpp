@@ -68,35 +68,39 @@ cairo_symbian_surface_set_size (cairo_surface_t *surface,
 								int width,
 								int height)
 {
-	__ASSERT_DEBUG(surface != NULL && width > 0 && height > 0, User::Invariant());
+	if (surface == NULL)
+	return;
+	
 	XCairoSymbianSurface *sym_surface = (XCairoSymbianSurface *)surface;
-
-	sym_surface->Resize(TSize(width, height));
+	sym_surface->SetSize(width, height);
 }
 
 int
 cairo_symbian_surface_get_depth (cairo_surface_t *surface) {
 
-	__ASSERT_DEBUG(surface != NULL, User::Invariant());
-	XCairoSymbianSurface *sym_surface = (XCairoSymbianSurface *)surface;
+	if (surface == NULL)
+	return 0;
 	
+	XCairoSymbianSurface *sym_surface = (XCairoSymbianSurface *)surface;
 	return sym_surface->Depth();
 }
 
 int
 cairo_symbian_surface_get_width (cairo_surface_t *surface) {
 
-	__ASSERT_DEBUG(surface != NULL, User::Invariant());
+	if (surface == NULL)
+	return 0;
+
 	XCairoSymbianSurface *sym_surface = (XCairoSymbianSurface *)surface;
-	
 	return sym_surface->Width();
 }
 
 int
 cairo_symbian_surface_get_height (cairo_surface_t *surface) {
 
-	__ASSERT_DEBUG(surface != NULL, User::Invariant());
-	XCairoSymbianSurface *sym_surface = (XCairoSymbianSurface *)surface;
+	if (surface == NULL)
+	return 0;
 	
+	XCairoSymbianSurface *sym_surface = (XCairoSymbianSurface *)surface;
 	return sym_surface->Height();
 }
