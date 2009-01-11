@@ -8,12 +8,10 @@ This is some kind of roadmap for this project.
 
  * Build Cairo as DLL instead of static library. Hopefully this is just a matter of sorting out various compiler DLL import/export settings, and doesn't need to deal with various writable static data.
  * Add support for ARMV5 target.
- * Learn more about Cairo font/text rendering mechanics
- * Implement Symbian OS font rendering backend. This is a complex area which might take a long time to deal with. May end up requiring [http://www.freetype.org FreeType] to be used in addition to Symbian OS built-in font rasterizer.
  * Build and run existing Cairo regression test-suite
+ * Port [http://www.pango.org Pango] to Symbian OS
  * Bugs fixing
  * Migrate to Makefile build system
- * Code review
- * Backend optimisation
  * Integrate back to Cairo mainline
+ * Port [http://www.gtk.org GTK] to Symbian OS.
  * Study the feasibility of using [http://www.khronos.org/openvg/ OpenVG] to implement Symbian OS surface backend to enable hardware accelerated rendering.
