@@ -116,13 +116,13 @@ _cairo_symbian_surface_get_extents (void *surface,
 
 static const cairo_surface_backend_t cairo_symbian_surface_backend = {
 	CAIRO_SURFACE_TYPE_SYMBIAN,
-	NULL, //create_similar,
+	NULL, //create_similar
 	_cairo_symbian_surface_finish,
 	_cairo_symbian_surface_acquire_source_image,
 	_cairo_symbian_surface_release_source_image,
 	_cairo_symbian_surface_acquire_dest_image,
 	_cairo_symbian_surface_release_dest_image,
-	NULL, //clone_similar,
+	NULL, //clone_similar
 	NULL, //composite
 	NULL, //fill_rectangles
 	NULL, //composite_trapezoids
@@ -133,8 +133,8 @@ static const cairo_surface_backend_t cairo_symbian_surface_backend = {
 	_cairo_symbian_surface_get_extents,
 	NULL, //old_show_glyphs
 	NULL, //get_font_options
-	NULL, //flush,
-	NULL, //mark_dirty_rectangle,
+	NULL, //flush
+	NULL, //mark_dirty_rectangle
 	NULL, //scaled_font_fini
 	NULL, //scaled_glyph_fini
 	NULL, //paint
@@ -143,8 +143,8 @@ static const cairo_surface_backend_t cairo_symbian_surface_backend = {
 	NULL, //fill
 	NULL, //show_glyphs
 	NULL, //snapshot
-	NULL, //is_similar,
-	NULL, //reset,
+	NULL, //is_similar
+	NULL, //reset
 	NULL, //fill_stroke
 	NULL  //create_solid_pattern_surface
 };
@@ -222,7 +222,6 @@ XCairoSymbianSurface::XCairoSymbianSurface(RWindow *aWindow):
 XCairoSymbianSurface::~XCairoSymbianSurface()
 	{
 	__ASSERT_DEBUG(iCache, User::Invariant());
-
 	delete iCache;
 	}
 
@@ -262,15 +261,22 @@ TInt XCairoSymbianSurface::Construct()
 	return KErrNone;
 	}
 
-void XCairoSymbianSurface::Resize(const TSize& aNewSize) 
+void XCairoSymbianSurface::SetSize(TInt aWidth, TInt aHeight) 
 	{
-	if (iSize == aNewSize)
+	TSize newSize(aWidth, aHeight);
+	if (iSize == newSize)
 		{
 		return;
 		}
 
-	TInt err = iCache->Resize(aNewSize);
-	iSize = iCache->SizeInPixels();
+	TInt err = iCache->Resize(newSize);
+	if (err != KErrNone)
+		{
+		_cairo_error(CAIRO_STATUS_NO_MEMORY);
+		return;
+		}
+
+	iSize = newSize;
 	}
 
 cairo_rectangle_int_t XCairoSymbianSurface::Extents() const
