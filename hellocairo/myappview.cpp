@@ -102,14 +102,28 @@ void CMyAppView::Draw( const TRect& aRect) const
 	draw(cr);
 #else
 	
-	/* testing font */
-	cairo_font_face_t* face = cairo_ft_font_face_create_for_file("z:\\resource\\fonts\\s60snr.ttf");
+	/* testing FT font */
+	cairo_font_face_t* face = cairo_ft_font_face_create_for_file("z:\\resource\\fonts\\s60snr.ttf", 0);
 	cairo_set_font_face(iContext, face);
 	cairo_set_font_size (iContext, 20.0);
 	cairo_move_to (iContext, 10.0, 260.0);
 	cairo_rotate(iContext, -45.0);
+	cairo_set_source_rgba(iContext, 1, 0, 0, 0.8);
 	cairo_show_text (iContext, "Cairo for Symbian OS");
 	cairo_font_face_destroy(face);
+
+	/* testing toy font */
+	/* family selection is not supported and will be using system default */
+	/* slant is always normal */
+	face = cairo_toy_font_face_create("", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
+	cairo_set_font_face(iContext, face);
+	cairo_set_font_size(iContext, 20.0);
+	cairo_move_to(iContext, 10.0, 10.0);
+	cairo_rotate(iContext, 45.0);
+	cairo_set_source_rgba(iContext, 0, 0, 1, 0.8);
+	cairo_show_text(iContext, "Cairo for Symbian OS");
+	cairo_font_face_destroy(face);
+
 #endif
 	
 	cairo_restore(cr);
