@@ -13,3 +13,4 @@ prj_exports
 ../../src/cairo-pdf.h		/epoc32/include/cairo/cairo-pdf.h
 ../../src/cairo-svg.h		/epoc32/include/cairo/cairo-svg.h
 ../../src/cairo-symbian.h	/epoc32/include/cairo/cairo-symbian.h
+../../src/cairo-ft.h		/epoc32/include/cairo/cairo-ft.h
