@@ -494,30 +494,15 @@ _cairo_ft_unscaled_font_create_for_pattern (FcPattern *pattern)
 UNWIND:
     return NULL;
 }
+
 #else /* CAIRO_HAS_FONTCONFIG */
+
 static cairo_ft_unscaled_font_t *
-_cairo_ft_unscaled_font_create_for_file (const char *filename)
+_cairo_ft_unscaled_font_create_for_file (char *filename, int face_idx)
 {
-	cairo_ft_unscaled_font_map_t *font_map;
-	FT_Face font_face = NULL;
-	int id = 0;
-	int err;
-
-	font_map = _cairo_ft_unscaled_font_map_lock ();
-	assert (font_map != NULL);
-	
-	err = FT_New_Face(font_map->ft_library, filename, id, &font_face);
-	if (err == FT_Err_Unknown_File_Format) {
-	_cairo_ft_unscaled_font_map_unlock ();
-	
-	_cairo_error_throw(CAIRO_STATUS_INVALID_FORMAT);
-	return NULL;
-	}
-
-	_cairo_ft_unscaled_font_map_unlock ();
-
-	return _cairo_ft_unscaled_font_create_internal (font_face != NULL, (char *)filename, id, font_face);
+	return _cairo_ft_unscaled_font_create_internal (false, filename, face_idx, NULL);
 }
+
 #endif /* CAIRO_HAS_FONTCONFIG */
 
 static cairo_ft_unscaled_font_t *
@@ -1762,6 +1747,9 @@ _cairo_ft_scaled_font_create_toy (cairo_toy_font_face_t	      *toy_face,
 
 #else /* CAIRO_HAS_FONTCONFIG */
 
+#define TOY_FONT_NORMAL	"z:\\resource\\fonts\\s60snr.ttf"
+#define TOY_FONT_BOLD	"z:\\resource\\fonts\\s60snrb.ttf"
+
 static cairo_status_t
 _cairo_ft_scaled_font_create_toy (cairo_toy_font_face_t	      *toy_face,
 				  const cairo_matrix_t	      *font_matrix,
@@ -1775,30 +1763,29 @@ _cairo_ft_scaled_font_create_toy (cairo_toy_font_face_t	      *toy_face,
 	cairo_ft_font_transform_t sf;
 	cairo_ft_options_t ft_options;
 	char filename[64];
+	int face_idx = 0;
 
 	cairo_matrix_multiply (&scale, font_matrix, ctm);
 	status = _compute_transform (&sf, &scale);
 	if (status)
 	return status;
 
-	/* ignore toy_face->family */
 	filename[0] = '\0';
-	strcat(filename, "z:\\resource\\fonts\\s60snr");
-	
-	/* ignore toy_face->slant */
-	
+	/* we ignore family and slant for toy font API */
+
 	switch (toy_face->weight)
 	{
 	case CAIRO_FONT_WEIGHT_BOLD:
-	    strcat(filename, "b");
+	    strcpy(filename, TOY_FONT_BOLD);
 	    break;
 	case CAIRO_FONT_WEIGHT_NORMAL:
 	default:
+		strcpy(filename, TOY_FONT_NORMAL);
 	    break;
 	}
-	strcat(filename, ".ttf");
-	
-	unscaled = _cairo_ft_unscaled_font_create_for_file (filename);
+
+	/* we always create first typeface */
+	unscaled = _cairo_ft_unscaled_font_create_for_file (filename, face_idx);
 	if (!unscaled) {
 	status = _cairo_error (CAIRO_STATUS_NO_MEMORY);
 	return status;
@@ -2654,13 +2641,13 @@ cairo_ft_font_face_create_for_pattern (FcPattern *pattern)
 #else /* CAIRO_HAS_FONTCONFIG */
 
 cairo_font_face_t *
-cairo_ft_font_face_create_for_file (const char *filename) 
+cairo_ft_font_face_create_for_file (char *filename, int face_idx) 
 {
 	cairo_ft_unscaled_font_t *unscaled;
 	cairo_font_face_t *font_face;
 	cairo_ft_options_t ft_options;
 	
-	unscaled = _cairo_ft_unscaled_font_create_for_file (filename);
+	unscaled = _cairo_ft_unscaled_font_create_for_file (filename, face_idx);
 	if (unscaled == NULL) {
 	_cairo_error_throw (CAIRO_STATUS_NO_MEMORY);
 	return (cairo_font_face_t *)&_cairo_font_face_nil;
