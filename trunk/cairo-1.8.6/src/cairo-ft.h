@@ -43,11 +43,19 @@
 
 /* Fontconfig/Freetype platform-specific font interface */
 
+#ifdef CAIRO_HAS_FONTCONFIG
 #include <fontconfig/fontconfig.h>
+#endif
+
 #include <ft2build.h>
+#ifdef HAVE_FT_CONFIG_H
+#include <ftconfig.h>
+#endif /**/
 #include FT_FREETYPE_H
 
 CAIRO_BEGIN_DECLS
+
+#ifdef CAIRO_HAS_FONTCONFIG
 
 cairo_public cairo_font_face_t *
 cairo_ft_font_face_create_for_pattern (FcPattern *pattern);
@@ -55,6 +63,12 @@ cairo_ft_font_face_create_for_pattern (FcPattern *pattern);
 cairo_public void
 cairo_ft_font_options_substitute (const cairo_font_options_t *options,
 				  FcPattern                  *pattern);
+
+#else /* CAIRO_HAS_FONTCONFIG */
+
+cairo_public cairo_font_face_t *
+cairo_ft_font_face_create_for_file (const char *filename);
+#endif /* CAIRO_HAS_FONTCONFIG */
 
 cairo_public cairo_font_face_t *
 cairo_ft_font_face_create_for_ft_face (FT_Face         face,
