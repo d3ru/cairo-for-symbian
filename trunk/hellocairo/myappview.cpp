@@ -25,6 +25,7 @@
 
 #include <cairo.h>
 #include <cairo-symbian.h>
+#include <cairo-ft.h>
 
 const TInt KOneSecond = 1000*1000;
 
@@ -95,10 +96,22 @@ void CMyAppView::Draw( const TRect& aRect) const
     cairo_paint(cr);
     cairo_set_source_rgb(cr, 0, 0, 0);
 
+#if 1
     /* draw Cairo samples */
 	draw_function draw = cairo_samples(iIdx);
 	draw(cr);
-
+#else
+	
+	/* testing font */
+	cairo_font_face_t* face = cairo_ft_font_face_create_for_file("z:\\resource\\fonts\\s60snr.ttf");
+	cairo_set_font_face(iContext, face);
+	cairo_set_font_size (iContext, 20.0);
+	cairo_move_to (iContext, 10.0, 260.0);
+	cairo_rotate(iContext, -45.0);
+	cairo_show_text (iContext, "Cairo for Symbian OS");
+	cairo_font_face_destroy(face);
+#endif
+	
 	cairo_restore(cr);
 
     iIdx = (iIdx+1) % iNumberOfSamples;
