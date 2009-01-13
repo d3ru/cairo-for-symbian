@@ -28,8 +28,6 @@
  *
  * The Original Code is the cairo graphics library.
  *
- * The Initial Developer of the Original Code is Iwan Junianto.
- *
  * Contributor(s):
  *      Iwan Junianto <iwanj@users.sourceforge.net>
  */
