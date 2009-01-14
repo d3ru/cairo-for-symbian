@@ -45,5 +45,6 @@ library			libpthread.lib
 library			libz.lib
 staticlibrary	libpng.lib
 staticlibrary	pixman-1.lib
+staticlibrary	freetype.lib
 #endif
 
