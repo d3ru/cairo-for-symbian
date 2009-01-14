@@ -27,6 +27,8 @@
 #include <cairo-symbian.h>
 #include <cairo-ft.h>
 
+#include <math.h>
+
 const TInt KOneSecond = 1000*1000;
 
 CMyAppView* CMyAppView::NewL( const TRect& aRect )
@@ -79,6 +81,20 @@ CMyAppView::~CMyAppView()
     cairo_debug_reset_static_data();
     }
 
+struct {
+	double r,g,b;
+} rgb[9] = {
+	{0,0,0},
+	{0,0,1},
+	{0,1,0},
+	{0,1,1},
+	{1,0,0},
+	{1,0,1},
+	{1,1,0},
+	{0.5,0.5,0.5},
+	{0.5,0,0}
+};
+
 void CMyAppView::Draw( const TRect& aRect) const
     {
     /* do not mix native and Cairo rendering to the same window, it is not supported */
@@ -102,28 +118,40 @@ void CMyAppView::Draw( const TRect& aRect) const
 	draw(cr);
 #else
 	
-	/* testing FT font */
-	cairo_font_face_t* face = cairo_ft_font_face_create_for_file("z:\\resource\\fonts\\s60snr.ttf", 0);
-	cairo_set_font_face(iContext, face);
-	cairo_set_font_size (iContext, 20.0);
-	cairo_move_to (iContext, 10.0, 260.0);
-	cairo_rotate(iContext, -45.0);
-	cairo_set_source_rgba(iContext, 1, 0, 0, 0.8);
-	cairo_show_text (iContext, "Cairo for Symbian OS");
-	cairo_font_face_destroy(face);
+	/* create font using ft */
+	const char* KFontFile = "z:\\resource\\fonts\\s60snr.ttf";
+	cairo_font_face_t* face = cairo_ft_font_face_create_for_file (KFontFile, 0);
+	cairo_set_font_face (cr, face);
+	cairo_set_font_size (cr, 20.0);
 
-	/* testing toy font */
-	/* family selection is not supported and will be using system default */
-	/* slant is always normal */
-	face = cairo_toy_font_face_create("", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
-	cairo_set_font_face(iContext, face);
-	cairo_set_font_size(iContext, 20.0);
-	cairo_move_to(iContext, 10.0, 10.0);
-	cairo_rotate(iContext, 45.0);
-	cairo_set_source_rgba(iContext, 0, 0, 1, 0.8);
-	cairo_show_text(iContext, "Cairo for Symbian OS");
-	cairo_font_face_destroy(face);
+	for (int i=0; i<10; ++i)
+		{
+		cairo_save(cr);
+		cairo_rotate(cr, i *10.0 * M_PI /180.0);
+		cairo_move_to (cr, 50.0, 40.0);
+		cairo_set_source_rgb (cr, rgb[i].r, rgb[i].g, rgb[i].b);
+		cairo_show_text (cr, "Cairo for Symbian OS");
+		cairo_restore(cr);
+		}
+	
+	CWsScreenDevice* screen = CCoeEnv::Static()->ScreenDevice();
+	const TSize sz = screen->SizeInPixels();
+	const TDisplayMode dm = screen->DisplayMode();
+	CFbsBitmap b;
+	b.Create(sz, dm);
+	screen->CopyScreenToBitmap(&b);
+	b.LockHeap();
+	cairo_surface_t* s = cairo_image_surface_create_for_data((unsigned char*)b.DataAddress(),
+																CAIRO_FORMAT_RGB24,
+																sz.iWidth,
+																sz.iHeight,
+																b.DataStride());
+	cairo_surface_write_to_png(s, "c:\\data\\text.png");
+	b.UnlockHeap();
+	b.Reset();
 
+	cairo_font_face_destroy (face);
+	
 #endif
 	
 	cairo_restore(cr);
