@@ -48,8 +48,6 @@
 #ifdef CAIRO_HAS_FONTCONFIG
 #include <fontconfig/fontconfig.h>
 #include <fontconfig/fcfreetype.h>
-#else
-#include <string.h>
 #endif /* CAIRO_HAS_FONTCONFIG */
 
 #include <ft2build.h>
@@ -498,9 +496,9 @@ UNWIND:
 #else /* CAIRO_HAS_FONTCONFIG */
 
 static cairo_ft_unscaled_font_t *
-_cairo_ft_unscaled_font_create_for_file (char *filename, int face_idx)
+_cairo_ft_unscaled_font_create_for_file (const char *filename, int face_idx)
 {
-	return _cairo_ft_unscaled_font_create_internal (false, filename, face_idx, NULL);
+	return _cairo_ft_unscaled_font_create_internal (0, (char*)filename, face_idx, NULL);
 }
 
 #endif /* CAIRO_HAS_FONTCONFIG */
@@ -2212,7 +2210,6 @@ _cairo_ft_scaled_glyph_init (void			*abstract_font,
     return status;
 }
 
-#ifdef CAIRO_HAS_FONTCONFIG
 static unsigned long
 _cairo_ft_ucs4_to_index (void	    *abstract_font,
 			 uint32_t    ucs4)
@@ -2228,22 +2225,19 @@ _cairo_ft_ucs4_to_index (void	    *abstract_font,
 
     /* If making this compile without fontconfig, use:
      * index = FT_Get_Char_Index (face, ucs4); */
+#ifdef CAIRO_HAS_FONTCONFIG
+
     index = FcFreeTypeCharIndex (face, ucs4);
+
+#else /* CAIRO_HAS_FONTCONFIG */
+
+    index = FT_Get_Char_Index (face, ucs4);
+
+#endif /* CAIRO_HAS_FONTCONFIG */
 
     _cairo_ft_unscaled_font_unlock_face (unscaled);
     return index;
 }
-
-#else /* CAIRO_HAS_FONTCONFIG */
-
-static unsigned long
-_cairo_ft_ucs4_to_index (void	    *abstract_font,
-			 uint32_t    ucs4)
-{
-	return 0;
-}
-
-#endif /* CAIRO_HAS_FONTCONFIG */
 
 static cairo_int_status_t
 _cairo_ft_load_truetype_table (void	       *abstract_font,
@@ -2641,7 +2635,7 @@ cairo_ft_font_face_create_for_pattern (FcPattern *pattern)
 #else /* CAIRO_HAS_FONTCONFIG */
 
 cairo_font_face_t *
-cairo_ft_font_face_create_for_file (char *filename, int face_idx) 
+cairo_ft_font_face_create_for_file (const char *filename, int face_idx) 
 {
 	cairo_ft_unscaled_font_t *unscaled;
 	cairo_font_face_t *font_face;
