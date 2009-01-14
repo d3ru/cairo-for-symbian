@@ -67,7 +67,7 @@ cairo_ft_font_options_substitute (const cairo_font_options_t *options,
 #else /* CAIRO_HAS_FONTCONFIG */
 
 cairo_public cairo_font_face_t *
-cairo_ft_font_face_create_for_file (char *filename, int face_idx);
+cairo_ft_font_face_create_for_file (const char *filename, int face_idx);
 
 #endif /* CAIRO_HAS_FONTCONFIG */
 
