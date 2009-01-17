@@ -1,3 +1,8 @@
+// cairo makefile for symbian
+//
+// Copyright (c) 2009 by iwanj@users.sourceforge.net
+//
+
 target		cairo-static.lib
 targettype	lib
 
@@ -7,10 +12,10 @@ MACRO   	HAVE_FT_CONFIG_H
 
 systeminclude 	/epoc32/include
 systeminclude	/epoc32/include/stdapis
-systeminclude	../../../lpng1234
-systeminclude	../../../pixman-0.13.2/pixman
-systeminclude	../../../freetype-2.3.7/include
-systeminclude	../../../freetype-2.3.7/include/freetype/config
+systeminclude	/epoc32/include/png
+systeminclude	/epoc32/include/pixman
+systeminclude	/epoc32/include/freetype
+systeminclude	/epoc32/include/freetype/config
 userinclude		../../src
 
 sourcepath	../../src
