@@ -1,3 +1,8 @@
+// hellocairo makefile for symbian
+//
+// Copyright (c) 2009 by iwanj@users.sourceforge.net
+//
+
 target		hellocairo.exe
 targettype	exe
 uid			0x100039ce 0xa000018f
