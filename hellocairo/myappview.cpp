@@ -25,9 +25,6 @@
 
 #include <cairo.h>
 #include <cairo-symbian.h>
-#include <cairo-ft.h>
-
-#include <math.h>
 
 const TInt KOneSecond = 1000*1000;
 
@@ -81,20 +78,6 @@ CMyAppView::~CMyAppView()
     cairo_debug_reset_static_data();
     }
 
-struct {
-	double r,g,b;
-} rgb[9] = {
-	{0,0,0},
-	{0,0,1},
-	{0,1,0},
-	{0,1,1},
-	{1,0,0},
-	{1,0,1},
-	{1,1,0},
-	{0.5,0.5,0.5},
-	{0.5,0,0}
-};
-
 void CMyAppView::Draw( const TRect& aRect) const
     {
     /* do not mix native and Cairo rendering to the same window, it is not supported */
@@ -111,32 +94,19 @@ void CMyAppView::Draw( const TRect& aRect) const
     cairo_set_source_rgb(cr, 1, 1, 1);
     cairo_paint(cr);
     cairo_set_source_rgb(cr, 0, 0, 0);
+    cairo_new_path(cr);
 
-#if 1
     /* draw Cairo samples */
 	draw_function draw = cairo_samples(iIdx);
 	draw(cr);
-#else
-	
-	/* create font using ft */
-	const char* KFontFile = "z:\\resource\\fonts\\s60snr.ttf";
-	cairo_font_face_t* face = cairo_ft_font_face_create_for_file (KFontFile, 0);
-	cairo_set_font_face (cr, face);
-	cairo_set_font_size (cr, 20.0);
 
-	for (int i=0; i<10; ++i)
-		{
-		cairo_save(cr);
-		cairo_rotate(cr, i *10.0 * M_PI /180.0);
-		cairo_move_to (cr, 50.0, 40.0);
-		cairo_set_source_rgb (cr, rgb[i].r, rgb[i].g, rgb[i].b);
-		cairo_show_text (cr, "Cairo for Symbian OS");
-		cairo_restore(cr);
-		}
-	
+	cairo_restore(cr);
+
+#if 0
+	/* capture screen to a bitmap and then use Image Surface to write it to a PNG file */
 	CWsScreenDevice* screen = CCoeEnv::Static()->ScreenDevice();
 	const TSize sz = screen->SizeInPixels();
-	const TDisplayMode dm = screen->DisplayMode();
+	const TDisplayMode dm = EColor16MU;
 	CFbsBitmap b;
 	b.Create(sz, dm);
 	screen->CopyScreenToBitmap(&b);
@@ -146,15 +116,13 @@ void CMyAppView::Draw( const TRect& aRect) const
 																sz.iWidth,
 																sz.iHeight,
 																b.DataStride());
-	cairo_surface_write_to_png(s, "c:\\data\\text.png");
+	cairo_surface_write_to_png(s, "c:\\data\\screen.png");
+	cairo_surface_flush(s);
+	cairo_surface_destroy(s);
+
 	b.UnlockHeap();
 	b.Reset();
-
-	cairo_font_face_destroy (face);
-	
 #endif
-	
-	cairo_restore(cr);
 
     iIdx = (iIdx+1) % iNumberOfSamples;
     }
