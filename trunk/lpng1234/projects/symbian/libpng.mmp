@@ -1,3 +1,8 @@
+// libpng makefile for symbian
+//
+// Copyright (c) 2009 by iwanj@users.sourceforge.net
+//
+
 target		libpng.lib
 targettype	lib
 
