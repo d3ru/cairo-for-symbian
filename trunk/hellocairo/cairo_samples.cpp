@@ -23,9 +23,47 @@
 #include <e32std.h>
 #include <math.h>
 #include "cairo_samples.h"
+#include <cairo-ft.h>
+
+static const struct {
+	double r,g,b;
+} rgb[9] = {
+	{0,0,0},
+	{0,0,1},
+	{0,1,0},
+	{0,1,1},
+	{1,0,0},
+	{1,0,1},
+	{1,1,0},
+	{0.5,0.5,0.5},
+	{0.5,0,0}
+};
+
+static void draw_rotated_text(cairo_t* cr)
+	{
+	/* create font using FT backend */
+	const char* KFontFileName = "z:\\resource\\fonts\\s60snr.ttf";
+	const TInt KFaceIndex = 0;
+	cairo_font_face_t* face = cairo_ft_font_face_create_for_file (KFontFileName, KFaceIndex);
+	cairo_set_font_face (cr, face);
+	cairo_set_font_size (cr, 40.0);
+
+	/* draw rotated text */
+	for (int i=0; i<10; ++i)
+		{
+		cairo_save(cr);
+		cairo_rotate(cr, i *10.0 * M_PI /180.0);
+		cairo_move_to (cr, 20.0, 20.0);
+		cairo_set_source_rgba (cr, rgb[i].r, rgb[i].g, rgb[i].b, 0.75);
+		cairo_show_text (cr, "Cairo Symbian OS");
+		cairo_restore(cr);
+		}
+
+	cairo_font_face_destroy (face);
+	}
 
 /**
-* The following drawing samples were copied from Cairo code snippets found at  
+* The following drawing samples code were copied from Cairo code snippets found at  
 * http://www.cairographics.org/samples/
 */
 
@@ -504,6 +542,7 @@ struct func_rec
  */
 static const func_rec drawing_samples[] = 
 	{
+	FUNC_REC(draw_rotated_text),
 	FUNC_REC(draw_arc),
 	FUNC_REC(draw_arc_negative),
 	FUNC_REC(draw_clip),
