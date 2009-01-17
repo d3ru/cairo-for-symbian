@@ -1,5 +1,14 @@
+// pixman makefile for symbian
+//
+// Copyright (c) 2009 by iwanj@users.sourceforge.net
+//
+
 prj_platforms
 winscw gcce armv5
 
 prj_mmpfiles
 pixman.mmp
+
+prj_exports
+../../pixman/pixman.h           /epoc32/include/pixman/pixman.h
+../../pixman/pixman-version.h   /epoc32/include/pixman/pixman-version.h
