@@ -13,6 +13,5 @@ This is some kind of roadmap for this project.
  * Optimise Symbian OS surface backend
  * Migrate to Makefile build system
  * Integrate back to Cairo mainline
- * Port [http://www.pango.org Pango] to Symbian OS
  * Port [http://www.gtk.org GTK+] to Symbian OS.
  * Study the feasibility of using [http://www.khronos.org/openvg/ OpenVG] to implement Symbian OS surface backend to enable hardware accelerated rendering.
