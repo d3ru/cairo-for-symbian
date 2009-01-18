@@ -4,5 +4,5 @@
 #include "../expat-2.0.1/symbian/bld.inf"
 #include "../fontconfig-2.6.0/projects/symbian/bld.inf"
 #include "../cairo-1.8.6/projects/symbian/bld.inf"
-//#include "../pango-1.22.2/projects/symbian/bld.inf"
+#include "../pango-1.22.2/projects/symbian/bld.inf"
 #include "../hellocairo/bld.inf"

@@ -86,5 +86,4 @@ library			libgobject.lib
 library			libgthread.lib
 library			libgmodule.lib
 
-staticlibrary	fontconfig.lib
 staticlibrary	cairo-static.lib
