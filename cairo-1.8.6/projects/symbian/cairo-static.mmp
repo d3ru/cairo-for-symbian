@@ -6,9 +6,9 @@
 target		cairo-static.lib
 targettype	lib
 
-MACRO		HAVE_PTHREAD_H
-MACRO		HAVE_STDINT_H
-MACRO   	HAVE_FT_CONFIG_H
+macro		HAVE_PTHREAD_H
+macro		HAVE_STDINT_H
+//macro		CAIRO_DOES_NOT_HAVE_FONTCONFIG
 
 systeminclude 	/epoc32/include
 systeminclude	/epoc32/include/stdapis
@@ -16,6 +16,7 @@ systeminclude	/epoc32/include/png
 systeminclude	/epoc32/include/pixman
 systeminclude	/epoc32/include/freetype
 systeminclude	/epoc32/include/freetype/config
+systeminclude	/epoc32/include/fontconfig
 userinclude		../../src
 
 sourcepath	../../src
@@ -99,4 +100,6 @@ library		libz.lib
 
 staticlibrary	libpng.lib
 staticlibrary	pixman-1.lib
-staticlibrary freetype.lib
+staticlibrary 	freetype.lib
+staticlibrary	fontconfig.lib
+
