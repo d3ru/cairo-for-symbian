@@ -127,10 +127,6 @@ pango_version_string (void)
  *
  * Since: 1.16
  **/
-#ifndef PANGO_BINARY_AGE
-#define PANGO_BINARY_AGE 0
-#endif
-
 const gchar*
 pango_version_check (int required_major,
 		     int required_minor,

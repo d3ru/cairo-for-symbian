@@ -687,10 +687,10 @@ pango_fc_font_map_list_families (PangoFontMap      *fontmap,
 	  if (res == FcResultNoMatch)
 	    spacing = FC_PROPORTIONAL;
 
-	  if (!is_alias_family (s) && !g_hash_table_lookup (temp_family_hash, s))
+	  if (!is_alias_family ((const gchar *)s) && !g_hash_table_lookup (temp_family_hash, s))
 	    {
 	      PangoFcFamily *temp_family = create_family (fcfontmap, (gchar *)s, spacing);
-	      g_hash_table_insert (temp_family_hash, g_strdup (s), s);
+	      g_hash_table_insert (temp_family_hash, g_strdup ((const gchar *)s), s);
 	      priv->families[count++] = temp_family;
 	    }
 	}
@@ -844,7 +844,7 @@ pango_fc_make_pattern (const  PangoFontDescription *description,
   families = g_strsplit (pango_font_description_get_family (description), ",", -1);
 
   for (i = 0; families[i]; i++)
-    FcPatternAddString (pattern, FC_FAMILY, families[i]);
+    FcPatternAddString (pattern, FC_FAMILY, (const FcChar8 *)families[i]);
 
   g_strfreev (families);
 
@@ -854,7 +854,7 @@ pango_fc_make_pattern (const  PangoFontDescription *description,
   if (gravity != PANGO_GRAVITY_SOUTH)
     {
       GEnumValue *value = g_enum_get_value (get_gravity_class (), gravity);
-      FcPatternAddString (pattern, PANGO_FC_GRAVITY, value->value_nick);
+      FcPatternAddString (pattern, PANGO_FC_GRAVITY, (const FcChar8 *)value->value_nick);
     }
 
   return pattern;
@@ -1625,7 +1625,7 @@ pango_fc_font_description_from_pattern (FcPattern *pattern, gboolean include_siz
    * the pattern */
   if (FcPatternGetString (pattern, PANGO_FC_GRAVITY, 0, (FcChar8 **)&s) == FcResultMatch)
     {
-      GEnumValue *value = g_enum_get_value_by_nick (get_gravity_class (), s);
+      GEnumValue *value = g_enum_get_value_by_nick (get_gravity_class (), (const gchar *)s);
       gravity = value->value;
 
       pango_font_description_set_gravity (desc, gravity);
@@ -1730,8 +1730,8 @@ pango_fc_face_list_sizes (PangoFontFace  *face,
   FcObjectSet *objectset;
 
   pattern = FcPatternCreate ();
-  FcPatternAddString (pattern, FC_FAMILY, fcface->family->family_name);
-  FcPatternAddString (pattern, FC_STYLE, fcface->style);
+  FcPatternAddString (pattern, FC_FAMILY, (const FcChar8 *)fcface->family->family_name);
+  FcPatternAddString (pattern, FC_STYLE, (const FcChar8 *)fcface->style);
 
   objectset = FcObjectSetCreate ();
   FcObjectSetAdd (objectset, FC_PIXEL_SIZE);
@@ -1924,12 +1924,12 @@ pango_fc_family_list_faces (PangoFontFamily  *family,
 		  if (slant == FC_SLANT_ROMAN)
 		    {
 		      has_face[REGULAR] = TRUE;
-		      style = "Regular";
+		      style = (FcChar8 *)"Regular";
 		    }
 		  else
 		    {
 		      has_face[ITALIC] = TRUE;
-		      style = "Italic";
+		      style = (FcChar8 *)"Italic";
 		    }
 		}
 	      else
@@ -1937,18 +1937,18 @@ pango_fc_family_list_faces (PangoFontFamily  *family,
 		  if (slant == FC_SLANT_ROMAN)
 		    {
 		      has_face[BOLD] = TRUE;
-		      style = "Bold";
+		      style = (FcChar8 *)"Bold";
 		    }
 		  else
 		    {
 		      has_face[BOLD_ITALIC] = TRUE;
-		      style = "Bold Italic";
+		      style = (FcChar8 *)"Bold Italic";
 		    }
 		}
 
 	      if (!font_style)
 		font_style = style;
-	      faces[num++] = create_face (fcfamily, font_style, FALSE);
+	      faces[num++] = create_face (fcfamily, (const char *)font_style, FALSE);
 	    }
 
 	  if (has_face[REGULAR])

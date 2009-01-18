@@ -95,6 +95,10 @@ static PangoFontDescription *pango_fc_font_describe_absolute (PangoFont        *
 
 G_DEFINE_ABSTRACT_TYPE (PangoFcFont, pango_fc_font, PANGO_TYPE_FONT)
 
+#ifndef G_PARAM_STATIC_STRINGS
+#define	G_PARAM_STATIC_STRINGS (G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB)
+#endif
+
 static void
 pango_fc_font_class_init (PangoFcFontClass *class)
 {
