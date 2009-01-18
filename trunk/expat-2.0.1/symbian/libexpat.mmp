@@ -6,6 +6,8 @@
 target      libexpat.lib
 targettype  lib
 
+macro XML_STATIC
+
 systeminclude /epoc32/include
 systeminclude /epoc32/include/stdapis
 userinclude   ../lib
