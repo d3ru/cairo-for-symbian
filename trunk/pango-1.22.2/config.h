@@ -106,7 +106,7 @@
 #define PACKAGE_VERSION 1.22.2
 
 /* PANGO binary age */
-#undef PANGO_BINARY_AGE
+#define PANGO_BINARY_AGE 0
 
 /* PANGO interface age */
 #undef PANGO_INTERFACE_AGE

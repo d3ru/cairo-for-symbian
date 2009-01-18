@@ -8,18 +8,20 @@ targettype  lib
 macro	PANGO_ENABLE_BACKEND
 macro	PANGO_ENABLE_ENGINE
 macro	G_OS_SYMBIAN
+macro	SYMBIAN
 
 systeminclude /epoc32/include
 systeminclude /epoc32/include/stdapis
 systeminclude /epoc32/include/stdapis/glib-2.0
 systeminclude /epoc32/include/cairo
+systeminclude /epoc32/include/fontconfig
 systeminclude ../..
 systeminclude ../../pango
 
 userinclude ../..
 userinclude ../../pango
 userinclude ../../pango/mini-fribidi
-//userinclude ../../modules/basic
+userinclude ../../modules/basic
 
 sourcepath  ../../pango
 source	module-defs-lang.c
@@ -51,10 +53,10 @@ source	pango-utils.c
 source	reorder-items.c
 source	shape.c
 
-//source	module-defs-fc.c
-//source	pangofc-decoder.c
-//source	pangofc-font.c
-//source	pangofc-fontmap.c
+source	module-defs-fc.c
+source	pangofc-decoder.c
+source	pangofc-font.c
+source	pangofc-fontmap.c
 //source	pangoft2-fontmap.c
 //source	pangoft2-render.c
 //source	pangoft2.c
@@ -64,8 +66,8 @@ source	shape.c
 //source	pango-ot-tag.c
 
 source	pangocairo-context.c
-//source	pangocairo-fcfont.c
-//source	pangocairo-fcfontmap.c
+source	pangocairo-fcfont.c
+source	pangocairo-fcfontmap.c
 source	pangocairo-font.c
 source	pangocairo-fontmap.c
 source	pangocairo-render.c
@@ -75,8 +77,14 @@ source  fribidi.c
 source  fribidi_types.c
 source  fribidi_char_type.c
 
-//sourcepath  ../../modules/basic
-//source  basic-fc.c
+sourcepath  ../../modules/basic
+source  basic-fc.c
 
 library 		libc.lib
+library			libglib.lib
+library			libgobject.lib
+library			libgthread.lib
+library			libgmodule.lib
+
+staticlibrary	fontconfig.lib
 staticlibrary	cairo-static.lib
