@@ -7,7 +7,9 @@ target		fontconfig.lib
 targettype	lib
 
 macro HAVE_STDINT_H
-macro HAVE_FT_CONFIG_H
+macro HAVE_RANDOM
+macro HAVE_FT_GET_NEXT_CHAR=1
+macro XML_STATIC
 
 systeminclude	/epoc32/include
 systeminclude	/epoc32/include/stdapis
@@ -43,3 +45,4 @@ source	ftglue.c
 
 library		    libc.lib
 staticlibrary	libexpat.lib
+staticlibrary	freetype.lib

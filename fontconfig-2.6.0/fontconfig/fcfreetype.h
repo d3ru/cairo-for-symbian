@@ -25,9 +25,6 @@
 #ifndef _FCFREETYPE_H_
 #define _FCFREETYPE_H_
 #include <ft2build.h>
-#ifdef HAVE_FT_CONFIG_H
-#include <ftconfig.h>
-#endif
 #include FT_FREETYPE_H
 
 #ifndef FcPublic

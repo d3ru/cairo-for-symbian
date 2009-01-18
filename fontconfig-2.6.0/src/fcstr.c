@@ -975,6 +975,9 @@ FcStrCanonFilename (const FcChar8 *s)
 
     FcConvertDosPath (full);
     return FcStrCanonAbsoluteFilename (full);
+#elif defined(__SYMBIAN32__)
+    /* we expect absolute filename in fonts.conf */
+    return FcStrCanonAbsoluteFilename (s);
 #else
     if (s[0] == '/')
 	return FcStrCanonAbsoluteFilename (s);

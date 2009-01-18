@@ -159,7 +159,11 @@ FcDirCacheScan (const FcChar8 *dir, FcConfig *config)
     }
 
     strcpy ((char *) file, (char *) dir);
+#ifdef __SYMBIAN32__
+    strcat ((char *) file, "\\");
+#else
     strcat ((char *) file, "/");
+#endif
     base = file + strlen ((char *) file);
     
     if (FcDebug () & FC_DBG_SCAN)

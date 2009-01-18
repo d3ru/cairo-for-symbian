@@ -1602,7 +1602,7 @@ FcConfigFileExists (const FcChar8 *dir, const FcChar8 *file)
 
     strcpy ((char *) path, (const char *) dir);
     /* make sure there's a single separator */
-#if defined(_WIN32) && !defined(__SYMBIAN32__)
+#if defined(_WIN32) || defined(__SYMBIAN32__)
     if ((!path[0] || (path[strlen((char *) path)-1] != '/' &&
 		      path[strlen((char *) path)-1] != '\\')) &&
 	!(file[0] == '/' ||
@@ -1622,6 +1622,10 @@ FcConfigFileExists (const FcChar8 *dir, const FcChar8 *file)
     FcStrFree (path);
     return 0;
 }
+
+#ifdef __SYMBIAN32__
+#define FONTCONFIG_PATH	"c:\\data\\fontconfig"
+#endif
 
 static FcChar8 **
 FcConfigGetPath (void)
@@ -1677,8 +1681,6 @@ FcConfigGetPath (void)
 		if (p) *p = '\0';
 		strcat (fontconfig_path, "\\fonts");
 	}
-#elif defined(__SYMBIAN32__)
-#define FONTCONFIG_PATH	"c:\\data\\fontconfig\\config"
 #endif
     dir = (FcChar8 *) FONTCONFIG_PATH;
     path[i] = malloc (strlen ((char *) dir) + 1);
@@ -1745,7 +1747,7 @@ FcConfigFilename (const FcChar8 *url)
     }
     file = 0;
 
-#if defined(_WIN32) && !defined(__SYMBIAN32__)
+#if defined(_WIN32)  || defined(__SYMBIAN32__)
     if (isalpha (*url) &&
 	url[1] == ':' &&
 	(url[2] == '/' || url[2] == '\\'))
@@ -1760,7 +1762,7 @@ FcConfigFilename (const FcChar8 *url)
 	else
 	    file = 0;
 	break;
-#if defined(_WIN32) && !defined(__SYMBIAN32__)
+#if defined(_WIN32) || defined(__SYMBIAN32__)
     case '\\':
     absolute_path:
 #endif
