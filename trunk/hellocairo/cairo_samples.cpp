@@ -25,8 +25,8 @@
 #include "cairo_samples.h"
 #include <cairo-ft.h>
 #include <fontconfig.h>
-//#include <pangocairo.h>
-//#include <glib.h>
+#include <pangocairo.h>
+#include <glib.h>
 
 static const struct {
 	double r,g,b;
@@ -49,31 +49,36 @@ static void draw_text_fc(cairo_t* cr)
     FcPatternAddString (pattern, FC_FAMILY, (const FcChar8 *)"Sans");
     FcPatternAddInteger (pattern, FC_SLANT, FC_SLANT_ROMAN);
     FcPatternAddInteger (pattern, FC_WEIGHT, FC_WEIGHT_NORMAL);
-
+    FcConfigSubstitute (NULL, pattern, FcMatchPattern);
+    FcDefaultSubstitute (pattern);
+    
     FcResult result;
     FcPattern *match = FcFontMatch (NULL, pattern, &result);
-	cairo_font_face_t* face = cairo_ft_font_face_create_for_pattern (match);
-	cairo_set_font_face (cr, face);
-	cairo_set_font_size (cr, 40.0);
-
-	/* draw rotated text */
-	for (int i=0; i<10; ++i)
-		{
-		cairo_save(cr);
-		cairo_rotate(cr, i *10.0 * M_PI /180.0);
-		cairo_move_to (cr, 20.0, 20.0);
-		cairo_set_source_rgba (cr, rgb[i].r, rgb[i].g, rgb[i].b, 0.75);
-		cairo_show_text (cr, "Cairo Symbian OS");
-		cairo_restore(cr);
-		}
-
-	cairo_font_face_destroy (face);
+    if (match)
+    	{
+		cairo_font_face_t* face = cairo_ft_font_face_create_for_pattern (match);
+		cairo_set_font_face (cr, face);
+		cairo_set_font_size (cr, 40.0);
+	
+		/* draw rotated text */
+		for (int i=0; i<10; ++i)
+			{
+			cairo_save(cr);
+			cairo_rotate(cr, i *10.0 * M_PI /180.0);
+			cairo_move_to (cr, 20.0, 20.0);
+			cairo_set_source_rgba (cr, rgb[i].r, rgb[i].g, rgb[i].b, 0.75);
+			cairo_show_text (cr, "Cairo Symbian OS");
+			cairo_restore(cr);
+			}
+	
+		cairo_font_face_destroy (face);
+    	}
 	
 	FcPatternDestroy(match);
 	FcPatternDestroy(pattern);
 	FcFini();
 	}
-/*
+
 static void draw_text_pango(cairo_t* cr)
 	{
 	PangoLayout* layout;
@@ -81,7 +86,7 @@ static void draw_text_pango(cairo_t* cr)
 	
 	layout = pango_cairo_create_layout(cr);
 	pango_layout_set_text(layout, "Cairo Symbian OS", -1);
-	desc = pango_font_description_from_string("Sans Normal 40");
+	desc = pango_font_description_from_string("Sans Roman Normal 40");
 	pango_layout_set_font_description(layout, desc);
 	pango_font_description_free(desc);
 	
@@ -94,7 +99,7 @@ static void draw_text_pango(cairo_t* cr)
 	
 	g_object_unref(layout);
 	}
-*/
+
 
 /**
 * The following drawing samples code were copied from Cairo code snippets found at  
@@ -577,7 +582,7 @@ struct func_rec
 static const func_rec drawing_samples[] = 
 	{
 	FUNC_REC(draw_text_fc),
-//	FUNC_REC(draw_text_pango),
+	FUNC_REC(draw_text_pango),
 	FUNC_REC(draw_arc),
 	FUNC_REC(draw_arc_negative),
 	FUNC_REC(draw_clip),

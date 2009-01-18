@@ -46,9 +46,7 @@ library fbscli.lib
 library ws32.lib
 
 library libc.lib
-//staticlibrary	pangocairo.lib
-staticlibrary cairo-static.lib
-staticlibrary fontconfig.lib
+staticlibrary	pangocairo.lib
 
 #ifndef __WINSCW__
 library			gdi.lib
