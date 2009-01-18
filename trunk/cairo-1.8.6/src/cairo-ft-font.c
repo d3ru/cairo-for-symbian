@@ -36,6 +36,7 @@
  *	Owen Taylor <otaylor@redhat.com>
  *      Keith Packard <keithp@keithp.com>
  *      Carl Worth <cworth@cworth.org>
+ * 		Iwan Junianto <iwanj@users.sourceforge.net>
  */
 
 #define _BSD_SOURCE /* for strdup() */
@@ -45,15 +46,12 @@
 
 #include <float.h>
 
-#ifdef CAIRO_HAS_FONTCONFIG
+#ifndef CAIRO_DOES_NOT_HAVE_FONTCONFIG
 #include <fontconfig/fontconfig.h>
 #include <fontconfig/fcfreetype.h>
-#endif /* CAIRO_HAS_FONTCONFIG */
+#endif /* CAIRO_DOES_NOT_HAVE_FONTCONFIG */
 
 #include <ft2build.h>
-#ifdef HAVE_FT_CONFIG_H
-#include <ftconfig.h>
-#endif /* HAVE_FT_CONFIG_H */
 #include FT_FREETYPE_H
 #include FT_OUTLINE_H
 #include FT_IMAGE_H
@@ -123,11 +121,11 @@ _cairo_ft_unscaled_font_keys_equal (const void *key_a,
 static void
 _cairo_ft_unscaled_font_fini (cairo_ft_unscaled_font_t *unscaled);
 
-#ifdef CAIRO_HAS_FONTCONFIG
+#ifndef CAIRO_DOES_NOT_HAVE_FONTCONFIG
 static cairo_status_t
 _cairo_ft_font_options_substitute (const cairo_font_options_t *options,
 				   FcPattern                  *pattern);
-#endif /* CAIRO_HAS_FONTCONFIG */
+#endif /* CAIRO_DOES_NOT_HAVE_FONTCONFIG */
 
 typedef enum _cairo_ft_extra_flags {
     CAIRO_FT_OPTIONS_HINT_METRICS = (1 << 0),
@@ -468,7 +466,7 @@ UNWIND:
     return NULL;
 }
 
-#ifdef CAIRO_HAS_FONTCONFIG
+#ifndef CAIRO_DOES_NOT_HAVE_FONTCONFIG
 static cairo_ft_unscaled_font_t *
 _cairo_ft_unscaled_font_create_for_pattern (FcPattern *pattern)
 {
@@ -493,7 +491,7 @@ UNWIND:
     return NULL;
 }
 
-#else /* CAIRO_HAS_FONTCONFIG */
+#else /* CAIRO_DOES_NOT_HAVE_FONTCONFIG */
 
 static cairo_ft_unscaled_font_t *
 _cairo_ft_unscaled_font_create_for_file (const char *filename, int face_idx)
@@ -501,7 +499,7 @@ _cairo_ft_unscaled_font_create_for_file (const char *filename, int face_idx)
 	return _cairo_ft_unscaled_font_create_internal (0, (char*)filename, face_idx, NULL);
 }
 
-#endif /* CAIRO_HAS_FONTCONFIG */
+#endif /* CAIRO_DOES_NOT_HAVE_FONTCONFIG */
 
 static cairo_ft_unscaled_font_t *
 _cairo_ft_unscaled_font_create_from_face (FT_Face face)
@@ -1301,7 +1299,7 @@ typedef struct _cairo_ft_scaled_font {
 
 const cairo_scaled_font_backend_t _cairo_ft_scaled_font_backend;
 
-#ifdef CAIRO_HAS_FONTCONFIG
+#ifndef CAIRO_DOES_NOT_HAVE_FONTCONFIG
 /* The load flags passed to FT_Load_Glyph control aspects like hinting and
  * antialiasing. Here we compute them from the fields of a FcPattern.
  */
@@ -1627,7 +1625,7 @@ _cairo_scaled_font_is_ft (cairo_scaled_font_t *scaled_font)
     return scaled_font->backend == &_cairo_ft_scaled_font_backend;
 }
 
-#ifdef CAIRO_HAS_FONTCONFIG
+#ifndef CAIRO_DOES_NOT_HAVE_FONTCONFIG
 static cairo_status_t
 _cairo_ft_scaled_font_create_toy (cairo_toy_font_face_t	      *toy_face,
 				  const cairo_matrix_t	      *font_matrix,
@@ -1743,7 +1741,7 @@ _cairo_ft_scaled_font_create_toy (cairo_toy_font_face_t	      *toy_face,
     return status;
 }
 
-#else /* CAIRO_HAS_FONTCONFIG */
+#else /* CAIRO_DOES_NOT_HAVE_FONTCONFIG */
 
 #define TOY_FONT_NORMAL	"z:\\resource\\fonts\\s60snr.ttf"
 #define TOY_FONT_BOLD	"z:\\resource\\fonts\\s60snrb.ttf"
@@ -1760,7 +1758,7 @@ _cairo_ft_scaled_font_create_toy (cairo_toy_font_face_t	      *toy_face,
 	cairo_status_t status;
 	cairo_ft_font_transform_t sf;
 	cairo_ft_options_t ft_options;
-	char filename[64];
+	const char* filename;
 	int face_idx = 0;
 
 	cairo_matrix_multiply (&scale, font_matrix, ctm);
@@ -1768,17 +1766,16 @@ _cairo_ft_scaled_font_create_toy (cairo_toy_font_face_t	      *toy_face,
 	if (status)
 	return status;
 
-	filename[0] = '\0';
 	/* we ignore family and slant for toy font API */
 
 	switch (toy_face->weight)
 	{
 	case CAIRO_FONT_WEIGHT_BOLD:
-	    strcpy(filename, TOY_FONT_BOLD);
+	    filename = TOY_FONT_BOLD;
 	    break;
 	case CAIRO_FONT_WEIGHT_NORMAL:
 	default:
-		strcpy(filename, TOY_FONT_NORMAL);
+		filename = TOY_FONT_NORMAL;
 	    break;
 	}
 
@@ -1802,7 +1799,7 @@ _cairo_ft_scaled_font_create_toy (cairo_toy_font_face_t	      *toy_face,
 	return CAIRO_STATUS_SUCCESS;
 }
 
-#endif /* CAIRO_HAS_FONTCONFIG */
+#endif /* CAIRO_DOES_NOT_HAVE_FONTCONFIG */
 
 static void
 _cairo_ft_scaled_font_fini (void *abstract_font)
@@ -2225,15 +2222,15 @@ _cairo_ft_ucs4_to_index (void	    *abstract_font,
 
     /* If making this compile without fontconfig, use:
      * index = FT_Get_Char_Index (face, ucs4); */
-#ifdef CAIRO_HAS_FONTCONFIG
+#ifndef CAIRO_DOES_NOT_HAVE_FONTCONFIG
 
     index = FcFreeTypeCharIndex (face, ucs4);
 
-#else /* CAIRO_HAS_FONTCONFIG */
+#else /* CAIRO_DOES_NOT_HAVE_FONTCONFIG */
 
     index = FT_Get_Char_Index (face, ucs4);
 
-#endif /* CAIRO_HAS_FONTCONFIG */
+#endif /* CAIRO_DOES_NOT_HAVE_FONTCONFIG */
 
     _cairo_ft_unscaled_font_unlock_face (unscaled);
     return index;
@@ -2457,7 +2454,7 @@ _cairo_ft_font_face_create (cairo_ft_unscaled_font_t *unscaled,
 }
 
 /* implement the platform-specific interface */
-#ifdef CAIRO_HAS_FONTCONFIG
+#ifndef CAIRO_DOES_NOT_HAVE_FONTCONFIG
 static cairo_status_t
 _cairo_ft_font_options_substitute (const cairo_font_options_t *options,
 				   FcPattern                  *pattern)
@@ -2632,7 +2629,7 @@ cairo_ft_font_face_create_for_pattern (FcPattern *pattern)
     return font_face;
 }
 
-#else /* CAIRO_HAS_FONTCONFIG */
+#else /* CAIRO_DOES_NOT_HAVE_FONTCONFIG */
 
 cairo_font_face_t *
 cairo_ft_font_face_create_for_file (const char *filename, int face_idx) 
@@ -2657,7 +2654,7 @@ cairo_ft_font_face_create_for_file (const char *filename, int face_idx)
 	return font_face;
 }
 
-#endif /* CAIRO_HAS_FONTCONFIG */
+#endif /* CAIRO_DOES_NOT_HAVE_FONTCONFIG */
 
 /**
  * cairo_ft_font_face_create_for_ft_face:
