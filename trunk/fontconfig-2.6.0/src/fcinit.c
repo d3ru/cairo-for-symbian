@@ -26,7 +26,7 @@
 #include <stdlib.h>
 
 #ifdef __SYMBIAN32__
-#define FC_CACHEDIR			"c:\\data\\fontconfig\\cache"
+#define FC_CACHEDIR			"c:\\data\\fontconfig"
 #define FC_DEFAULT_FONTS	"Sans"
 #endif
 
@@ -84,8 +84,11 @@ FcInitLoadConfig (void)
 		 FC_CACHEDIR);
 	fprintf (stderr,
 		 "Fontconfig warning: adding <cachedir>~/.fontconfig</cachedir>\n");
-	if (!FcConfigAddCacheDir (config, (FcChar8 *) FC_CACHEDIR) ||
-	    !FcConfigAddCacheDir (config, (FcChar8 *) "~/.fontconfig"))
+	if (!FcConfigAddCacheDir (config, (FcChar8 *) FC_CACHEDIR)
+#ifndef __SYMBIAN32__			
+		|| !FcConfigAddCacheDir (config, (FcChar8 *) "~/.fontconfig")
+#endif
+		)
 	{
 	    fprintf (stderr,
 		     "Fontconfig error: out of memory");

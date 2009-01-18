@@ -2395,7 +2395,11 @@ FcConfigParseAndLoadDir (FcConfig	*config,
     }
     
     strcpy ((char *) file, (char *) dir);
+#ifdef __SYMBIAN32__
+    strcat ((char *) file, "\\");
+#else    
     strcat ((char *) file, "/");
+#endif
     base = file + strlen ((char *) file);
     
     files = FcStrSetCreate ();

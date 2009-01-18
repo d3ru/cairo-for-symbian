@@ -593,7 +593,7 @@ FcDirCacheMapFd (int fd, struct stat *fd_stat, struct stat *dir_stat)
 	{
 #if defined(HAVE_MMAP) || defined(__CYGWIN__)
 	    munmap (cache, fd_stat->st_size);
-#elif defined(_WIN32) && defined(__SYMBIAN32__)
+#elif defined(_WIN32) && !defined(__SYMBIAN32__)
 	    UnmapViewOfFile (cache);
 #endif
 	}
