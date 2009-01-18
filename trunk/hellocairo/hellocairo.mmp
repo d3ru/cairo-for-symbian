@@ -7,9 +7,14 @@ target		hellocairo.exe
 targettype	exe
 uid			0x100039ce 0xa000018f
 
+macro SYMBIAN
+
 systeminclude	/epoc32/include
 systeminclude	/epoc32/include/stdapis
 systeminclude	/epoc32/include/cairo
+systeminclude	/epoc32/include/fontconfig
+systeminclude	/epoc32/include/pango
+systeminclude	/epoc32/include/stdapis/glib-2.0
 userinclude		.
 
 sourcepath	.
@@ -40,16 +45,23 @@ library	avkon.lib
 library fbscli.lib
 library ws32.lib
 
-library			libc.lib
-staticlibrary	cairo-static.lib
+library libc.lib
+//staticlibrary	pangocairo.lib
+staticlibrary cairo-static.lib
+staticlibrary fontconfig.lib
 
 #ifndef __WINSCW__
 library			gdi.lib
 library			libm.lib
 library			libpthread.lib
 library			libz.lib
+library			libglib.lib
+
 staticlibrary	libpng.lib
 staticlibrary	pixman-1.lib
 staticlibrary	freetype.lib
+staticlibrary	cairo-static.lib
+staticlibrary	fontconfig.lib
+staticlibrary	libexpat.lib	
 #endif
 

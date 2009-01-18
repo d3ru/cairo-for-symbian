@@ -24,6 +24,9 @@
 #include <math.h>
 #include "cairo_samples.h"
 #include <cairo-ft.h>
+#include <fontconfig.h>
+//#include <pangocairo.h>
+//#include <glib.h>
 
 static const struct {
 	double r,g,b;
@@ -39,15 +42,22 @@ static const struct {
 	{0.5,0,0}
 };
 
-static void draw_rotated_text(cairo_t* cr)
+static void draw_text_fc(cairo_t* cr)
 	{
-	/* create font using FT backend */
-	const char* KFontFileName = "z:\\resource\\fonts\\s60snr.ttf";
-	const TInt KFaceIndex = 0;
-	cairo_font_face_t* face = cairo_ft_font_face_create_for_file (KFontFileName, KFaceIndex);
+    FcPattern *pattern = FcPatternCreate ();
+    FcPatternAddString (pattern, FC_FAMILY, (const FcChar8 *)"Sans");
+    FcPatternAddInteger (pattern, FC_SLANT, FC_SLANT_ROMAN);
+    FcPatternAddInteger (pattern, FC_WEIGHT, FC_WEIGHT_NORMAL);
+
+    FcResult result;
+    FcPattern *match = FcFontMatch (NULL, pattern, &result);
+	cairo_font_face_t* face = cairo_ft_font_face_create_for_pattern (match);
 	cairo_set_font_face (cr, face);
 	cairo_set_font_size (cr, 40.0);
 
+	FcPatternDestroy(match);
+	FcPatternDestroy(pattern);
+	
 	/* draw rotated text */
 	for (int i=0; i<10; ++i)
 		{
@@ -61,6 +71,28 @@ static void draw_rotated_text(cairo_t* cr)
 
 	cairo_font_face_destroy (face);
 	}
+/*
+static void draw_text_pango(cairo_t* cr)
+	{
+	PangoLayout* layout;
+	PangoFontDescription* desc;
+	
+	layout = pango_cairo_create_layout(cr);
+	pango_layout_set_text(layout, "Cairo Symbian OS", -1);
+	desc = pango_font_description_from_string("Sans Normal 40");
+	pango_layout_set_font_description(layout, desc);
+	pango_font_description_free(desc);
+	
+	cairo_rotate(cr, 30.0 * M_PI /180.0);
+	cairo_move_to (cr, 20.0, 20.0);
+	cairo_set_source_rgba (cr, 1, 0, 0, 0.75);
+	
+	pango_cairo_update_layout(cr, layout);
+	pango_cairo_show_layout(cr, layout);
+	
+	g_object_unref(layout);
+	}
+*/
 
 /**
 * The following drawing samples code were copied from Cairo code snippets found at  
@@ -542,7 +574,8 @@ struct func_rec
  */
 static const func_rec drawing_samples[] = 
 	{
-	FUNC_REC(draw_rotated_text),
+	FUNC_REC(draw_text_fc),
+//	FUNC_REC(draw_text_pango),
 	FUNC_REC(draw_arc),
 	FUNC_REC(draw_arc_negative),
 	FUNC_REC(draw_clip),
