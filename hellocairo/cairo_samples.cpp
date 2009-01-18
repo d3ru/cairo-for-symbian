@@ -44,6 +44,7 @@ static const struct {
 
 static void draw_text_fc(cairo_t* cr)
 	{
+	FcInit();
     FcPattern *pattern = FcPatternCreate ();
     FcPatternAddString (pattern, FC_FAMILY, (const FcChar8 *)"Sans");
     FcPatternAddInteger (pattern, FC_SLANT, FC_SLANT_ROMAN);
@@ -55,9 +56,6 @@ static void draw_text_fc(cairo_t* cr)
 	cairo_set_font_face (cr, face);
 	cairo_set_font_size (cr, 40.0);
 
-	FcPatternDestroy(match);
-	FcPatternDestroy(pattern);
-	
 	/* draw rotated text */
 	for (int i=0; i<10; ++i)
 		{
@@ -70,6 +68,10 @@ static void draw_text_fc(cairo_t* cr)
 		}
 
 	cairo_font_face_destroy (face);
+	
+	FcPatternDestroy(match);
+	FcPatternDestroy(pattern);
+	FcFini();
 	}
 /*
 static void draw_text_pango(cairo_t* cr)
