@@ -7,8 +7,6 @@ target		hellocairo.exe
 targettype	exe
 uid			0x100039ce 0xa000018f
 
-macro SYMBIAN
-
 systeminclude	/epoc32/include
 systeminclude	/epoc32/include/stdapis
 systeminclude	/epoc32/include/cairo
@@ -47,6 +45,7 @@ library ws32.lib
 
 library libc.lib
 staticlibrary	pangocairo.lib
+staticlibrary	glib-missing.lib
 
 #ifndef __WINSCW__
 library			gdi.lib
