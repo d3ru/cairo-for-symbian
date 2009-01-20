@@ -8,7 +8,6 @@ targettype  lib
 macro	PANGO_ENABLE_BACKEND
 macro	PANGO_ENABLE_ENGINE
 macro	G_OS_SYMBIAN
-macro	SYMBIAN
 
 systeminclude /epoc32/include
 systeminclude /epoc32/include/stdapis
@@ -60,11 +59,11 @@ source	pangofc-fontmap.c
 //source	pangoft2-fontmap.c
 //source	pangoft2-render.c
 //source	pangoft2.c
+//OpenType support is not yet included
 //source	pango-ot-buffer.c
 //source	pango-ot-info.c
 //source	pango-ot-ruleset.c
 //source	pango-ot-tag.c
-
 source	pangocairo-context.c
 source	pangocairo-fcfont.c
 source	pangocairo-fcfontmap.c
