@@ -1,0 +1,18 @@
+// glib-missing makefile for symbian
+//
+// Copyright (c) 2009 by iwanj@users.sourceforge.net
+//
+
+target      glib-missing.lib
+targettype  lib
+
+systeminclude /epoc32/include
+systeminclude /epoc32/include/stdapis
+systeminclude /epoc32/include/stdapis/glib-2.0
+userinclude   .
+
+sourcepath    .
+source gunichar.c
+
+library libc.lib
+library libglib.lib

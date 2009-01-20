@@ -1,0 +1,10 @@
+// glib-missing makefile for symbian
+//
+// Copyright (c) 2009 by iwanj@users.sourceforge.net
+//
+
+prj_platforms
+winscw gcce armv5
+
+prj_mmpfiles
+glib-missing.mmp
