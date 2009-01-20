@@ -47,7 +47,6 @@ static void draw_text_fc(cairo_t* cr)
 	FcInit();
     FcPattern *pattern = FcPatternCreate ();
     FcPatternAddString (pattern, FC_FAMILY, (const FcChar8 *)"Sans");
-    FcPatternAddInteger (pattern, FC_SLANT, FC_SLANT_ROMAN);
     FcPatternAddInteger (pattern, FC_WEIGHT, FC_WEIGHT_NORMAL);
     FcConfigSubstitute (NULL, pattern, FcMatchPattern);
     FcDefaultSubstitute (pattern);
@@ -81,23 +80,22 @@ static void draw_text_fc(cairo_t* cr)
 
 static void draw_text_pango(cairo_t* cr)
 	{
-	PangoLayout* layout;
-	PangoFontDescription* desc;
-	
-	layout = pango_cairo_create_layout(cr);
-	pango_layout_set_text(layout, "Cairo Symbian OS", -1);
-	desc = pango_font_description_from_string("Sans Roman Normal 40");
+	PangoFontDescription* desc = pango_font_description_new();
+	pango_font_description_set_family(desc, "Sans");
+	pango_font_description_set_weight(desc, PANGO_WEIGHT_NORMAL);
+	pango_font_description_set_absolute_size(desc, 40 * PANGO_SCALE);
+
+	PangoLayout *layout = pango_cairo_create_layout(cr);
 	pango_layout_set_font_description(layout, desc);
-	pango_font_description_free(desc);
+	pango_layout_set_text(layout, "Pango Symbian OS", -1);
 	
 	cairo_rotate(cr, 30.0 * M_PI /180.0);
 	cairo_move_to (cr, 20.0, 20.0);
 	cairo_set_source_rgba (cr, 1, 0, 0, 0.75);
-	
-	pango_cairo_update_layout(cr, layout);
 	pango_cairo_show_layout(cr, layout);
 	
 	g_object_unref(layout);
+	pango_font_description_free(desc);	
 	}
 
 
@@ -581,7 +579,7 @@ struct func_rec
  */
 static const func_rec drawing_samples[] = 
 	{
-	FUNC_REC(draw_text_fc),
+	//FUNC_REC(draw_text_fc),
 	FUNC_REC(draw_text_pango),
 	FUNC_REC(draw_arc),
 	FUNC_REC(draw_arc_negative),
