@@ -88,14 +88,21 @@ static void draw_text_pango(cairo_t* cr)
 	PangoLayout *layout = pango_cairo_create_layout(cr);
 	pango_layout_set_font_description(layout, desc);
 	pango_layout_set_text(layout, "Pango Symbian OS", -1);
-	
-	cairo_rotate(cr, 30.0 * M_PI /180.0);
-	cairo_move_to (cr, 20.0, 20.0);
-	cairo_set_source_rgba (cr, 1, 0, 0, 0.75);
-	pango_cairo_show_layout(cr, layout);
+
+	/* draw rotated text */
+	for (int i=0; i<10; ++i)
+		{
+		cairo_save(cr);
+		cairo_rotate(cr, i *10.0 * M_PI /180.0);
+		cairo_move_to(cr, 20.0, 20.0);
+		cairo_set_source_rgba (cr, rgb[i].r, rgb[i].g, rgb[i].b, 0.75);
+		pango_cairo_update_layout(cr, layout);
+		pango_cairo_show_layout_line(cr, pango_layout_get_line (layout, 0));		
+		cairo_restore(cr);
+		}
 	
 	g_object_unref(layout);
-	pango_font_description_free(desc);	
+	pango_font_description_free(desc);
 	}
 
 
@@ -579,7 +586,7 @@ struct func_rec
  */
 static const func_rec drawing_samples[] = 
 	{
-	//FUNC_REC(draw_text_fc),
+	FUNC_REC(draw_text_fc),
 	FUNC_REC(draw_text_pango),
 	FUNC_REC(draw_arc),
 	FUNC_REC(draw_arc_negative),
