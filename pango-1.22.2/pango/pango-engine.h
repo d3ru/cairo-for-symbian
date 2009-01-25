@@ -364,6 +364,10 @@ prefix ## _register_type (GTypeModule *module)				  \
  * and macro substitution isn't used on function arguments that
  * are used for token pasting.
  */
+#ifdef G_OS_SYMBIAN
+#define PANGO_MODULE_PREFIX	_pango_basic_ft2
+#endif
+
 #ifdef PANGO_MODULE_PREFIX
 #define PANGO_MODULE_ENTRY(func) _PANGO_MODULE_ENTRY2(PANGO_MODULE_PREFIX,func)
 #define _PANGO_MODULE_ENTRY2(prefix,func) _PANGO_MODULE_ENTRY3(prefix,func)

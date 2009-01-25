@@ -703,7 +703,7 @@ pango_get_sysconf_subdirectory (void)
     }
   return result;
 #elif defined(G_OS_SYMBIAN)
-  return "";
+  return "c:\\data\\pango";
 #else
   return SYSCONFDIR "/pango";
 #endif
