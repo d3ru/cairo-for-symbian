@@ -176,6 +176,17 @@ pango_module_load (GTypeModule *module)
 	  return FALSE;
 	}
 
+#ifdef G_OS_SYMBIAN
+      /* Open C glib does not understand symbol, instead it uses string of function ordinal number */ 
+      if (!g_module_symbol (pango_module->library, "1",
+			    (gpointer *)&pango_module->init) ||
+	  !g_module_symbol (pango_module->library, "2",
+			    (gpointer *)&pango_module->exit) ||
+	  !g_module_symbol (pango_module->library, "3",
+			    (gpointer *)&pango_module->list) ||
+	  !g_module_symbol (pango_module->library, "4",
+			    (gpointer *)&pango_module->create))
+#else
       /* extract symbols from the lib */
       if (!g_module_symbol (pango_module->library, "script_engine_init",
 			    (gpointer *)&pango_module->init) ||
@@ -185,6 +196,7 @@ pango_module_load (GTypeModule *module)
 			    (gpointer *)&pango_module->list) ||
 	  !g_module_symbol (pango_module->library, "script_engine_create",
 			    (gpointer *)&pango_module->create))
+#endif
 	{
 	  g_warning ("%s", g_module_error());
 	  g_module_close (pango_module->library);

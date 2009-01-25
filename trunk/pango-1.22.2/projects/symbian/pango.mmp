@@ -14,11 +14,13 @@ systeminclude /epoc32/include/stdapis
 systeminclude /epoc32/include/stdapis/glib-2.0
 systeminclude /epoc32/include/cairo
 systeminclude /epoc32/include/fontconfig
+systeminclude /epoc32/include/freetype
 systeminclude ../..
 systeminclude ../../pango
 
 userinclude ../..
 userinclude ../../pango
+userinclude	../../pango/opentype
 userinclude ../../pango/mini-fribidi
 userinclude ../../modules/basic
 
@@ -56,14 +58,18 @@ source	module-defs-fc.c
 source	pangofc-decoder.c
 source	pangofc-font.c
 source	pangofc-fontmap.c
+
+//dont need ft2 stuff as we will use cairo backend
 //source	pangoft2-fontmap.c
 //source	pangoft2-render.c
 //source	pangoft2.c
-//OpenType support is not yet included
-//source	pango-ot-buffer.c
-//source	pango-ot-info.c
-//source	pango-ot-ruleset.c
-//source	pango-ot-tag.c
+
+//need ot stuff for basic-fc engine
+source	pango-ot-buffer.c
+source	pango-ot-info.c
+source	pango-ot-ruleset.c
+source	pango-ot-tag.c
+
 source	pangocairo-context.c
 source	pangocairo-fcfont.c
 source	pangocairo-fcfontmap.c
@@ -71,13 +77,16 @@ source	pangocairo-font.c
 source	pangocairo-fontmap.c
 source	pangocairo-render.c
 
+sourcepath	../../pango/opentype
+source	harfbuzz.c 
+
 sourcepath  ../../pango/mini-fribidi
 source  fribidi.c
 source  fribidi_types.c
 source  fribidi_char_type.c
 
-sourcepath  ../../modules/basic
-source  basic-fc.c
+sourcepath	../../modules/basic
+source	basic-fc.c
 
 library 		libc.lib
 library			libglib.lib
