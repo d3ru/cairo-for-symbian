@@ -10,4 +10,4 @@ prj_mmpfiles
 hellocairo.mmp
 
 prj_exports
-data\romedalen.png	c:\romedalen.png
+data\romedalen.png	c:\data\romedalen.png
