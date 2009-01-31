@@ -5,7 +5,7 @@
 
 target      libpng.dll
 targettype  dll
-uid			0x1000008d 0xe000ff01
+UID 0x1000008d 0xa000ff01
 capability	all -tcb
 
 macro	PNG_BUILD_DLL
