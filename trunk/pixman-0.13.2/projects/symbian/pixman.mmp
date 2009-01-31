@@ -50,3 +50,4 @@ source		pixman-timer.c
 source		pixman-matrix.c
 
 library		libc.lib
+library   libm.lib
