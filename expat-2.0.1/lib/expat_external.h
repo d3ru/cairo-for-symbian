@@ -38,6 +38,9 @@
 #define XMLCALL __cdecl
 #elif defined(__GNUC__) && defined(__i386) && !defined(__INTEL_COMPILER)
 #define XMLCALL __attribute__((cdecl))
+#elif defined(__SYMBIAN32__)
+#include <e32def.h>
+#define XMLCALL	EXPORT_C
 #else
 /* For any platform which uses this definition and supports more than
    one calling convention, we need to extend this definition to
@@ -60,6 +63,11 @@
 
 #ifdef XML_USE_MSC_EXTENSIONS
 #define XMLIMPORT __declspec(dllimport)
+#endif
+
+#ifdef __SYMBIAN32__
+#include <e32def.h>
+#define XMLIMPORT	IMPORT_C
 #endif
 
 #endif
