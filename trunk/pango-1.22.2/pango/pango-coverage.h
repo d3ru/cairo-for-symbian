@@ -22,6 +22,7 @@
 #ifndef __PANGO_COVERAGE_H__
 #define __PANGO_COVERAGE_H__
 
+#include <pango/pango-compiler-private.h>
 #include <glib.h>
 
 G_BEGIN_DECLS
@@ -35,22 +36,22 @@ typedef enum {
   PANGO_COVERAGE_EXACT
 } PangoCoverageLevel;
 
-PangoCoverage *    pango_coverage_new     (void);
-PangoCoverage *    pango_coverage_ref     (PangoCoverage      *coverage);
-void               pango_coverage_unref   (PangoCoverage      *coverage);
-PangoCoverage *    pango_coverage_copy    (PangoCoverage      *coverage);
-PangoCoverageLevel pango_coverage_get     (PangoCoverage      *coverage,
+PangoApi PangoCoverage *    pango_coverage_new     (void);
+PangoApi PangoCoverage *    pango_coverage_ref     (PangoCoverage      *coverage);
+PangoApi void               pango_coverage_unref   (PangoCoverage      *coverage);
+PangoApi PangoCoverage *    pango_coverage_copy    (PangoCoverage      *coverage);
+PangoApi PangoCoverageLevel pango_coverage_get     (PangoCoverage      *coverage,
 					   int                 index_);
-void               pango_coverage_set     (PangoCoverage      *coverage,
+PangoApi void               pango_coverage_set     (PangoCoverage      *coverage,
 					   int                 index_,
 					   PangoCoverageLevel  level);
-void               pango_coverage_max     (PangoCoverage      *coverage,
+PangoApi void               pango_coverage_max     (PangoCoverage      *coverage,
 					   PangoCoverage      *other);
 
-void           pango_coverage_to_bytes   (PangoCoverage  *coverage,
+PangoApi void           pango_coverage_to_bytes   (PangoCoverage  *coverage,
 					  guchar        **bytes,
 					  int            *n_bytes);
-PangoCoverage *pango_coverage_from_bytes (guchar         *bytes,
+PangoApi PangoCoverage *pango_coverage_from_bytes (guchar         *bytes,
 					  int             n_bytes);
 
 G_END_DECLS

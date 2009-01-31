@@ -22,6 +22,7 @@
 #ifndef __PANGO_BREAK_H__
 #define __PANGO_BREAK_H__
 
+#include <pango/pango-compiler-private.h>
 #include <glib.h>
 
 G_BEGIN_DECLS
@@ -82,18 +83,18 @@ struct _PangoLogAttr
 /* Determine information about cluster/word/line breaks in a string
  * of Unicode text.
  */
-void pango_break (const gchar   *text,
+PangoApi void pango_break (const gchar   *text,
 		  int            length,
 		  PangoAnalysis *analysis,
 		  PangoLogAttr  *attrs,
 		  int            attrs_len);
 
-void pango_find_paragraph_boundary (const gchar *text,
+PangoApi void pango_find_paragraph_boundary (const gchar *text,
 				    gint         length,
 				    gint        *paragraph_delimiter_index,
 				    gint        *next_paragraph_start);
 
-void pango_get_log_attrs (const char    *text,
+PangoApi void pango_get_log_attrs (const char    *text,
 			  int            length,
 			  int            level,
 			  PangoLanguage *language,
@@ -107,7 +108,7 @@ void pango_get_log_attrs (const char    *text,
  * instead; this function is mostly useful for chaining up
  * from a language engine override.
  */
-void pango_default_break (const gchar   *text,
+PangoApi void pango_default_break (const gchar   *text,
 			  int            length,
 			  PangoAnalysis *analysis,
 			  PangoLogAttr  *attrs,

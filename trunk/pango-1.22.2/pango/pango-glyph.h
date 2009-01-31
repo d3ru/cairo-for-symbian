@@ -22,6 +22,7 @@
 #ifndef __PANGO_GLYPH_H__
 #define __PANGO_GLYPH_H__
 
+#include <pango/pango-compiler-private.h>
 #include <pango/pango-types.h>
 #include <pango/pango-item.h>
 
@@ -81,39 +82,39 @@ struct _PangoGlyphString {
 
 #define PANGO_TYPE_GLYPH_STRING (pango_glyph_string_get_type ())
 
-PangoGlyphString *pango_glyph_string_new      (void);
-void              pango_glyph_string_set_size (PangoGlyphString *string,
+PangoApi PangoGlyphString *pango_glyph_string_new      (void);
+PangoApi void              pango_glyph_string_set_size (PangoGlyphString *string,
 					       gint              new_len);
-GType             pango_glyph_string_get_type (void) G_GNUC_CONST;
-PangoGlyphString *pango_glyph_string_copy     (PangoGlyphString *string);
-void              pango_glyph_string_free     (PangoGlyphString *string);
-void              pango_glyph_string_extents  (PangoGlyphString *glyphs,
+PangoApi GType             pango_glyph_string_get_type (void) G_GNUC_CONST;
+PangoApi PangoGlyphString *pango_glyph_string_copy     (PangoGlyphString *string);
+PangoApi void              pango_glyph_string_free     (PangoGlyphString *string);
+PangoApi void              pango_glyph_string_extents  (PangoGlyphString *glyphs,
 					       PangoFont        *font,
 					       PangoRectangle   *ink_rect,
 					       PangoRectangle   *logical_rect);
-int               pango_glyph_string_get_width(PangoGlyphString *glyphs) G_GNUC_PURE;
+PangoApi int               pango_glyph_string_get_width(PangoGlyphString *glyphs) G_GNUC_PURE;
 
-void              pango_glyph_string_extents_range  (PangoGlyphString *glyphs,
+PangoApi void              pango_glyph_string_extents_range  (PangoGlyphString *glyphs,
 						     int               start,
 						     int               end,
 						     PangoFont        *font,
 						     PangoRectangle   *ink_rect,
 						     PangoRectangle   *logical_rect);
 
-void pango_glyph_string_get_logical_widths (PangoGlyphString *glyphs,
+PangoApi void pango_glyph_string_get_logical_widths (PangoGlyphString *glyphs,
 					    const char       *text,
 					    int               length,
 					    int               embedding_level,
 					    int              *logical_widths);
 
-void pango_glyph_string_index_to_x (PangoGlyphString *glyphs,
+PangoApi void pango_glyph_string_index_to_x (PangoGlyphString *glyphs,
 				    char             *text,
 				    int               length,
 				    PangoAnalysis    *analysis,
 				    int               index_,
 				    gboolean          trailing,
 				    int              *x_pos);
-void pango_glyph_string_x_to_index (PangoGlyphString *glyphs,
+PangoApi void pango_glyph_string_x_to_index (PangoGlyphString *glyphs,
 				    char             *text,
 				    int               length,
 				    PangoAnalysis    *analysis,
@@ -123,12 +124,12 @@ void pango_glyph_string_x_to_index (PangoGlyphString *glyphs,
 
 /* Turn a string of characters into a string of glyphs
  */
-void pango_shape (const gchar      *text,
+PangoApi void pango_shape (const gchar      *text,
 		  gint              length,
 		  const PangoAnalysis *analysis,
 		  PangoGlyphString *glyphs);
 
-GList *pango_reorder_items (GList *logical_items);
+PangoApi GList *pango_reorder_items (GList *logical_items);
 
 G_END_DECLS
 

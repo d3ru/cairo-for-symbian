@@ -22,6 +22,7 @@
 #ifndef __PANGO_GLYPH_ITEM_H__
 #define __PANGO_GLYPH_ITEM_H__
 
+#include <pango/pango-compiler-private.h>
 #include <pango/pango-attributes.h>
 #include <pango/pango-break.h>
 #include <pango/pango-item.h>
@@ -39,17 +40,17 @@ struct _PangoGlyphItem
 
 #define PANGO_TYPE_GLYPH_ITEM (pango_glyph_item_get_type ())
 
-GType pango_glyph_item_get_type (void) G_GNUC_CONST;
+PangoApi GType pango_glyph_item_get_type (void) G_GNUC_CONST;
 
-PangoGlyphItem *pango_glyph_item_split        (PangoGlyphItem *orig,
+PangoApi PangoGlyphItem *pango_glyph_item_split        (PangoGlyphItem *orig,
 					       const char     *text,
 					       int             split_index);
-PangoGlyphItem *pango_glyph_item_copy         (PangoGlyphItem *orig);
-void            pango_glyph_item_free         (PangoGlyphItem *glyph_item);
-GSList *        pango_glyph_item_apply_attrs  (PangoGlyphItem *glyph_item,
+PangoApi PangoGlyphItem *pango_glyph_item_copy         (PangoGlyphItem *orig);
+PangoApi void            pango_glyph_item_free         (PangoGlyphItem *glyph_item);
+PangoApi GSList *        pango_glyph_item_apply_attrs  (PangoGlyphItem *glyph_item,
 					       const char     *text,
 					       PangoAttrList  *list);
-void            pango_glyph_item_letter_space (PangoGlyphItem *glyph_item,
+PangoApi void            pango_glyph_item_letter_space (PangoGlyphItem *glyph_item,
 					       const char     *text,
 					       PangoLogAttr   *log_attrs,
 					       int             letter_spacing);
@@ -73,18 +74,18 @@ struct _PangoGlyphItemIter
 
 #define PANGO_TYPE_GLYPH_ITEM_ITER (pango_glyph_item_iter_get_type ())
 
-GType               pango_glyph_item_iter_get_type (void) G_GNUC_CONST;
-PangoGlyphItemIter *pango_glyph_item_iter_copy (PangoGlyphItemIter *orig);
-void                pango_glyph_item_iter_free (PangoGlyphItemIter *iter);
+PangoApi GType               pango_glyph_item_iter_get_type (void) G_GNUC_CONST;
+PangoApi PangoGlyphItemIter *pango_glyph_item_iter_copy (PangoGlyphItemIter *orig);
+PangoApi void                pango_glyph_item_iter_free (PangoGlyphItemIter *iter);
 
-gboolean pango_glyph_item_iter_init_start   (PangoGlyphItemIter *iter,
+PangoApi gboolean pango_glyph_item_iter_init_start   (PangoGlyphItemIter *iter,
 					     PangoGlyphItem     *glyph_item,
 					     const char         *text);
-gboolean pango_glyph_item_iter_init_end     (PangoGlyphItemIter *iter,
+PangoApi gboolean pango_glyph_item_iter_init_end     (PangoGlyphItemIter *iter,
 					     PangoGlyphItem     *glyph_item,
 					     const char         *text);
-gboolean pango_glyph_item_iter_next_cluster (PangoGlyphItemIter *iter);
-gboolean pango_glyph_item_iter_prev_cluster (PangoGlyphItemIter *iter);
+PangoApi gboolean pango_glyph_item_iter_next_cluster (PangoGlyphItemIter *iter);
+PangoApi gboolean pango_glyph_item_iter_prev_cluster (PangoGlyphItemIter *iter);
 
 G_END_DECLS
 

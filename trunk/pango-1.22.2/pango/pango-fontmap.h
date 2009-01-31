@@ -22,6 +22,7 @@
 #ifndef __PANGO_FONTMAP_H__
 #define __PANGO_FONTMAP_H__
 
+#include <pango/pango-compiler-private.h>
 #include <pango/pango-font.h>
 #include <pango/pango-fontset.h>
 
@@ -33,16 +34,16 @@ G_BEGIN_DECLS
 
 typedef struct _PangoContext PangoContext;
 
-GType         pango_font_map_get_type       (void) G_GNUC_CONST;
-PangoContext * pango_font_map_create_context (PangoFontMap               *fontmap);
-PangoFont *   pango_font_map_load_font     (PangoFontMap                 *fontmap,
+PangoApi GType         pango_font_map_get_type       (void) G_GNUC_CONST;
+PangoApi PangoContext * pango_font_map_create_context (PangoFontMap               *fontmap);
+PangoApi PangoFont *   pango_font_map_load_font     (PangoFontMap                 *fontmap,
 					    PangoContext                 *context,
 					    const PangoFontDescription   *desc);
-PangoFontset *pango_font_map_load_fontset  (PangoFontMap                 *fontmap,
+PangoApi PangoFontset *pango_font_map_load_fontset  (PangoFontMap                 *fontmap,
 					    PangoContext                 *context,
 					    const PangoFontDescription   *desc,
 					    PangoLanguage                *language);
-void          pango_font_map_list_families (PangoFontMap                 *fontmap,
+PangoApi void          pango_font_map_list_families (PangoFontMap                 *fontmap,
 					    PangoFontFamily            ***families,
 					    int                          *n_families);
 
@@ -87,7 +88,7 @@ struct _PangoFontMapClass
   void (*_pango_reserved4) (void);
 };
 
-const char   *pango_font_map_get_shape_engine_type (PangoFontMap *fontmap);
+PangoApi const char   *pango_font_map_get_shape_engine_type (PangoFontMap *fontmap);
 
 #endif /* PANGO_ENABLE_BACKEND */
 

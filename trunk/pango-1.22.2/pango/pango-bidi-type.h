@@ -22,6 +22,7 @@
 #ifndef __PANGO_BIDI_TYPE_H__
 #define __PANGO_BIDI_TYPE_H__
 
+#include <pango/pango-compiler-private.h>
 #include <glib.h>
 
 G_BEGIN_DECLS
@@ -81,7 +82,7 @@ typedef enum {
   PANGO_BIDI_TYPE_ON
 } PangoBidiType;
 
-PangoBidiType pango_bidi_type_for_unichar (gunichar ch) G_GNUC_CONST;
+PangoApi PangoBidiType pango_bidi_type_for_unichar (gunichar ch) G_GNUC_CONST;
 
 /**
  * PangoDirection:
@@ -121,12 +122,12 @@ typedef enum {
   PANGO_DIRECTION_NEUTRAL
 } PangoDirection;
 
-PangoDirection pango_unichar_direction      (gunichar     ch) G_GNUC_CONST;
-PangoDirection pango_find_base_dir          (const gchar *text,
+PangoApi PangoDirection pango_unichar_direction      (gunichar     ch) G_GNUC_CONST;
+PangoApi PangoDirection pango_find_base_dir          (const gchar *text,
 					     gint         length);
 
 #ifndef PANGO_DISABLE_DEPRECATED
-gboolean       pango_get_mirror_char        (gunichar     ch,
+PangoApi gboolean       pango_get_mirror_char        (gunichar     ch,
 					     gunichar    *mirrored_ch);
 #endif
 

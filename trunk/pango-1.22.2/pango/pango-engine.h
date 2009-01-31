@@ -22,6 +22,7 @@
 #ifndef __PANGO_ENGINE_H__
 #define __PANGO_ENGINE_H__
 
+#include <pango/pango-compiler-private.h>
 #include <pango/pango-types.h>
 #include <pango/pango-item.h>
 #include <pango/pango-font.h>
@@ -69,7 +70,7 @@ struct _PangoEngineClass
   GObjectClass parent_class;
 };
 
-GType pango_engine_get_type (void) G_GNUC_CONST;
+PangoApi GType pango_engine_get_type (void) G_GNUC_CONST;
 
 #define PANGO_ENGINE_TYPE_LANG "PangoEngineLang"
 
@@ -123,7 +124,7 @@ struct _PangoEngineLangClass
 			int            attrs_len);
 };
 
-GType pango_engine_lang_get_type (void) G_GNUC_CONST;
+PangoApi GType pango_engine_lang_get_type (void) G_GNUC_CONST;
 
 #define PANGO_ENGINE_TYPE_SHAPE "PangoEngineShape"
 
@@ -196,7 +197,7 @@ struct _PangoEngineShapeClass
 				  gunichar          wc);
 };
 
-GType pango_engine_shape_get_type (void) G_GNUC_CONST;
+PangoApi GType pango_engine_shape_get_type (void) G_GNUC_CONST;
 
 typedef struct _PangoEngineInfo PangoEngineInfo;
 typedef struct _PangoEngineScriptInfo PangoEngineScriptInfo;
@@ -229,7 +230,7 @@ struct _PangoEngineInfo
  * Note that script_engine_init() will not be called before this
  * function.
  **/
-void script_engine_list (PangoEngineInfo **engines,
+PangoApi void script_engine_list (PangoEngineInfo **engines,
 			 int              *n_engines);
 
 /**
@@ -240,7 +241,7 @@ void script_engine_list (PangoEngineInfo **engines,
  * Function to be provided by a module to register any
  * GObject types in the module.
  **/
-void script_engine_init (GTypeModule *module);
+PangoApi void script_engine_init (GTypeModule *module);
 
 
 /**
@@ -249,7 +250,7 @@ void script_engine_init (GTypeModule *module);
  * Function to be provided by the module that is called
  * when the module is unloading. Frequently does nothing.
  **/
-void script_engine_exit (void);
+PangoApi void script_engine_exit (void);
 
 /**
  * script_engine_create:
@@ -264,7 +265,7 @@ void script_engine_exit (void);
  *  acceptable in the case where system misconfiguration or
  *  bugs in the driver routine are encountered.)
  **/
-PangoEngine *script_engine_create (const char *id);
+PangoApi PangoEngine *script_engine_create (const char *id);
 
 /* Utility macro used by PANGO_ENGINE_LANG_DEFINE_TYPE and
  * PANGO_ENGINE_LANG_DEFINE_TYPE

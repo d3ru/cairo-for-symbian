@@ -22,6 +22,7 @@
 #ifndef __PANGO_FONT_H__
 #define __PANGO_FONT_H__
 
+#include <pango/pango-compiler-private.h>
 #include <pango/pango-coverage.h>
 #include <pango/pango-types.h>
 
@@ -98,83 +99,83 @@ typedef enum {
 
 #define PANGO_TYPE_FONT_DESCRIPTION (pango_font_description_get_type ())
 
-GType                 pango_font_description_get_type    (void) G_GNUC_CONST;
-PangoFontDescription *pango_font_description_new         (void);
-PangoFontDescription *pango_font_description_copy        (const PangoFontDescription  *desc);
-PangoFontDescription *pango_font_description_copy_static (const PangoFontDescription  *desc);
-guint                 pango_font_description_hash        (const PangoFontDescription  *desc) G_GNUC_PURE;
-gboolean              pango_font_description_equal       (const PangoFontDescription  *desc1,
+PangoApi GType                 pango_font_description_get_type    (void) G_GNUC_CONST;
+PangoApi PangoFontDescription *pango_font_description_new         (void);
+PangoApi PangoFontDescription *pango_font_description_copy        (const PangoFontDescription  *desc);
+PangoApi PangoFontDescription *pango_font_description_copy_static (const PangoFontDescription  *desc);
+PangoApi guint                 pango_font_description_hash        (const PangoFontDescription  *desc) G_GNUC_PURE;
+PangoApi gboolean              pango_font_description_equal       (const PangoFontDescription  *desc1,
 							  const PangoFontDescription  *desc2) G_GNUC_PURE;
-void                  pango_font_description_free        (PangoFontDescription        *desc);
-void                  pango_font_descriptions_free       (PangoFontDescription       **descs,
+PangoApi void                  pango_font_description_free        (PangoFontDescription        *desc);
+PangoApi void                  pango_font_descriptions_free       (PangoFontDescription       **descs,
 							  int                          n_descs);
 
-void                 pango_font_description_set_family        (PangoFontDescription *desc,
+PangoApi void                 pango_font_description_set_family        (PangoFontDescription *desc,
 							       const char           *family);
-void                 pango_font_description_set_family_static (PangoFontDescription *desc,
+PangoApi void                 pango_font_description_set_family_static (PangoFontDescription *desc,
 							       const char           *family);
-G_CONST_RETURN char *pango_font_description_get_family        (const PangoFontDescription *desc) G_GNUC_PURE;
-void                 pango_font_description_set_style         (PangoFontDescription *desc,
+PangoApi G_CONST_RETURN char *pango_font_description_get_family        (const PangoFontDescription *desc) G_GNUC_PURE;
+PangoApi void                 pango_font_description_set_style         (PangoFontDescription *desc,
 							       PangoStyle            style);
-PangoStyle           pango_font_description_get_style         (const PangoFontDescription *desc) G_GNUC_PURE;
-void                 pango_font_description_set_variant       (PangoFontDescription *desc,
+PangoApi PangoStyle           pango_font_description_get_style         (const PangoFontDescription *desc) G_GNUC_PURE;
+PangoApi void                 pango_font_description_set_variant       (PangoFontDescription *desc,
 							       PangoVariant          variant);
-PangoVariant         pango_font_description_get_variant       (const PangoFontDescription *desc) G_GNUC_PURE;
-void                 pango_font_description_set_weight        (PangoFontDescription *desc,
+PangoApi PangoVariant         pango_font_description_get_variant       (const PangoFontDescription *desc) G_GNUC_PURE;
+PangoApi void                 pango_font_description_set_weight        (PangoFontDescription *desc,
 							       PangoWeight           weight);
-PangoWeight          pango_font_description_get_weight        (const PangoFontDescription *desc) G_GNUC_PURE;
-void                 pango_font_description_set_stretch       (PangoFontDescription *desc,
+PangoApi PangoWeight          pango_font_description_get_weight        (const PangoFontDescription *desc) G_GNUC_PURE;
+PangoApi void                 pango_font_description_set_stretch       (PangoFontDescription *desc,
 							       PangoStretch          stretch);
-PangoStretch         pango_font_description_get_stretch       (const PangoFontDescription *desc) G_GNUC_PURE;
-void                 pango_font_description_set_size          (PangoFontDescription *desc,
+PangoApi PangoStretch         pango_font_description_get_stretch       (const PangoFontDescription *desc) G_GNUC_PURE;
+PangoApi void                 pango_font_description_set_size          (PangoFontDescription *desc,
 							       gint                  size);
-gint                 pango_font_description_get_size          (const PangoFontDescription *desc) G_GNUC_PURE;
-void                 pango_font_description_set_absolute_size (PangoFontDescription *desc,
+PangoApi gint                 pango_font_description_get_size          (const PangoFontDescription *desc) G_GNUC_PURE;
+PangoApi void                 pango_font_description_set_absolute_size (PangoFontDescription *desc,
 							       double                size);
-gboolean             pango_font_description_get_size_is_absolute (const PangoFontDescription *desc) G_GNUC_PURE;
-void                 pango_font_description_set_gravity       (PangoFontDescription *desc,
+PangoApi gboolean             pango_font_description_get_size_is_absolute (const PangoFontDescription *desc) G_GNUC_PURE;
+PangoApi void                 pango_font_description_set_gravity       (PangoFontDescription *desc,
 							       PangoGravity          gravity);
-PangoGravity         pango_font_description_get_gravity       (const PangoFontDescription *desc) G_GNUC_PURE;
+PangoApi PangoGravity         pango_font_description_get_gravity       (const PangoFontDescription *desc) G_GNUC_PURE;
 
-PangoFontMask pango_font_description_get_set_fields (const PangoFontDescription *desc) G_GNUC_PURE;
-void          pango_font_description_unset_fields   (PangoFontDescription       *desc,
+PangoApi PangoFontMask pango_font_description_get_set_fields (const PangoFontDescription *desc) G_GNUC_PURE;
+PangoApi void          pango_font_description_unset_fields   (PangoFontDescription       *desc,
 						     PangoFontMask               to_unset);
 
-void pango_font_description_merge        (PangoFontDescription       *desc,
+PangoApi void pango_font_description_merge        (PangoFontDescription       *desc,
 					  const PangoFontDescription *desc_to_merge,
 					  gboolean                    replace_existing);
-void pango_font_description_merge_static (PangoFontDescription       *desc,
+PangoApi void pango_font_description_merge_static (PangoFontDescription       *desc,
 					  const PangoFontDescription *desc_to_merge,
 					  gboolean                    replace_existing);
 
-gboolean pango_font_description_better_match (const PangoFontDescription *desc,
+PangoApi gboolean pango_font_description_better_match (const PangoFontDescription *desc,
 					      const PangoFontDescription *old_match,
 					      const PangoFontDescription *new_match) G_GNUC_PURE;
 
-PangoFontDescription *pango_font_description_from_string (const char                  *str);
-char *                pango_font_description_to_string   (const PangoFontDescription  *desc);
-char *                pango_font_description_to_filename (const PangoFontDescription  *desc);
+PangoApi PangoFontDescription *pango_font_description_from_string (const char                  *str);
+PangoApi char *                pango_font_description_to_string   (const PangoFontDescription  *desc);
+PangoApi char *                pango_font_description_to_filename (const PangoFontDescription  *desc);
 
 /*
  * PangoFontMetrics
  */
 
 #define PANGO_TYPE_FONT_METRICS  (pango_font_metrics_get_type ())
-GType             pango_font_metrics_get_type                    (void) G_GNUC_CONST;
-PangoFontMetrics *pango_font_metrics_ref                         (PangoFontMetrics *metrics);
-void              pango_font_metrics_unref                       (PangoFontMetrics *metrics);
-int               pango_font_metrics_get_ascent                  (PangoFontMetrics *metrics) G_GNUC_PURE;
-int               pango_font_metrics_get_descent                 (PangoFontMetrics *metrics) G_GNUC_PURE;
-int               pango_font_metrics_get_approximate_char_width  (PangoFontMetrics *metrics) G_GNUC_PURE;
-int               pango_font_metrics_get_approximate_digit_width (PangoFontMetrics *metrics) G_GNUC_PURE;
-int               pango_font_metrics_get_underline_position      (PangoFontMetrics *metrics) G_GNUC_PURE;
-int               pango_font_metrics_get_underline_thickness     (PangoFontMetrics *metrics) G_GNUC_PURE;
-int               pango_font_metrics_get_strikethrough_position  (PangoFontMetrics *metrics) G_GNUC_PURE;
-int               pango_font_metrics_get_strikethrough_thickness (PangoFontMetrics *metrics) G_GNUC_PURE;
+PangoApi GType             pango_font_metrics_get_type                    (void) G_GNUC_CONST;
+PangoApi PangoFontMetrics *pango_font_metrics_ref                         (PangoFontMetrics *metrics);
+PangoApi void              pango_font_metrics_unref                       (PangoFontMetrics *metrics);
+PangoApi int               pango_font_metrics_get_ascent                  (PangoFontMetrics *metrics) G_GNUC_PURE;
+PangoApi int               pango_font_metrics_get_descent                 (PangoFontMetrics *metrics) G_GNUC_PURE;
+PangoApi int               pango_font_metrics_get_approximate_char_width  (PangoFontMetrics *metrics) G_GNUC_PURE;
+PangoApi int               pango_font_metrics_get_approximate_digit_width (PangoFontMetrics *metrics) G_GNUC_PURE;
+PangoApi int               pango_font_metrics_get_underline_position      (PangoFontMetrics *metrics) G_GNUC_PURE;
+PangoApi int               pango_font_metrics_get_underline_thickness     (PangoFontMetrics *metrics) G_GNUC_PURE;
+PangoApi int               pango_font_metrics_get_strikethrough_position  (PangoFontMetrics *metrics) G_GNUC_PURE;
+PangoApi int               pango_font_metrics_get_strikethrough_thickness (PangoFontMetrics *metrics) G_GNUC_PURE;
 
 #ifdef PANGO_ENABLE_BACKEND
 
-PangoFontMetrics *pango_font_metrics_new (void);
+PangoApi PangoFontMetrics *pango_font_metrics_new (void);
 
 struct _PangoFontMetrics
 {
@@ -203,13 +204,13 @@ struct _PangoFontMetrics
 typedef struct _PangoFontFamily      PangoFontFamily;
 typedef struct _PangoFontFace        PangoFontFace;
 
-GType      pango_font_family_get_type       (void) G_GNUC_CONST;
+PangoApi GType      pango_font_family_get_type       (void) G_GNUC_CONST;
 
-void                 pango_font_family_list_faces (PangoFontFamily  *family,
+PangoApi void                 pango_font_family_list_faces (PangoFontFamily  *family,
 						   PangoFontFace  ***faces,
 						   int              *n_faces);
-G_CONST_RETURN char *pango_font_family_get_name   (PangoFontFamily  *family) G_GNUC_PURE;
-gboolean   pango_font_family_is_monospace         (PangoFontFamily  *family) G_GNUC_PURE;
+PangoApi G_CONST_RETURN char *pango_font_family_get_name   (PangoFontFamily  *family) G_GNUC_PURE;
+PangoApi gboolean   pango_font_family_is_monospace         (PangoFontFamily  *family) G_GNUC_PURE;
 
 #ifdef PANGO_ENABLE_BACKEND
 
@@ -254,14 +255,14 @@ struct _PangoFontFamilyClass
 #define PANGO_FONT_FACE(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), PANGO_TYPE_FONT_FACE, PangoFontFace))
 #define PANGO_IS_FONT_FACE(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), PANGO_TYPE_FONT_FACE))
 
-GType      pango_font_face_get_type       (void) G_GNUC_CONST;
+PangoApi GType      pango_font_face_get_type       (void) G_GNUC_CONST;
 
-PangoFontDescription *pango_font_face_describe       (PangoFontFace  *face);
-G_CONST_RETURN char  *pango_font_face_get_face_name  (PangoFontFace  *face) G_GNUC_PURE;
-void                  pango_font_face_list_sizes     (PangoFontFace  *face,
+PangoApi PangoFontDescription *pango_font_face_describe       (PangoFontFace  *face);
+PangoApi G_CONST_RETURN char  *pango_font_face_get_face_name  (PangoFontFace  *face) G_GNUC_PURE;
+PangoApi void                  pango_font_face_list_sizes     (PangoFontFace  *face,
 						      int           **sizes,
 						      int            *n_sizes);
-gboolean              pango_font_face_is_synthesized (PangoFontFace  *face) G_GNUC_PURE;
+PangoApi gboolean              pango_font_face_is_synthesized (PangoFontFace  *face) G_GNUC_PURE;
 
 #ifdef PANGO_ENABLE_BACKEND
 
@@ -306,22 +307,22 @@ struct _PangoFontFaceClass
 #define PANGO_FONT(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), PANGO_TYPE_FONT, PangoFont))
 #define PANGO_IS_FONT(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), PANGO_TYPE_FONT))
 
-GType                 pango_font_get_type          (void) G_GNUC_CONST;
+PangoApi GType                 pango_font_get_type          (void) G_GNUC_CONST;
 
-PangoFontDescription *pango_font_describe          (PangoFont        *font);
-PangoFontDescription *pango_font_describe_with_absolute_size (PangoFont        *font);
-PangoCoverage *       pango_font_get_coverage      (PangoFont        *font,
+PangoApi PangoFontDescription *pango_font_describe          (PangoFont        *font);
+PangoApi PangoFontDescription *pango_font_describe_with_absolute_size (PangoFont        *font);
+PangoApi PangoCoverage *       pango_font_get_coverage      (PangoFont        *font,
 						    PangoLanguage    *language);
-PangoEngineShape *    pango_font_find_shaper       (PangoFont        *font,
+PangoApi PangoEngineShape *    pango_font_find_shaper       (PangoFont        *font,
 						    PangoLanguage    *language,
 						    guint32           ch);
-PangoFontMetrics *    pango_font_get_metrics       (PangoFont        *font,
+PangoApi PangoFontMetrics *    pango_font_get_metrics       (PangoFont        *font,
 						    PangoLanguage    *language);
-void                  pango_font_get_glyph_extents (PangoFont        *font,
+PangoApi void                  pango_font_get_glyph_extents (PangoFont        *font,
 						    PangoGlyph        glyph,
 						    PangoRectangle   *ink_rect,
 						    PangoRectangle   *logical_rect);
-PangoFontMap         *pango_font_get_font_map      (PangoFont        *font);
+PangoApi PangoFontMap         *pango_font_get_font_map      (PangoFont        *font);
 
 #ifdef PANGO_ENABLE_BACKEND
 

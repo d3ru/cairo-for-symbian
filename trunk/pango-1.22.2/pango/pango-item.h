@@ -22,6 +22,7 @@
 #ifndef __PANGO_ITEM_H__
 #define __PANGO_ITEM_H__
 
+#include <pango/pango-compiler-private.h>
 #include <pango/pango-types.h>
 
 G_BEGIN_DECLS
@@ -58,12 +59,12 @@ struct _PangoItem
 
 #define PANGO_TYPE_ITEM (pango_item_get_type ())
 
-GType pango_item_get_type (void) G_GNUC_CONST;
+PangoApi GType pango_item_get_type (void) G_GNUC_CONST;
 
-PangoItem *pango_item_new   (void);
-PangoItem *pango_item_copy  (PangoItem  *item);
-void       pango_item_free  (PangoItem  *item);
-PangoItem *pango_item_split (PangoItem  *orig,
+PangoApi PangoItem *pango_item_new   (void);
+PangoApi PangoItem *pango_item_copy  (PangoItem  *item);
+PangoApi void       pango_item_free  (PangoItem  *item);
+PangoApi PangoItem *pango_item_split (PangoItem  *orig,
 			     int         split_index,
 			     int         split_offset);
 

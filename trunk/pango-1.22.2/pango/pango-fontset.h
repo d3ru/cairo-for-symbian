@@ -22,6 +22,7 @@
 #ifndef __PANGO_FONTSET_H__
 #define __PANGO_FONTSET_H__
 
+#include <pango/pango-compiler-private.h>
 #include <pango/pango-coverage.h>
 #include <pango/pango-types.h>
 
@@ -37,7 +38,7 @@ G_BEGIN_DECLS
 #define PANGO_FONTSET(object)           (G_TYPE_CHECK_INSTANCE_CAST ((object), PANGO_TYPE_FONTSET, PangoFontset))
 #define PANGO_IS_FONTSET(object)        (G_TYPE_CHECK_INSTANCE_TYPE ((object), PANGO_TYPE_FONTSET))
 
-GType pango_fontset_get_type (void) G_GNUC_CONST;
+PangoApi GType pango_fontset_get_type (void) G_GNUC_CONST;
 
 typedef struct _PangoFontset        PangoFontset;
 
@@ -58,10 +59,10 @@ typedef gboolean (*PangoFontsetForeachFunc) (PangoFontset  *fontset,
 					     PangoFont     *font,
 					     gpointer       data);
 
-PangoFont *       pango_fontset_get_font    (PangoFontset           *fontset,
+PangoApi PangoFont *       pango_fontset_get_font    (PangoFontset           *fontset,
 					     guint                   wc);
-PangoFontMetrics *pango_fontset_get_metrics (PangoFontset           *fontset);
-void              pango_fontset_foreach     (PangoFontset           *fontset,
+PangoApi PangoFontMetrics *pango_fontset_get_metrics (PangoFontset           *fontset);
+PangoApi void              pango_fontset_foreach     (PangoFontset           *fontset,
 					     PangoFontsetForeachFunc func,
 					     gpointer                data);
 
@@ -113,12 +114,12 @@ struct _PangoFontsetClass
 typedef struct _PangoFontsetSimple  PangoFontsetSimple;
 typedef struct _PangoFontsetSimpleClass  PangoFontsetSimpleClass;
 
-GType pango_fontset_simple_get_type (void) G_GNUC_CONST;
+PangoApi GType pango_fontset_simple_get_type (void) G_GNUC_CONST;
 
-PangoFontsetSimple * pango_fontset_simple_new    (PangoLanguage      *language);
-void                 pango_fontset_simple_append (PangoFontsetSimple *fontset,
+PangoApi PangoFontsetSimple * pango_fontset_simple_new    (PangoLanguage      *language);
+PangoApi void                 pango_fontset_simple_append (PangoFontsetSimple *fontset,
 						  PangoFont          *font);
-int                  pango_fontset_simple_size   (PangoFontsetSimple *fontset);
+PangoApi int                  pango_fontset_simple_size   (PangoFontsetSimple *fontset);
 
 #endif /* PANGO_ENABLE_BACKEND */
 

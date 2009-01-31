@@ -22,6 +22,7 @@
 #ifndef __PANGO_TABS_H__
 #define __PANGO_TABS_H__
 
+#include <pango/pango-compiler-private.h>
 #include <pango/pango-types.h>
 
 G_BEGIN_DECLS
@@ -43,32 +44,32 @@ typedef enum
 
 #define PANGO_TYPE_TAB_ARRAY (pango_tab_array_get_type ())
 
-PangoTabArray  *pango_tab_array_new                 (gint           initial_size,
+PangoApi PangoTabArray  *pango_tab_array_new                 (gint           initial_size,
 						     gboolean       positions_in_pixels);
-PangoTabArray  *pango_tab_array_new_with_positions  (gint           size,
+PangoApi PangoTabArray  *pango_tab_array_new_with_positions  (gint           size,
 						     gboolean       positions_in_pixels,
 						     PangoTabAlign  first_alignment,
 						     gint           first_position,
 						     ...);
-GType           pango_tab_array_get_type            (void) G_GNUC_CONST;
-PangoTabArray  *pango_tab_array_copy                (PangoTabArray *src);
-void            pango_tab_array_free                (PangoTabArray *tab_array);
-gint            pango_tab_array_get_size            (PangoTabArray *tab_array);
-void            pango_tab_array_resize              (PangoTabArray *tab_array,
+PangoApi GType           pango_tab_array_get_type            (void) G_GNUC_CONST;
+PangoApi PangoTabArray  *pango_tab_array_copy                (PangoTabArray *src);
+PangoApi void            pango_tab_array_free                (PangoTabArray *tab_array);
+PangoApi gint            pango_tab_array_get_size            (PangoTabArray *tab_array);
+PangoApi void            pango_tab_array_resize              (PangoTabArray *tab_array,
 						     gint           new_size);
-void            pango_tab_array_set_tab             (PangoTabArray *tab_array,
+PangoApi void            pango_tab_array_set_tab             (PangoTabArray *tab_array,
 						     gint           tab_index,
 						     PangoTabAlign  alignment,
 						     gint           location);
-void            pango_tab_array_get_tab             (PangoTabArray *tab_array,
+PangoApi void            pango_tab_array_get_tab             (PangoTabArray *tab_array,
 						     gint           tab_index,
 						     PangoTabAlign *alignment,
 						     gint          *location);
-void            pango_tab_array_get_tabs            (PangoTabArray *tab_array,
+PangoApi void            pango_tab_array_get_tabs            (PangoTabArray *tab_array,
 						     PangoTabAlign **alignments,
 						     gint          **locations);
 
-gboolean        pango_tab_array_get_positions_in_pixels (PangoTabArray *tab_array);
+PangoApi gboolean        pango_tab_array_get_positions_in_pixels (PangoTabArray *tab_array);
 
 
 G_END_DECLS
