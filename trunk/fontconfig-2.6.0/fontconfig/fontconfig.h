@@ -37,7 +37,16 @@
 #endif
 
 #ifndef FcPublic
-#define FcPublic
+#ifdef __SYMBIAN32__
+#	include <e32def.h>
+#	ifdef FC_BUILD_LIBRARY
+#		define FcPublic	EXPORT_C
+#	else
+#		define FcPublic	IMPORT_C
+#	endif
+#else
+#	define FcPublic
+#endif
 #endif
 
 typedef unsigned char	FcChar8;
