@@ -4,7 +4,7 @@
 //
 target      pangocairo.dll
 targettype  dll
-uid			0x1000008d 0xa000ff07
+UID 0x1000008d 0xe000ff07
 capability	all -tcb
 
 #ifdef WINSCW
