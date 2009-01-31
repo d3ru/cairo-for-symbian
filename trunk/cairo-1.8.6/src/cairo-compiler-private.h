@@ -44,7 +44,11 @@
 #include "config.h"
 #endif
 
-#if __GNUC__ >= 3 && defined(__ELF__) && !defined(__sun)
+#if defined(__SYMBIAN32__)
+# define slim_hidden_proto(name)
+# define slim_hidden_proto_no_warn(name)
+# define slim_hidden_def(name)
+#elif __GNUC__ >= 3 && defined(__ELF__) && !defined(__sun)
 # define slim_hidden_proto(name)		slim_hidden_proto1(name, slim_hidden_int_name(name)) cairo_private
 # define slim_hidden_proto_no_warn(name)	slim_hidden_proto1(name, slim_hidden_int_name(name)) cairo_private_no_warn
 # define slim_hidden_def(name)			slim_hidden_def1(name, slim_hidden_int_name(name))
