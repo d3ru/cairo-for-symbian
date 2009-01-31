@@ -105,6 +105,8 @@ library		cone.lib
 library		libc.lib
 library		libpthread.lib
 library		libz.lib
+library   libm.lib
+
 library		libpng.lib
 library		pixman-1.lib
 library		freetype.lib
