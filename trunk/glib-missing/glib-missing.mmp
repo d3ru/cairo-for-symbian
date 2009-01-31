@@ -3,8 +3,16 @@
 // Copyright (c) 2009 by iwanj@users.sourceforge.net
 //
 
-target      glib-missing.lib
-targettype  lib
+target      glib-missing.dll
+targettype  dll
+uid			0x1000008d 0xa000ff03
+capability	all -tcb
+
+#ifdef WINSCW
+deffile	bwins/glib-missing.def
+#else
+deffile	eabi/glib-missing.def
+#endif
 
 systeminclude /epoc32/include
 systeminclude /epoc32/include/stdapis
