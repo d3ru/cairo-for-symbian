@@ -1,7 +1,7 @@
 &EN
 
 ; standard SIS file header
-#{"HelloCairo"},(0xA000018F),1,1,0
+#{"HelloCairo"},(0xA000018F),1,0,1
 
 ;Localised Vendor name
 %{"Vendor-EN"}
