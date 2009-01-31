@@ -1,0 +1,19 @@
+SECTION_COMMANDS
+bldmake bldfiles
+abld reallyclean
+abld export
+abld makefile winscw
+abld library winscw
+abld resource winscw udeb
+abld target winscw udeb
+
+SECTION_DIRS
+../lpng1234/projects/symbian
+../pixman-0.13.2/projects/symbian
+../freetype-2.3.7/builds/symbian
+../expat-2.0.1/symbian
+../fontconfig-2.6.0/projects/symbian
+../cairo-1.8.6/projects/symbian
+../pango-1.22.2/projects/symbian
+../glib-missing
+../hellocairo
