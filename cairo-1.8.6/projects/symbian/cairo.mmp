@@ -5,7 +5,7 @@
 
 target		cairo.dll
 targettype	dll
-uid			0x1000008d 0xa000ff06
+UID 0x1000008d 0xe000ff06
 capability	all -tcb
 
 #ifdef WINSCW
