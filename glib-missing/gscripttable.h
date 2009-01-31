@@ -3122,3 +3122,6 @@ static const struct {
  { 0xe0020,    96, G_UNICODE_SCRIPT_COMMON },
  { 0xe0100,   240, G_UNICODE_SCRIPT_INHERITED },
 };
+
+#include <e32def.h>
+IMPORT_C GUnicodeScriptg_unichar_get_script (gunichar ch);

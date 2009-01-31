@@ -50,7 +50,7 @@ g_unichar_get_script_bsearch (gunichar ch)
   return G_UNICODE_SCRIPT_UNKNOWN;
 }
 
-GUnicodeScript
+EXPORT_C GUnicodeScript
 g_unichar_get_script (gunichar ch)
 {
   if (ch < G_EASY_SCRIPTS_RANGE)
