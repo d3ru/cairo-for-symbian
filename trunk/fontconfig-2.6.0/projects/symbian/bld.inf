@@ -11,3 +11,6 @@ fontconfig.mmp
 prj_exports
 ../../fontconfig/fontconfig.h /epoc32/include/fontconfig/fontconfig.h
 ../../fontconfig/fcfreetype.h /epoc32/include/fontconfig/fcfreetype.h
+
+fonts.dtd   c:/data/fontconfig/fonts.dtd
+fonts.conf  c:/data/fontconfig/fonts.conf
