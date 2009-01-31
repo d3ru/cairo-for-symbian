@@ -5,7 +5,7 @@
 
 target      glib-missing.dll
 targettype  dll
-uid			0x1000008d 0xa000ff03
+UID 0x1000008d 0xe000ff03
 capability	all -tcb
 
 #ifdef WINSCW
