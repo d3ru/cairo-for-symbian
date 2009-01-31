@@ -3,9 +3,20 @@
 // Copyright (c) 2009 by iwanj@users.sourceforge.net
 //
 
-target		libpng.lib
-targettype	lib
+target      libpng.dll
+targettype  dll
+uid			0x1000008d 0xe000ff01
+capability	all -tcb
 
+macro	PNG_BUILD_DLL
+
+#ifdef WINSCW
+deffile	bwins/libpng.def
+#else
+deffile	eabi/libpng.def
+#endif
+
+systeminclude	/epoc32/include
 systeminclude	/epoc32/include/stdapis
 userinclude		../..
 sourcepath		../..
