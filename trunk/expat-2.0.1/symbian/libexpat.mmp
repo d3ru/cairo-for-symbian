@@ -3,10 +3,16 @@
 // Copyright (c) 2009 by iwanj@users.sourceforge.net
 //
 
-target      libexpat.lib
-targettype  lib
+target      libexpat.dll
+targettype  dll
+uid			0x1000008d 0xe000ff00
+capability	all -tcb
 
-macro XML_STATIC
+#ifdef WINSCW
+deffile	bwins/libexpat.def
+#else
+deffile	eabi/libexpat.def
+#endif
 
 systeminclude /epoc32/include
 systeminclude /epoc32/include/stdapis
