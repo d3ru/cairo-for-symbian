@@ -7,7 +7,8 @@ prj_platforms
 winscw gcce armv5
 
 prj_mmpfiles
-cairo-static.mmp
+//cairo-static.mmp
+cairo.mmp
 
 prj_exports
 ../../cairo-version.h		/epoc32/include/cairo/cairo-version.h

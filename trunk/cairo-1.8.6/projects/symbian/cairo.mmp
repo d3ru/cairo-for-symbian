@@ -1,14 +1,30 @@
+// cairo makefile for symbian
+//
+// Copyright (c) 2009 by iwanj@users.sourceforge.net
+//
+
 target		cairo.dll
 targettype	dll
-uid 		0x1000008d 0xa000c0de
+uid			0x1000008d 0xa000ff06
+capability	all -tcb
 
-MACRO		HAVE_PTHREAD_H
-MACRO		HAVE_STDINT_H
+#ifdef WINSCW
+deffile	bwins/cairo.def
+#else
+deffile	eabi/cairo.def
+#endif
+
+macro		CAIRO_BUILD_LIBRARY
+macro		HAVE_PTHREAD_H
+macro		HAVE_STDINT_H
 
 systeminclude 	/epoc32/include
 systeminclude	/epoc32/include/stdapis
-systeminclude	../../../lpng1234
-systeminclude	../../../pixman-0.13.2/pixman
+systeminclude	/epoc32/include/png
+systeminclude	/epoc32/include/pixman
+systeminclude	/epoc32/include/freetype
+systeminclude	/epoc32/include/freetype/config
+systeminclude	/epoc32/include/fontconfig
 userinclude		../../src
 
 sourcepath	../../src
@@ -31,6 +47,7 @@ source		cairo-font-face-twin.c
 source		cairo-font-face.c
 source		cairo-font-options.c
 source		cairo-freelist.c
+source		cairo-ft-font.c
 source		cairo-gstate.c
 source		cairo-hash.c
 source		cairo-hull.c
@@ -76,9 +93,19 @@ source		cairo-version.c
 source		cairo-wideint.c
 source		cairo.c
 
+source		cairo-symbian-surface.cpp
+source		cairo-symbian-surface-private.cpp
+
+library		euser.lib
+library		gdi.lib
+library		fbscli.lib
+library		ws32.lib
+library		cone.lib
+
 library		libc.lib
 library		libpthread.lib
 library		libz.lib
-
-staticlibrary	libpng.lib
-staticlibrary	pixman-1.lib
+library		libpng.lib
+library		pixman-1.lib
+library		freetype.lib
+library		fontconfig.lib

@@ -53,6 +53,13 @@
 #ifndef cairo_public
 # if defined (_MSC_VER) && ! defined (CAIRO_WIN32_STATIC_BUILD)
 #  define cairo_public __declspec(dllimport)
+# elif defined(__SYMBIAN32__)
+#	include <e32def.h>
+# 	ifdef CAIRO_BUILD_LIBRARY
+#		define cairo_public	EXPORT_C
+# 	else
+#		define cairo_public IMPORT_C
+# 	endif
 # else
 #  define cairo_public
 # endif
