@@ -3,8 +3,18 @@
 // Copyright (c) 2009 by iwanj@users.sourceforge.net
 //
 
-target		fontconfig.lib
-targettype	lib
+target		fontconfig.dll
+targettype	dll
+uid			0x1000008d 0xa000ff05
+capability	all -tcb
+
+macro	FC_BUILD_LIBRARY
+
+#ifdef WINSCW
+deffile	bwins/fontconfig.def
+#else
+deffile	eabi/fontconfig.def
+#endif
 
 macro HAVE_STDINT_H
 macro HAVE_RANDOM
@@ -43,6 +53,6 @@ source	fcstr.c
 source	fcxml.c
 source	ftglue.c
 
-library		    libc.lib
-staticlibrary	libexpat.lib
-staticlibrary	freetype.lib
+library	libc.lib
+library	libexpat.lib
+library	freetype.lib
