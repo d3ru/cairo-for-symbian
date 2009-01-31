@@ -44,4 +44,9 @@ library fbscli.lib
 library ws32.lib
 
 library libc.lib
+library	libm.lib
+library libgobject.lib
+library	libglib.lib
+library	fontconfig.lib
+library	cairo.lib
 library	pangocairo.lib
