@@ -44,21 +44,4 @@ library fbscli.lib
 library ws32.lib
 
 library libc.lib
-staticlibrary	pangocairo.lib
-staticlibrary	glib-missing.lib
-
-#ifndef __WINSCW__
-library			gdi.lib
-library			libm.lib
-library			libpthread.lib
-library			libz.lib
-library			libglib.lib
-
-staticlibrary	libpng.lib
-staticlibrary	pixman-1.lib
-staticlibrary	freetype.lib
-staticlibrary	cairo-static.lib
-staticlibrary	fontconfig.lib
-staticlibrary	libexpat.lib	
-#endif
-
+library	pangocairo.lib
