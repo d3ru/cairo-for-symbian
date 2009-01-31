@@ -6,6 +6,7 @@
 target		hellocairo.exe
 targettype	exe
 uid			0x100039ce 0xa000018f
+capability	none
 
 systeminclude	/epoc32/include
 systeminclude	/epoc32/include/stdapis
