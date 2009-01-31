@@ -1,0 +1,3 @@
+EXPORTS
+	g_unichar_get_script @ 1 NONAME
+
