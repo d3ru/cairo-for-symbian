@@ -22,6 +22,7 @@
 #ifndef __PANGO_SCRIPT_H__
 #define __PANGO_SCRIPT_H__
 
+#include <pango/pango-compiler-private.h>
 #include <glib.h>
 
 G_BEGIN_DECLS
@@ -124,20 +125,20 @@ typedef enum {                         /* ISO 15924 code */
       PANGO_SCRIPT_LYDIAN              /* Lydi */
 } PangoScript;
 
-PangoScript pango_script_for_unichar         (gunichar             ch) G_GNUC_CONST;
+PangoApi PangoScript pango_script_for_unichar         (gunichar             ch) G_GNUC_CONST;
 
-PangoScriptIter *pango_script_iter_new       (const char          *text,
+PangoApi PangoScriptIter *pango_script_iter_new       (const char          *text,
 					      int                  length);
-void             pango_script_iter_get_range (PangoScriptIter      *iter,
+PangoApi void             pango_script_iter_get_range (PangoScriptIter      *iter,
 					      G_CONST_RETURN char **start,
 					      G_CONST_RETURN char **end,
 					      PangoScript          *script);
-gboolean         pango_script_iter_next      (PangoScriptIter      *iter);
-void             pango_script_iter_free      (PangoScriptIter      *iter);
+PangoApi gboolean         pango_script_iter_next      (PangoScriptIter      *iter);
+PangoApi void             pango_script_iter_free      (PangoScriptIter      *iter);
 
 #include <pango/pango-language.h>
 
-PangoLanguage *pango_script_get_sample_language (PangoScript    script) G_GNUC_PURE;
+PangoApi PangoLanguage *pango_script_get_sample_language (PangoScript    script) G_GNUC_PURE;
 
 G_END_DECLS
 

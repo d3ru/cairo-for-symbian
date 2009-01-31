@@ -22,6 +22,7 @@
 #ifndef __PANGO_GRAVITY_H__
 #define __PANGO_GRAVITY_H__
 
+#include <pango/pango-compiler-private.h>
 #include <glib.h>
 
 G_BEGIN_DECLS
@@ -97,9 +98,9 @@ typedef enum {
 #include <pango/pango-matrix.h>
 #include <pango/pango-script.h>
 
-double       pango_gravity_to_rotation    (PangoGravity       gravity) G_GNUC_CONST;
-PangoGravity pango_gravity_get_for_matrix (const PangoMatrix *matrix) G_GNUC_PURE;
-PangoGravity pango_gravity_get_for_script (PangoScript        script,
+PangoApi double       pango_gravity_to_rotation    (PangoGravity       gravity) G_GNUC_CONST;
+PangoApi PangoGravity pango_gravity_get_for_matrix (const PangoMatrix *matrix) G_GNUC_PURE;
+PangoApi PangoGravity pango_gravity_get_for_script (PangoScript        script,
 					   PangoGravity       base_gravity,
 					   PangoGravityHint   hint) G_GNUC_CONST;
 

@@ -22,33 +22,34 @@
 #ifndef __PANGO_UTILS_H__
 #define __PANGO_UTILS_H__
 
+#include <pango/pango-compiler-private.h>
 #include <stdio.h>
 #include <glib.h>
 #include <pango/pango-font.h>
 
 G_BEGIN_DECLS
 
-char **  pango_split_file_list (const char *str);
+PangoApi char **  pango_split_file_list (const char *str);
 
-char    *pango_trim_string     (const char *str);
-gint     pango_read_line      (FILE        *stream,
+PangoApi char    *pango_trim_string     (const char *str);
+PangoApi gint     pango_read_line      (FILE        *stream,
 			       GString     *str);
-gboolean pango_skip_space     (const char **pos);
-gboolean pango_scan_word      (const char **pos,
+PangoApi gboolean pango_skip_space     (const char **pos);
+PangoApi gboolean pango_scan_word      (const char **pos,
 			       GString     *out);
-gboolean pango_scan_string    (const char **pos,
+PangoApi gboolean pango_scan_string    (const char **pos,
 			       GString     *out);
-gboolean pango_scan_int       (const char **pos,
+PangoApi gboolean pango_scan_int       (const char **pos,
 			       int         *out);
 
 #ifdef PANGO_ENABLE_BACKEND
-char *   pango_config_key_get (const char  *key);
-void     pango_lookup_aliases (const char   *fontname,
+PangoApi char *   pango_config_key_get (const char  *key);
+PangoApi void     pango_lookup_aliases (const char   *fontname,
 			       char       ***families,
 			       int          *n_families);
 #endif /* PANGO_ENABLE_BACKEND */
 
-gboolean pango_parse_enum     (GType       type,
+PangoApi gboolean pango_parse_enum     (GType       type,
 			       const char *str,
 			       int        *value,
 			       gboolean    warn,
@@ -61,16 +62,16 @@ gboolean pango_parse_enum     (GType       type,
  * a warning is printed (with g_warning) if the string does not
  * contain a valid value.
  */
-gboolean pango_parse_style   (const char   *str,
+PangoApi gboolean pango_parse_style   (const char   *str,
 			      PangoStyle   *style,
 			      gboolean      warn);
-gboolean pango_parse_variant (const char   *str,
+PangoApi gboolean pango_parse_variant (const char   *str,
 			      PangoVariant *variant,
 			      gboolean      warn);
-gboolean pango_parse_weight  (const char   *str,
+PangoApi gboolean pango_parse_weight  (const char   *str,
 			      PangoWeight  *weight,
 			      gboolean      warn);
-gboolean pango_parse_stretch (const char   *str,
+PangoApi gboolean pango_parse_stretch (const char   *str,
 			      PangoStretch *stretch,
 			      gboolean      warn);
 
@@ -82,31 +83,31 @@ gboolean pango_parse_stretch (const char   *str,
  * stored in the registry). The returned string should not be
  * g_free'd.
  */
-G_CONST_RETURN char *   pango_get_sysconf_subdirectory (void) G_GNUC_PURE;
+PangoApi G_CONST_RETURN char *   pango_get_sysconf_subdirectory (void) G_GNUC_PURE;
 
 /* Ditto for LIBDIR/pango. On Win32, use the same Pango
  * installation directory. This returned string should not be
  * g_free'd either.
  */
-G_CONST_RETURN char *   pango_get_lib_subdirectory (void) G_GNUC_PURE;
+PangoApi G_CONST_RETURN char *   pango_get_lib_subdirectory (void) G_GNUC_PURE;
 
 #endif /* PANGO_ENABLE_BACKEND */
 
 /* Hint line position and thickness.
  */
-void pango_quantize_line_geometry (int *thickness,
+PangoApi void pango_quantize_line_geometry (int *thickness,
 				   int *position);
 
 /* A routine from fribidi that we either wrap or provide ourselves.
  */
-guint8 * pango_log2vis_get_embedding_levels (const gchar    *text,
+PangoApi guint8 * pango_log2vis_get_embedding_levels (const gchar    *text,
 					     int             length,
 					     PangoDirection *pbase_dir);
 
 /* Unicode characters that are zero-width and should not be rendered
  * normally.
  */
-gboolean pango_is_zero_width (gunichar ch) G_GNUC_CONST;
+PangoApi gboolean pango_is_zero_width (gunichar ch) G_GNUC_CONST;
 
 /* Pango version checking */
 
@@ -128,13 +129,13 @@ gboolean pango_is_zero_width (gunichar ch) G_GNUC_CONST;
 
 
 /* Return encoded version of Pango at run-time */
-int pango_version (void) G_GNUC_CONST;
+PangoApi int pango_version (void) G_GNUC_CONST;
 
 /* Return run-time Pango version as an string */
-G_CONST_RETURN char * pango_version_string (void) G_GNUC_CONST;
+PangoApi G_CONST_RETURN char * pango_version_string (void) G_GNUC_CONST;
 
 /* Check that run-time Pango is as new as required */
-G_CONST_RETURN char * pango_version_check (int required_major,
+PangoApi G_CONST_RETURN char * pango_version_check (int required_major,
 					   int required_minor,
 					   int required_micro) G_GNUC_CONST;
 

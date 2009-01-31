@@ -35,3 +35,5 @@ prj_exports
 ../../pango/pango-types.h	      /epoc32/include/pango/pango-types.h
 ../../pango/pango-utils.h	      /epoc32/include/pango/pango-utils.h
 ../../pango/pangocairo.h	      /epoc32/include/pango/pangocairo.h
+
+../../pango/pango-compiler-private.h  /epoc32/include/pango/pango-compiler-private.h

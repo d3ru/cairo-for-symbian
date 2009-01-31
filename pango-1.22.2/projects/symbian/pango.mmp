@@ -2,9 +2,18 @@
 //
 // Copyright (c) 2009 by iwanj@users.sourceforge.net
 //
-target      pangocairo.lib
-targettype  lib
+target      pangocairo.dll
+targettype  dll
+uid			0x1000008d 0xa000ff07
+capability	all -tcb
 
+#ifdef WINSCW
+deffile	bwins/pangocairo.def
+#else
+deffile	eabi/pangocairo.def
+#endif
+
+macro	PANGO_BUILD_LIBRARY
 macro	PANGO_ENABLE_BACKEND
 macro	PANGO_ENABLE_ENGINE
 macro	G_OS_SYMBIAN
@@ -89,9 +98,12 @@ sourcepath	../../modules/basic
 source	basic-fc.c
 
 library 		libc.lib
+library			libm.lib
 library			libglib.lib
 library			libgobject.lib
 library			libgthread.lib
 library			libgmodule.lib
-
-staticlibrary	cairo-static.lib
+library			glib-missing.lib
+library			cairo.lib
+library			freetype.lib
+library			fontconfig.lib

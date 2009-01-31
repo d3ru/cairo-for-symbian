@@ -22,6 +22,7 @@
 #ifndef __PANGO_MATRIX_H__
 #define __PANGO_MATRIX_H__
 
+#include <pango/pango-compiler-private.h>
 #include <glib.h>
 #include <glib-object.h>
 
@@ -84,32 +85,32 @@ struct _PangoMatrix
 /* for PangoRectangle */
 #include <pango/pango-types.h>
 
-GType pango_matrix_get_type (void) G_GNUC_CONST;
+PangoApi GType pango_matrix_get_type (void) G_GNUC_CONST;
 
-PangoMatrix *pango_matrix_copy   (const PangoMatrix *matrix);
-void         pango_matrix_free   (PangoMatrix *matrix);
+PangoApi PangoMatrix *pango_matrix_copy   (const PangoMatrix *matrix);
+PangoApi void         pango_matrix_free   (PangoMatrix *matrix);
 
-void pango_matrix_translate (PangoMatrix *matrix,
+PangoApi void pango_matrix_translate (PangoMatrix *matrix,
 			     double       tx,
 			     double       ty);
-void pango_matrix_scale     (PangoMatrix *matrix,
+PangoApi void pango_matrix_scale     (PangoMatrix *matrix,
 			     double       scale_x,
 			     double       scale_y);
-void pango_matrix_rotate    (PangoMatrix *matrix,
+PangoApi void pango_matrix_rotate    (PangoMatrix *matrix,
 			     double       degrees);
-void pango_matrix_concat    (PangoMatrix       *matrix,
+PangoApi void pango_matrix_concat    (PangoMatrix       *matrix,
 			     const PangoMatrix *new_matrix);
-void pango_matrix_transform_point    (const PangoMatrix *matrix,
+PangoApi void pango_matrix_transform_point    (const PangoMatrix *matrix,
 				      double            *x,
 				      double            *y);
-void pango_matrix_transform_distance (const PangoMatrix *matrix,
+PangoApi void pango_matrix_transform_distance (const PangoMatrix *matrix,
 				      double            *dx,
 				      double            *dy);
-void pango_matrix_transform_rectangle (const PangoMatrix *matrix,
+PangoApi void pango_matrix_transform_rectangle (const PangoMatrix *matrix,
 				       PangoRectangle    *rect);
-void pango_matrix_transform_pixel_rectangle (const PangoMatrix *matrix,
+PangoApi void pango_matrix_transform_pixel_rectangle (const PangoMatrix *matrix,
 					     PangoRectangle    *rect);
-double pango_matrix_get_font_scale_factor (const PangoMatrix *matrix) G_GNUC_PURE;
+PangoApi double pango_matrix_get_font_scale_factor (const PangoMatrix *matrix) G_GNUC_PURE;
 
 
 G_END_DECLS

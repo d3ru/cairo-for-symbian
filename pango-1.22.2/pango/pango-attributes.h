@@ -22,6 +22,7 @@
 #ifndef __PANGO_ATTRIBUTES_H__
 #define __PANGO_ATTRIBUTES_H__
 
+#include <pango/pango-compiler-private.h>
 #include <pango/pango-font.h>
 #include <glib-object.h>
 
@@ -39,13 +40,13 @@ struct _PangoColor
 };
 
 #define PANGO_TYPE_COLOR pango_color_get_type ()
-GType       pango_color_get_type (void) G_GNUC_CONST;
+PangoApi GType       pango_color_get_type (void) G_GNUC_CONST;
 
-PangoColor *pango_color_copy     (const PangoColor *src);
-void        pango_color_free     (PangoColor       *color);
-gboolean    pango_color_parse    (PangoColor       *color,
+PangoApi PangoColor *pango_color_copy     (const PangoColor *src);
+PangoApi void        pango_color_free     (PangoColor       *color);
+PangoApi gboolean    pango_color_parse    (PangoColor       *color,
 				  const char       *spec);
-gchar      *pango_color_to_string(const PangoColor *color);
+PangoApi gchar      *pango_color_to_string(const PangoColor *color);
 
 
 /* Attributes */
@@ -176,95 +177,94 @@ struct _PangoAttrFontDesc
   PangoFontDescription *desc;
 };
 
-PangoAttrType         pango_attr_type_register (const gchar        *name);
-G_CONST_RETURN char * pango_attr_type_get_name (PangoAttrType       type) G_GNUC_CONST;
+PangoApi PangoAttrType         pango_attr_type_register (const gchar        *name);
+PangoApi G_CONST_RETURN char * pango_attr_type_get_name (PangoAttrType       type) G_GNUC_CONST;
 
-void             pango_attribute_init        (PangoAttribute       *attr,
+PangoApi void             pango_attribute_init        (PangoAttribute       *attr,
 					      const PangoAttrClass *klass);
-PangoAttribute * pango_attribute_copy        (const PangoAttribute *attr);
-void             pango_attribute_destroy     (PangoAttribute       *attr);
-gboolean         pango_attribute_equal       (const PangoAttribute *attr1,
+PangoApi PangoAttribute * pango_attribute_copy        (const PangoAttribute *attr);
+PangoApi void             pango_attribute_destroy     (PangoAttribute       *attr);
+PangoApi gboolean         pango_attribute_equal       (const PangoAttribute *attr1,
 					      const PangoAttribute *attr2) G_GNUC_PURE;
 
-PangoAttribute *pango_attr_language_new      (PangoLanguage              *language);
-PangoAttribute *pango_attr_family_new        (const char                 *family);
-PangoAttribute *pango_attr_foreground_new    (guint16                     red,
+PangoApi PangoAttribute *pango_attr_language_new      (PangoLanguage              *language);
+PangoApi PangoAttribute *pango_attr_family_new        (const char                 *family);
+PangoApi PangoAttribute *pango_attr_foreground_new    (guint16                     red,
 					      guint16                     green,
 					      guint16                     blue);
-PangoAttribute *pango_attr_background_new    (guint16                     red,
+PangoApi PangoAttribute *pango_attr_background_new    (guint16                     red,
 					      guint16                     green,
 					      guint16                     blue);
-PangoAttribute *pango_attr_size_new          (int                         size);
-PangoAttribute *pango_attr_size_new_absolute (int                         size);
-PangoAttribute *pango_attr_style_new         (PangoStyle                  style);
-PangoAttribute *pango_attr_weight_new        (PangoWeight                 weight);
-PangoAttribute *pango_attr_variant_new       (PangoVariant                variant);
-PangoAttribute *pango_attr_stretch_new       (PangoStretch                stretch);
-PangoAttribute *pango_attr_font_desc_new     (const PangoFontDescription *desc);
-
-PangoAttribute *pango_attr_underline_new           (PangoUnderline underline);
-PangoAttribute *pango_attr_underline_color_new     (guint16        red,
+PangoApi PangoAttribute *pango_attr_size_new          (int                         size);
+PangoApi PangoAttribute *pango_attr_size_new_absolute (int                         size);
+PangoApi PangoAttribute *pango_attr_style_new         (PangoStyle                  style);
+PangoApi PangoAttribute *pango_attr_weight_new        (PangoWeight                 weight);
+PangoApi PangoAttribute *pango_attr_variant_new       (PangoVariant                variant);
+PangoApi PangoAttribute *pango_attr_stretch_new       (PangoStretch                stretch);
+PangoApi PangoAttribute *pango_attr_font_desc_new     (const PangoFontDescription *desc);
+PangoApi PangoAttribute *pango_attr_underline_new           (PangoUnderline underline);
+PangoApi PangoAttribute *pango_attr_underline_color_new     (guint16        red,
 						    guint16        green,
 						    guint16        blue);
-PangoAttribute *pango_attr_strikethrough_new       (gboolean       strikethrough);
-PangoAttribute *pango_attr_strikethrough_color_new (guint16        red,
+PangoApi PangoAttribute *pango_attr_strikethrough_new       (gboolean       strikethrough);
+PangoApi PangoAttribute *pango_attr_strikethrough_color_new (guint16        red,
 						    guint16        green,
 						    guint16        blue);
 
-PangoAttribute *pango_attr_rise_new          (int                         rise);
-PangoAttribute *pango_attr_scale_new         (double                      scale_factor);
-PangoAttribute *pango_attr_fallback_new      (gboolean                    enable_fallback);
-PangoAttribute *pango_attr_letter_spacing_new (int                        letter_spacing);
+PangoApi PangoAttribute *pango_attr_rise_new          (int                         rise);
+PangoApi PangoAttribute *pango_attr_scale_new         (double                      scale_factor);
+PangoApi PangoAttribute *pango_attr_fallback_new      (gboolean                    enable_fallback);
+PangoApi PangoAttribute *pango_attr_letter_spacing_new (int                        letter_spacing);
 
-PangoAttribute *pango_attr_shape_new           (const PangoRectangle       *ink_rect,
+PangoApi PangoAttribute *pango_attr_shape_new           (const PangoRectangle       *ink_rect,
 						const PangoRectangle       *logical_rect);
-PangoAttribute *pango_attr_shape_new_with_data (const PangoRectangle       *ink_rect,
+PangoApi PangoAttribute *pango_attr_shape_new_with_data (const PangoRectangle       *ink_rect,
 						const PangoRectangle       *logical_rect,
 						gpointer                    data,
 						PangoAttrDataCopyFunc       copy_func,
 						GDestroyNotify              destroy_func);
 
-PangoAttribute *pango_attr_gravity_new      (PangoGravity     gravity);
-PangoAttribute *pango_attr_gravity_hint_new (PangoGravityHint hint);
+PangoApi PangoAttribute *pango_attr_gravity_new      (PangoGravity     gravity);
+PangoApi PangoAttribute *pango_attr_gravity_hint_new (PangoGravityHint hint);
 
-GType              pango_attr_list_get_type      (void) G_GNUC_CONST;
-PangoAttrList *    pango_attr_list_new           (void);
-PangoAttrList *    pango_attr_list_ref           (PangoAttrList  *list);
-void               pango_attr_list_unref         (PangoAttrList  *list);
-PangoAttrList *    pango_attr_list_copy          (PangoAttrList  *list);
-void               pango_attr_list_insert        (PangoAttrList  *list,
+PangoApi GType              pango_attr_list_get_type      (void) G_GNUC_CONST;
+PangoApi PangoAttrList *    pango_attr_list_new           (void);
+PangoApi PangoAttrList *    pango_attr_list_ref           (PangoAttrList  *list);
+PangoApi void               pango_attr_list_unref         (PangoAttrList  *list);
+PangoApi PangoAttrList *    pango_attr_list_copy          (PangoAttrList  *list);
+PangoApi void               pango_attr_list_insert        (PangoAttrList  *list,
 						  PangoAttribute *attr);
-void               pango_attr_list_insert_before (PangoAttrList  *list,
+PangoApi void               pango_attr_list_insert_before (PangoAttrList  *list,
 						  PangoAttribute *attr);
-void               pango_attr_list_change        (PangoAttrList  *list,
+PangoApi void               pango_attr_list_change        (PangoAttrList  *list,
 						  PangoAttribute *attr);
-void               pango_attr_list_splice        (PangoAttrList  *list,
+PangoApi void               pango_attr_list_splice        (PangoAttrList  *list,
 						  PangoAttrList  *other,
 						  gint            pos,
 						  gint            len);
 
-PangoAttrList *pango_attr_list_filter (PangoAttrList       *list,
+PangoApi PangoAttrList *pango_attr_list_filter (PangoAttrList       *list,
 				       PangoAttrFilterFunc  func,
 				       gpointer             data);
 
-PangoAttrIterator *pango_attr_list_get_iterator  (PangoAttrList  *list);
+PangoApi PangoAttrIterator *pango_attr_list_get_iterator  (PangoAttrList  *list);
 
-void               pango_attr_iterator_range    (PangoAttrIterator     *iterator,
+PangoApi void               pango_attr_iterator_range    (PangoAttrIterator     *iterator,
 						 gint                  *start,
 						 gint                  *end);
-gboolean           pango_attr_iterator_next     (PangoAttrIterator     *iterator);
-PangoAttrIterator *pango_attr_iterator_copy     (PangoAttrIterator     *iterator);
-void               pango_attr_iterator_destroy  (PangoAttrIterator     *iterator);
-PangoAttribute *   pango_attr_iterator_get      (PangoAttrIterator     *iterator,
+PangoApi gboolean           pango_attr_iterator_next     (PangoAttrIterator     *iterator);
+PangoApi PangoAttrIterator *pango_attr_iterator_copy     (PangoAttrIterator     *iterator);
+PangoApi void               pango_attr_iterator_destroy  (PangoAttrIterator     *iterator);
+PangoApi PangoAttribute *   pango_attr_iterator_get      (PangoAttrIterator     *iterator,
 						 PangoAttrType          type);
-void               pango_attr_iterator_get_font (PangoAttrIterator     *iterator,
+PangoApi void               pango_attr_iterator_get_font (PangoAttrIterator     *iterator,
 						 PangoFontDescription  *desc,
 						 PangoLanguage        **language,
 						 GSList               **extra_attrs);
-GSList *          pango_attr_iterator_get_attrs (PangoAttrIterator     *iterator);
+PangoApi GSList *          pango_attr_iterator_get_attrs (PangoAttrIterator     *iterator);
 
 
-gboolean pango_parse_markup (const char                 *markup_text,
+PangoApi gboolean pango_parse_markup (const char                 *markup_text,
 			     int                         length,
 			     gunichar                    accel_marker,
 			     PangoAttrList             **attr_list,

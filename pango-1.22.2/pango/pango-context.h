@@ -22,6 +22,7 @@
 #ifndef __PANGO_CONTEXT_H__
 #define __PANGO_CONTEXT_H__
 
+#include <pango/pango-compiler-private.h>
 #include <pango/pango-font.h>
 #include <pango/pango-fontmap.h>
 #include <pango/pango-attributes.h>
@@ -47,58 +48,58 @@ typedef struct _PangoContextClass PangoContextClass;
  * need to create a subclass of these, file a bug.
  */
 
-GType         pango_context_get_type      (void) G_GNUC_CONST;
+PangoApi GType         pango_context_get_type      (void) G_GNUC_CONST;
 
-PangoContext *pango_context_new           (void);
-void          pango_context_set_font_map  (PangoContext                 *context,
+PangoApi PangoContext *pango_context_new           (void);
+PangoApi void          pango_context_set_font_map  (PangoContext                 *context,
 					   PangoFontMap                 *font_map);
-PangoFontMap *pango_context_get_font_map  (PangoContext                 *context);
+PangoApi PangoFontMap *pango_context_get_font_map  (PangoContext                 *context);
 
-void          pango_context_list_families (PangoContext                 *context,
+PangoApi void          pango_context_list_families (PangoContext                 *context,
 					   PangoFontFamily            ***families,
 					   int                          *n_families);
-PangoFont *   pango_context_load_font     (PangoContext                 *context,
+PangoApi PangoFont *   pango_context_load_font     (PangoContext                 *context,
 					   const PangoFontDescription   *desc);
-PangoFontset *pango_context_load_fontset  (PangoContext                 *context,
+PangoApi PangoFontset *pango_context_load_fontset  (PangoContext                 *context,
 					   const PangoFontDescription   *desc,
 					   PangoLanguage                *language);
 
-PangoFontMetrics *pango_context_get_metrics   (PangoContext                 *context,
+PangoApi PangoFontMetrics *pango_context_get_metrics   (PangoContext                 *context,
 					       const PangoFontDescription   *desc,
 					       PangoLanguage                *language);
 
-void                      pango_context_set_font_description (PangoContext               *context,
+PangoApi void                      pango_context_set_font_description (PangoContext               *context,
 							      const PangoFontDescription *desc);
-PangoFontDescription *    pango_context_get_font_description (PangoContext               *context);
-PangoLanguage            *pango_context_get_language         (PangoContext               *context);
-void                      pango_context_set_language         (PangoContext               *context,
+PangoApi PangoFontDescription *    pango_context_get_font_description (PangoContext               *context);
+PangoApi PangoLanguage            *pango_context_get_language         (PangoContext               *context);
+PangoApi void                      pango_context_set_language         (PangoContext               *context,
 							      PangoLanguage              *language);
-void                      pango_context_set_base_dir         (PangoContext               *context,
+PangoApi void                      pango_context_set_base_dir         (PangoContext               *context,
 							      PangoDirection              direction);
-PangoDirection            pango_context_get_base_dir         (PangoContext               *context);
-void                      pango_context_set_base_gravity     (PangoContext               *context,
+PangoApi PangoDirection            pango_context_get_base_dir         (PangoContext               *context);
+PangoApi void                      pango_context_set_base_gravity     (PangoContext               *context,
 							      PangoGravity                gravity);
-PangoGravity              pango_context_get_base_gravity     (PangoContext               *context);
-PangoGravity              pango_context_get_gravity          (PangoContext               *context);
-void                      pango_context_set_gravity_hint     (PangoContext               *context,
+PangoApi PangoGravity              pango_context_get_base_gravity     (PangoContext               *context);
+PangoApi PangoGravity              pango_context_get_gravity          (PangoContext               *context);
+PangoApi void                      pango_context_set_gravity_hint     (PangoContext               *context,
 							      PangoGravityHint            hint);
-PangoGravityHint          pango_context_get_gravity_hint     (PangoContext               *context);
+PangoApi PangoGravityHint          pango_context_get_gravity_hint     (PangoContext               *context);
 
-void                        pango_context_set_matrix (PangoContext      *context,
+PangoApi void                        pango_context_set_matrix (PangoContext      *context,
 						      const PangoMatrix *matrix);
-G_CONST_RETURN PangoMatrix *pango_context_get_matrix (PangoContext      *context);
+PangoApi G_CONST_RETURN PangoMatrix *pango_context_get_matrix (PangoContext      *context);
 
 /* Break a string of Unicode characters into segments with
  * consistent shaping/language engine and bidrectional level.
  * Returns a #GList of #PangoItem's
  */
-GList *pango_itemize                (PangoContext      *context,
+PangoApi GList *pango_itemize                (PangoContext      *context,
 				     const char        *text,
 				     int                start_index,
 				     int                length,
 				     PangoAttrList     *attrs,
 				     PangoAttrIterator *cached_iter);
-GList *pango_itemize_with_base_dir  (PangoContext      *context,
+PangoApi GList *pango_itemize_with_base_dir  (PangoContext      *context,
 				     PangoDirection     base_dir,
 				     const char        *text,
 				     int                start_index,

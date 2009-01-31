@@ -21,6 +21,7 @@
 #ifndef __PANGO_RENDERER_H_
 #define __PANGO_RENDERER_H_
 
+#include <pango/pango-compiler-private.h>
 #include <pango/pango-layout.h>
 
 G_BEGIN_DECLS
@@ -190,38 +191,38 @@ struct _PangoRendererClass
   void (*_pango_reserved4) (void);
 };
 
-GType pango_renderer_get_type    (void) G_GNUC_CONST;
+PangoApi GType pango_renderer_get_type    (void) G_GNUC_CONST;
 
-void pango_renderer_draw_layout          (PangoRenderer    *renderer,
+PangoApi void pango_renderer_draw_layout          (PangoRenderer    *renderer,
 					  PangoLayout      *layout,
 					  int               x,
 					  int               y);
-void pango_renderer_draw_layout_line     (PangoRenderer    *renderer,
+PangoApi void pango_renderer_draw_layout_line     (PangoRenderer    *renderer,
 					  PangoLayoutLine  *line,
 					  int               x,
 					  int               y);
-void pango_renderer_draw_glyphs          (PangoRenderer    *renderer,
+PangoApi void pango_renderer_draw_glyphs          (PangoRenderer    *renderer,
 					  PangoFont        *font,
 					  PangoGlyphString *glyphs,
 					  int               x,
 					  int               y);
-void pango_renderer_draw_glyph_item      (PangoRenderer    *renderer,
+PangoApi void pango_renderer_draw_glyph_item      (PangoRenderer    *renderer,
 					  const char       *text,
 					  PangoGlyphItem   *glyph_item,
 					  int               x,
 					  int               y);
-void pango_renderer_draw_rectangle       (PangoRenderer    *renderer,
+PangoApi void pango_renderer_draw_rectangle       (PangoRenderer    *renderer,
 					  PangoRenderPart   part,
 					  int               x,
 					  int               y,
 					  int               width,
 					  int               height);
-void pango_renderer_draw_error_underline (PangoRenderer    *renderer,
+PangoApi void pango_renderer_draw_error_underline (PangoRenderer    *renderer,
 					  int               x,
 					  int               y,
 					  int               width,
 					  int               height);
-void pango_renderer_draw_trapezoid       (PangoRenderer    *renderer,
+PangoApi void pango_renderer_draw_trapezoid       (PangoRenderer    *renderer,
 					  PangoRenderPart   part,
 					  double            y1_,
 					  double            x11,
@@ -229,30 +230,30 @@ void pango_renderer_draw_trapezoid       (PangoRenderer    *renderer,
 					  double            y2,
 					  double            x12,
 					  double            x22);
-void pango_renderer_draw_glyph           (PangoRenderer    *renderer,
+PangoApi void pango_renderer_draw_glyph           (PangoRenderer    *renderer,
 					  PangoFont        *font,
 					  PangoGlyph        glyph,
 					  double            x,
 					  double            y);
 
-void pango_renderer_activate             (PangoRenderer    *renderer);
-void pango_renderer_deactivate           (PangoRenderer    *renderer);
+PangoApi void pango_renderer_activate             (PangoRenderer    *renderer);
+PangoApi void pango_renderer_deactivate           (PangoRenderer    *renderer);
 
-void        pango_renderer_part_changed (PangoRenderer   *renderer,
+PangoApi void        pango_renderer_part_changed (PangoRenderer   *renderer,
 					 PangoRenderPart  part);
 
-void        pango_renderer_set_color (PangoRenderer    *renderer,
+PangoApi void        pango_renderer_set_color (PangoRenderer    *renderer,
 				      PangoRenderPart   part,
 				      const PangoColor *color);
-PangoColor *pango_renderer_get_color (PangoRenderer    *renderer,
+PangoApi PangoColor *pango_renderer_get_color (PangoRenderer    *renderer,
 				      PangoRenderPart   part);
 
-void                        pango_renderer_set_matrix (PangoRenderer     *renderer,
+PangoApi void                        pango_renderer_set_matrix (PangoRenderer     *renderer,
 						       const PangoMatrix *matrix);
-G_CONST_RETURN PangoMatrix *pango_renderer_get_matrix (PangoRenderer     *renderer);
+PangoApi G_CONST_RETURN PangoMatrix *pango_renderer_get_matrix (PangoRenderer     *renderer);
 
-PangoLayout     *pango_renderer_get_layout      (PangoRenderer     *renderer);
-PangoLayoutLine *pango_renderer_get_layout_line (PangoRenderer     *renderer);
+PangoApi PangoLayout     *pango_renderer_get_layout      (PangoRenderer     *renderer);
+PangoApi PangoLayoutLine *pango_renderer_get_layout_line (PangoRenderer     *renderer);
 
 G_END_DECLS
 
