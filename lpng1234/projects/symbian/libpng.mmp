@@ -41,4 +41,5 @@ source		pngwutil.c
 
 library		libc.lib
 library		libz.lib
+library   libm.lib
 
