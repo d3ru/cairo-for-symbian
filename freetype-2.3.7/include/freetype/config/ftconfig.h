@@ -331,6 +331,14 @@ FT_BEGIN_HEADER
 
 #endif /* !FT_BASE_DEF */
 
+#ifdef __SYMBIAN32__
+#include <e32def.h>
+#ifdef FT2_BUILD_LIBRARY
+#define FT_EXPORT(x)		EXPORT_C x
+#else
+#define FT_EXPORT(x)		IMPORT_C x
+#endif
+#endif
 
 #ifndef FT_EXPORT
 
