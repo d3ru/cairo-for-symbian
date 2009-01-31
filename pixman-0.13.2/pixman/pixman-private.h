@@ -741,6 +741,8 @@ pixman_compute_composite_region32 (pixman_region32_t *	pRegion,
 /* Sun Studio 8 visibility */
 #elif defined(__SUNPRO_C) && (__SUNPRO_C >= 0x550)
 #define PIXMAN_EXPORT __global
+#elif defined(__SYMBIAN32__)
+/* macro defined in pixman.h to allow both external and internal usage */
 #else
 #define PIXMAN_EXPORT
 #endif

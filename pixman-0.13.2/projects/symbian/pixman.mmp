@@ -3,9 +3,20 @@
 // Copyright (c) 2009 by iwanj@users.sourceforge.net
 //
 
-target		pixman-1.lib
-targettype	lib
+target		pixman-1.dll
+targettype	dll
+uid			0x1000008d 0xa000ff04
+capability	all -tcb
 
+macro	PIXMAN_BUILD_LIBRARY
+
+#ifdef WINSCW
+deffile	bwins/pixman-1.def
+#else
+deffile	eabi/pixman-1.def
+#endif
+
+systeminclude	/epoc32/include
 systeminclude	/epoc32/include/stdapis
 systeminclude	../../pixman
 
