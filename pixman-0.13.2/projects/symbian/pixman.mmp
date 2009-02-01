@@ -5,8 +5,8 @@
 
 target		pixman-1.dll
 targettype	dll
-UID 0x1000008d 0xe000ff04
-capability	all -tcb
+uid			0x1000008d 0xe000ff04
+capability	none
 
 macro	PIXMAN_BUILD_LIBRARY
 
