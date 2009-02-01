@@ -12,14 +12,6 @@
 ;Supports Series 60 v 3.0
 [0x101F7961], 0, 0, 0, {"S60ProductID"}
 
-if not package(0x20013851)
-@"pips_nokia_1_3_SS.sis", (0x20013851)
-endif
-
-if not package(0x200110cc)
-@"glib.sis", (0x200110cc)
-endif
-
 ;Files to install
 "\symbian\9.2\s60_3rd_fp1_2\epoc32\release\gcce\urel\hellocairo.exe"    - "c:\sys\bin\hellocairo.exe"
 "\symbian\9.2\s60_3rd_fp1_2\epoc32\data\z\resource\apps\hellocairo.rsc" - "c:\resource\apps\hellocairo.rsc"
