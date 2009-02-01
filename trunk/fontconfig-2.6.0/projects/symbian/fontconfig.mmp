@@ -5,8 +5,8 @@
 
 target		fontconfig.dll
 targettype	dll
-UID 0x1000008d 0xe000ff05
-capability	all -tcb
+uid 		0x1000008d 0xe000ff05
+capability	none
 
 macro	FC_BUILD_LIBRARY
 
