@@ -10,6 +10,6 @@
 #   define PangoApi IMPORT_C
 # endif
 
-#endif
+#endif /* PANGO_BUILD_LIBRARY */
 
-#endif
+#endif /* PANGO_COMPILER_PRIVATE_H */
