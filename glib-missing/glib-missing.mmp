@@ -5,8 +5,8 @@
 
 target      glib-missing.dll
 targettype  dll
-UID 0x1000008d 0xe000ff03
-capability	all -tcb
+uid 		0x1000008d 0xe000ff03
+capability	none
 
 #ifdef WINSCW
 deffile	bwins/glib-missing.def
