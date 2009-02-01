@@ -44,7 +44,6 @@ static const struct {
 
 static void draw_text_fc(cairo_t* cr)
 	{
-	FcInit();
     FcPattern *pattern = FcPatternCreate ();
     FcPatternAddString (pattern, FC_FAMILY, (const FcChar8 *)"Sans");
     FcPatternAddInteger (pattern, FC_WEIGHT, FC_WEIGHT_NORMAL);
@@ -75,7 +74,6 @@ static void draw_text_fc(cairo_t* cr)
 	
 	FcPatternDestroy(match);
 	FcPatternDestroy(pattern);
-	FcFini();
 	}
 
 static void draw_text_pango(cairo_t* cr)
@@ -591,28 +589,21 @@ static const func_rec drawing_samples[] =
 	FUNC_REC(draw_arc),
 	FUNC_REC(draw_arc_negative),
 	FUNC_REC(draw_clip),
-#ifdef __WINSCW__
 	FUNC_REC(draw_clip_image),
-#endif
 	FUNC_REC(draw_curve_rectangle),
 	FUNC_REC(draw_curve_to),
 	FUNC_REC(draw_dash),
 	FUNC_REC(draw_fill_and_stroke2),
 	FUNC_REC(draw_fill_style),
-#ifdef __WINSCW__
 	FUNC_REC(draw_gradient),
 	FUNC_REC(draw_image),
 	FUNC_REC(draw_image_pattern),
-#endif
 	FUNC_REC(draw_multi_segment_caps),
 	FUNC_REC(draw_set_line_cap),
-	FUNC_REC(draw_set_line_join)
-#ifdef __WINSCW__
-	,
+	FUNC_REC(draw_set_line_join),
 	FUNC_REC(draw_text),
 	FUNC_REC(draw_text_align_center),
 	FUNC_REC(draw_text_extents)
-#endif
 	};
 
 int number_of_cairo_samples()
