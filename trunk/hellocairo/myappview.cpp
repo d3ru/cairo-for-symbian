@@ -25,6 +25,7 @@
 
 #include <cairo.h>
 #include <cairo-symbian.h>
+#include <fontconfig.h>
 
 const TInt KOneSecond = 1000*1000;
 
@@ -62,6 +63,8 @@ void CMyAppView::ConstructL( const TRect& aRect )
 
     iNumberOfSamples = number_of_cairo_samples();
     iTimer = CPeriodic::NewL(CActive::EPriorityLow);
+    
+    FcInit();
     }
 
 CMyAppView::CMyAppView()
@@ -76,6 +79,8 @@ CMyAppView::~CMyAppView()
     cairo_destroy(iContext);
     cairo_surface_destroy(iSurface);
     cairo_debug_reset_static_data();
+    
+    FcFini();
     }
 
 void CMyAppView::Draw( const TRect& aRect) const
