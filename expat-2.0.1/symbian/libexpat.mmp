@@ -5,8 +5,8 @@
 
 target      libexpat.dll
 targettype  dll
-UID 0x1000008d 0xe000ff00
-capability	all -tcb
+uid			0x1000008d 0xe000ff00
+capability	none
 
 #ifdef WINSCW
 deffile	bwins/libexpat.def
