@@ -15,8 +15,8 @@
 //
 target 			freetype.dll
 targettype 		dll
-UID 0x1000008d 0xe000ff02
-capability		all -tcb
+uid				0x1000008d 0xe000ff02
+capability		none
 
 #ifdef WINSCW
 deffile	bwins/freetype.def
