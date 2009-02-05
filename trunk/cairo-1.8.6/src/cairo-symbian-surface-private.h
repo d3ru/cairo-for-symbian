@@ -45,6 +45,7 @@ class TCairoSymbianUtil
 public:
 	static cairo_content_t ToCairoContent(TDisplayMode);
 	static cairo_format_t ToCairoFormat(TDisplayMode);
+	static TRect ToRect(const cairo_rectangle_int_t&);
 	};
 
 class RWsSession;
@@ -74,7 +75,7 @@ public:
 	void SetSize(TInt, TInt);	
 	cairo_image_surface_t* Lock();
 	void Unlock();
-	void Flush();
+	void Flush(const TRect&);
 
 private:
 	XCairoSymbianSurface(RWindow*);
