@@ -99,7 +99,7 @@ _cairo_symbian_surface_release_dest_image (void *abstract_surface,
 	XCairoSymbianSurface *sym_surface = (XCairoSymbianSurface *) abstract_surface;
 	sym_surface->Unlock();
 
-	sym_surface->Flush();
+	sym_surface->Flush(TCairoSymbianUtil::ToRect(*interest_rect));
 }
 
 static cairo_int_status_t
@@ -184,6 +184,17 @@ cairo_format_t TCairoSymbianUtil::ToCairoFormat(TDisplayMode aMode)
 
 	__ASSERT_ALWAYS(EFalse, User::Invariant());
 	return CAIRO_FORMAT_ARGB32; // to get rid of warning
+	}
+
+TRect TCairoSymbianUtil::ToRect(const cairo_rectangle_int_t& aRect)
+	{
+	TRect r;
+	r.iTl.iX = aRect.x;
+	r.iTl.iY = aRect.y;
+	r.SetWidth(aRect.width);
+	r.SetHeight(aRect.height);
+	
+	return r;
 	}
 
 /**
@@ -304,10 +315,10 @@ void XCairoSymbianSurface::Unlock()
 	iCache->UnlockHeap();
 	}
 
-void XCairoSymbianSurface::Flush()
+void XCairoSymbianSurface::Flush(const TRect& aRect)
 	{
 	/* must be called when GC is active and within RWindow::BeginRedraw/EndRedraw block */
-	iGc->BitBlt(TPoint(), iCache);
+	iGc->BitBlt(aRect.iTl, iCache, aRect);
 	iWs->Flush();
 	}
 
