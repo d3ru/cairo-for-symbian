@@ -8,6 +8,10 @@ targettype	exe
 uid			0x100039ce 0xa000018f
 capability	none
 
+#ifndef ARMCC
+macro	HAS_PANGO
+#endif
+
 systeminclude	/epoc32/include
 systeminclude	/epoc32/include/stdapis
 systeminclude	/epoc32/include/cairo
@@ -50,5 +54,8 @@ library libgobject.lib
 library	libglib.lib
 library	fontconfig.lib
 library	cairo.lib
-//library	pangocairo.lib
+#ifndef ARMCC
+library	pangocairo.lib
+#endif
+
 
