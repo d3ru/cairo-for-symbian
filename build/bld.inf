@@ -6,4 +6,5 @@
 #include "../cairo-1.8.6/projects/symbian/bld.inf"
 #include "../pango-1.22.2/projects/symbian/bld.inf"
 #include "../glib-missing/bld.inf"
+#include "../gcce-missing/bld.inf"
 #include "../hellocairo/bld.inf"
