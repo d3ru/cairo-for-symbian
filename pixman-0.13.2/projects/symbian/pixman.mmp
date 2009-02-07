@@ -8,6 +8,8 @@ targettype	dll
 uid			0x1000008d 0xe000ff04
 capability	none
 
+epocallowdlldata
+
 macro	PIXMAN_BUILD_LIBRARY
 
 #ifdef WINSCW
