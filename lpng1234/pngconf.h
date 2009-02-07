@@ -1390,18 +1390,18 @@ typedef z_stream FAR *  png_zstreamp;
 
 #if defined(__SYMBIAN32__)
 #	undef PNGAPI
-#	undef PNX_IMPEXP
+#	undef PNG_IMPEXP
 #	undef PNG_EXPORT
+#	undef PNG_EXPORT_VAR
+#	define PNGAPI
 #	include <e32def.h>
 #	ifdef PNG_BUILD_DLL
 #		define PNG_IMPEXP	EXPORT_C
-#		define PNGAPI 		EXPORT_C
-#		define PNG_EXPORT(type, symbol)	EXPORT_C type symbol
 #	else
 #		define PNG_IMPEXP	IMPORT_C
-#		define PNGAPI 		IMPORT_C
-#		define PNG_EXPORT(type, symbol)	IMPORT_C type symbol
 #	endif
+#	define PNG_EXPORT(type, symbol)	PNG_IMPEXP type symbol
+#	define PNG_EXPORT_VAR(type) extern PNG_IMPEXP type
 #endif
 
 #ifndef PNGAPI
