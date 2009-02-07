@@ -1,0 +1,31 @@
+&EN
+
+; standard SIS file header
+#{"HelloCairo"}, (0xa000018f), 1, 0, 1
+
+;Localised Vendor name
+%{"Vendor-EN"}
+
+;Unique Vendor name
+:"iwanj@users.sourceforge.net"
+
+;Supports Series 60 v 3.0
+[0x101F7961], 0, 0, 0, {"S60ProductID"}
+
+;Files to install
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\release\armv5\urel\hellocairo.exe"    - "c:\sys\bin\hellocairo.exe"
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\data\z\resource\apps\hellocairo.rsc" - "c:\resource\apps\hellocairo.rsc"
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\data\z\private\10003a3f\import\apps\hellocairo_reg.rsc" - "c:\private\10003a3f\import\apps\hellocairo_reg.rsc"
+
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\release\armv5\urel\glib-missing.dll"  - "c:\sys\bin\glib-missing.dll"
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\release\armv5\urel\libexpat.dll"      - "c:\sys\bin\libexpat.dll"
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\release\armv5\urel\freetype.dll"      - "c:\sys\bin\freetype.dll"
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\release\armv5\urel\fontconfig.dll"    - "c:\sys\bin\fontconfig.dll"
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\release\armv5\urel\libpng.dll"        - "c:\sys\bin\libpng.dll"
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\release\armv5\urel\pixman-1.dll"      - "c:\sys\bin\pixman-1.dll"
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\release\armv5\urel\cairo.dll"         - "c:\sys\bin\cairo.dll"
+;"\symbian\9.2\s60_3rd_fp1_2\epoc32\release\armv5\urel\pangocairo.dll"    - "c:\sys\bin\pangocairo.dll"
+
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\data\c\data\romedalen.png"           - "c:\data\romedalen.png"
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\data\c\data\fontconfig\fonts.dtd"    - "c:\data\fontconfig\fonts.dtd"
+"\symbian\9.2\s60_3rd_fp1_2\epoc32\data\c\data\fontconfig\fonts.conf"   - "c:\data\fontconfig\fonts.conf"
