@@ -1,0 +1,8 @@
+target      gcce-missing.lib
+targettype  lib
+
+systeminclude /epoc32/include
+systeminclude /epoc32/include/stdapis
+
+sourcepath  .
+source      div.c
