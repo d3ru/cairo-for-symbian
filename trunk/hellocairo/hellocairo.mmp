@@ -10,7 +10,7 @@ capability	none
 
 epocstacksize	16384
 
-#ifndef ARMCC
+#ifdef WINSCW
 macro	HAS_PANGO
 #endif
 
@@ -56,7 +56,7 @@ library libgobject.lib
 library	libglib.lib
 library	fontconfig.lib
 library	cairo.lib
-#ifndef ARMCC
+#ifdef WINSCW
 library	pangocairo.lib
 #endif
 
