@@ -8,6 +8,8 @@ targettype	dll
 uid 		0x1000008d 0xe000ff05
 capability	none
 
+epocallowdlldata
+
 macro	FC_BUILD_LIBRARY
 
 #ifdef WINSCW
