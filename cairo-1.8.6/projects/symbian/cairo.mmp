@@ -8,6 +8,8 @@ targettype	dll
 uid			0x1000008d 0xe000ff06
 capability	none
 
+epocallowdlldata
+
 #ifdef WINSCW
 deffile	bwins/cairo.def
 #else
@@ -17,6 +19,7 @@ deffile	eabi/cairo.def
 macro		CAIRO_BUILD_LIBRARY
 macro		HAVE_PTHREAD_H
 macro		HAVE_STDINT_H
+macro		HAVE_UINT64_T=1
 
 systeminclude 	/epoc32/include
 systeminclude	/epoc32/include/stdapis
