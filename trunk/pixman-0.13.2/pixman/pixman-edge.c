@@ -87,7 +87,11 @@
  * 8 bit alpha
  */
 
+#ifdef __ARMCC__
+static __inline uint8_t
+#else
 static inline uint8_t
+#endif
 clip255 (int x)
 {
     if (x > 255) return 255;
