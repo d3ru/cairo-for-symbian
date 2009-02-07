@@ -6,7 +6,6 @@ This is some kind of roadmap for this project.
 
 = Details =
 
- * Add support for ARMV5 target.
  * Build and run existing Cairo regression test-suite
  * Bugs fixing
  * Optimise surface backend
