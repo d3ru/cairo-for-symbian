@@ -8,6 +8,8 @@ targettype  dll
 uid 		0x1000008d 0xe000ff03
 capability	none
 
+epocallowdlldata
+
 #ifdef WINSCW
 deffile	bwins/glib-missing.def
 #else
