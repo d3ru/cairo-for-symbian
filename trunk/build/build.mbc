@@ -16,4 +16,5 @@ SECTION_DIRS
 ../cairo-1.8.6/projects/symbian
 ../pango-1.22.2/projects/symbian
 ../glib-missing
+../gcce-missing
 ../hellocairo
