@@ -40,7 +40,7 @@
 #define XMLCALL __attribute__((cdecl))
 #elif defined(__SYMBIAN32__)
 #include <e32def.h>
-#define XMLCALL	EXPORT_C
+#define XMLCALL
 #else
 /* For any platform which uses this definition and supports more than
    one calling convention, we need to extend this definition to
@@ -70,7 +70,14 @@
 #define XMLIMPORT	IMPORT_C
 #endif
 
+#else /* XML_BUILDING_EXPAT */
+
+#ifdef __SYMBIAN32__
+#include <e32def.h>
+#define XMLIMPORT	EXPORT_C
 #endif
+
+#endif /* XML_BUILDING_EXPAT */
 #endif  /* not defined XML_STATIC */
 
 
