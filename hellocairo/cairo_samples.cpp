@@ -25,7 +25,9 @@
 #include "cairo_samples.h"
 #include <cairo-ft.h>
 #include <fontconfig.h>
+#if HAS_PANGO
 #include <pangocairo.h>
+#endif
 #include <glib.h>
 
 static const struct {
@@ -76,6 +78,7 @@ static void draw_text_fc(cairo_t* cr)
 	FcPatternDestroy(pattern);
 	}
 
+#if HAS_PANGO
 static void draw_text_pango(cairo_t* cr)
 	{
 	PangoFontDescription* desc = pango_font_description_new();
@@ -102,7 +105,7 @@ static void draw_text_pango(cairo_t* cr)
 	g_object_unref(layout);
 	pango_font_description_free(desc);
 	}
-
+#endif
 
 /**
 * The following drawing samples code were copied from Cairo code snippets found at  
@@ -585,7 +588,9 @@ struct func_rec
 static const func_rec drawing_samples[] = 
 	{
 	FUNC_REC(draw_text_fc),
+#if HAS_PANGO	
 	FUNC_REC(draw_text_pango),
+#endif	
 	FUNC_REC(draw_arc),
 	FUNC_REC(draw_arc_negative),
 	FUNC_REC(draw_clip),

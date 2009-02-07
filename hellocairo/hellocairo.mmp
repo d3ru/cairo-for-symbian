@@ -50,4 +50,5 @@ library libgobject.lib
 library	libglib.lib
 library	fontconfig.lib
 library	cairo.lib
-library	pangocairo.lib
+//library	pangocairo.lib
+
