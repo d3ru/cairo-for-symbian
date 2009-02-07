@@ -8,6 +8,8 @@ targettype	exe
 uid			0x100039ce 0xa000018f
 capability	none
 
+epocstacksize	16384
+
 #ifndef ARMCC
 macro	HAS_PANGO
 #endif
