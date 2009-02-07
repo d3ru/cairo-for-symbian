@@ -188,14 +188,14 @@ typedef struct _FbComposeData {
 } FbComposeData;
 
 typedef struct _FbComposeFunctions32 {
-    CombineFuncU32 *combineU;
-    CombineFuncC32 *combineC;
+    const CombineFuncU32 *combineU;
+    const CombineFuncC32 *combineC;
     CombineMaskU32 combineMaskU;
 } FbComposeFunctions32;
 
 typedef struct _FbComposeFunctions64 {
-    CombineFuncU64 *combineU;
-    CombineFuncC64 *combineC;
+    const CombineFuncU64 *combineU;
+    const CombineFuncC64 *combineC;
     CombineMaskU64 combineMaskU;
 } FbComposeFunctions64;
 
