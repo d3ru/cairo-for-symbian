@@ -199,8 +199,8 @@ typedef struct _FbComposeFunctions64 {
     CombineMaskU64 combineMaskU;
 } FbComposeFunctions64;
 
-extern FbComposeFunctions32 pixman_composeFunctions;
-extern FbComposeFunctions64 pixman_composeFunctions64;
+extern const FbComposeFunctions32 pixman_composeFunctions;
+extern const FbComposeFunctions64 pixman_composeFunctions64;
 
 void pixman_composite_rect_general_accessors (const FbComposeData *data,
                                               void *src_buffer,

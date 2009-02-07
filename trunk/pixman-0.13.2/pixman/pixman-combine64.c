@@ -1172,7 +1172,7 @@ fbCombineConjointXorC (uint64_t *dest, uint64_t *src, uint64_t *mask, int width)
     fbCombineConjointGeneralC (dest, src, mask, width, CombineXor);
 }
 
-static CombineFuncU64 pixman_fbCombineFuncU[] = {
+static const CombineFuncU64 pixman_fbCombineFuncU[] = {
     fbCombineClear,
     fbCombineSrcU,
     NULL, /* CombineDst */
@@ -1219,7 +1219,7 @@ static CombineFuncU64 pixman_fbCombineFuncU[] = {
     fbCombineConjointXorU,
 };
 
-static CombineFuncC64 pixman_fbCombineFuncC[] = {
+static const CombineFuncC64 pixman_fbCombineFuncC[] = {
     fbCombineClearC,
     fbCombineSrcC,
     NULL, /* Dest */
@@ -1266,7 +1266,7 @@ static CombineFuncC64 pixman_fbCombineFuncC[] = {
     fbCombineConjointXorC,
 };
 
-FbComposeFunctions64 pixman_composeFunctions64 = {
+const FbComposeFunctions64 pixman_composeFunctions64 = {
     pixman_fbCombineFuncU,
     pixman_fbCombineFuncC,
     pixman_fbCombineMaskU
