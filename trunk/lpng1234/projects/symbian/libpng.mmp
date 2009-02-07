@@ -8,12 +8,18 @@ targettype  dll
 uid			0x1000008d 0xe000ff01
 capability	none
 
+epocallowdlldata
+
 macro	PNG_BUILD_DLL
 
-#ifdef WINSCW
+#if defined(CW32)
 deffile	bwins/libpng.def
-#else
+#elif defined(ARMCC)
 deffile	eabi/libpng.def
+#elif defined(GCCE)
+deffile eabi/libpng_gcce.def
+#else
+#error compiler not supported
 #endif
 
 systeminclude	/epoc32/include
