@@ -107,3 +107,7 @@ library			glib-missing.lib
 library			cairo.lib
 library			freetype.lib
 library			fontconfig.lib
+
+#ifdef GCCE
+staticlibrary gcce-missing.lib
+#endif

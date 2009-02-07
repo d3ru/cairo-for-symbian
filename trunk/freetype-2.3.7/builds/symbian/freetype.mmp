@@ -147,3 +147,7 @@ userinclude		..\..\src\type42
 userinclude		..\..\src\winfonts
 
 library			libc.lib
+
+#ifdef GCCE
+staticlibrary gcce-missing.lib
+#endif

@@ -114,3 +114,7 @@ library		libpng.lib
 library		pixman-1.lib
 library		freetype.lib
 library		fontconfig.lib
+
+#ifdef GCCE
+staticlibrary gcce-missing.lib
+#endif

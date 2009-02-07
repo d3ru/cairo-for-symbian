@@ -47,5 +47,8 @@ source		pngwutil.c
 
 library		libc.lib
 library		libz.lib
-library   libm.lib
+library   	libm.lib
 
+#ifdef GCCE
+staticlibrary	gcce-missing.lib
+#endif

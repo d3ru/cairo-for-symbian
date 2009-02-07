@@ -53,3 +53,7 @@ source		pixman-matrix.c
 
 library		libc.lib
 library   libm.lib
+
+#ifdef GCCE
+staticlibrary gcce-missing.lib
+#endif
