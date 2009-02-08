@@ -25,10 +25,16 @@
 #ifndef __MODULES_H__
 #define __MODULES_H__
 
-extern const PangoIncludedModule _pango_included_lang_modules[];
-//extern PangoIncludedModule _pango_included_x_modules[];
-extern const PangoIncludedModule _pango_included_fc_modules[];
-//extern PangoIncludedModule _pango_included_win32_modules[];
-//extern PangoIncludedModule _pango_included_atsui_modules[];
+extern
+#ifdef __GCCE__
+const
+#endif
+PangoIncludedModule _pango_included_lang_modules[];
+
+extern
+#ifdef __GCCE__
+const
+#endif
+PangoIncludedModule _pango_included_fc_modules[];
 
 #endif /* __MODULES_H__ */

@@ -38,7 +38,11 @@ typedef PangoEngineShapeClass BasicEngineFcClass;
 #define SCRIPT_ENGINE_NAME "BasicScriptEngineFc"
 #define RENDER_TYPE PANGO_RENDER_TYPE_FC
 
-static const PangoEngineScriptInfo basic_scripts[] = {
+static
+#ifdef __GCCE__
+const
+#endif
+PangoEngineScriptInfo basic_scripts[] = {
   /* Listed in OpenType "Standard scripts" standard */
   { PANGO_SCRIPT_LATIN,    "*" },
   { PANGO_SCRIPT_CYRILLIC, "*" },
@@ -83,7 +87,11 @@ static const PangoEngineScriptInfo basic_scripts[] = {
   { PANGO_SCRIPT_COMMON,   "" }
 };
 
-static const PangoEngineInfo script_engines[] = {
+static
+#ifdef __GCCE__
+const
+#endif
+PangoEngineInfo script_engines[] = {
   {
     SCRIPT_ENGINE_NAME,
     PANGO_ENGINE_TYPE_SHAPE,

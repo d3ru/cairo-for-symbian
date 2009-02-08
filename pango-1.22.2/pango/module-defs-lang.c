@@ -2,6 +2,9 @@
 
 #include "module-defs.h"
 
-const PangoIncludedModule _pango_included_lang_modules[] = {
+#ifdef __GCCE__
+const
+#endif
+PangoIncludedModule _pango_included_lang_modules[] = {
  { NULL, NULL, NULL, NULL },
 };
