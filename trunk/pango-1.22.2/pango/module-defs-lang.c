@@ -2,6 +2,6 @@
 
 #include "module-defs.h"
 
-PangoIncludedModule _pango_included_lang_modules[] = {
+const PangoIncludedModule _pango_included_lang_modules[] = {
  { NULL, NULL, NULL, NULL },
 };
