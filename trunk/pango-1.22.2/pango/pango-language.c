@@ -481,22 +481,46 @@ typedef struct {
 /* Pure black magic, based on appendix of dsohowto.pdf */
 #define POOLSTRFIELD(line) POOLSTRFIELD1(line)
 #define POOLSTRFIELD1(line) str##line
+
+/* RVCT patch by Jani Uusi-Rantala */
+#ifdef __ARMCC__
+typedef union {
+#else
 static const union _LangPool {
+#endif /* __ARMCC__ */
+
   struct {
     char str0[1];
 #define LANGUAGE(id, source, sample) char POOLSTRFIELD(__LINE__)[sizeof(sample)];
 #include "pango-language-sample-table.h"
 #undef LANGUAGE
+
+/* RVCT patch by Jani Uusi-Rantala */
+#ifdef __ARMCC__
+  } dummy;
+  const char str[1];
+} _LangPool;
+static const _LangPool lang_pool = { {
+#else
   };
   const char str[1];
 } lang_pool = { {
+#endif
+
     "",
 #define LANGUAGE(id, source, sample) sample,
 #include "pango-language-sample-table.h"
 #undef LANGUAGE
 } };
 static const LangInfo lang_texts[] = {
+
+/* RVCT patch by Jani Uusi-Rantala */
+#ifdef __ARMCC__
+#define LANGUAGE(id, source, sample) {G_STRINGIFY(id),	G_STRUCT_OFFSET(_LangPool, dummy. POOLSTRFIELD(__LINE__))},
+#else
 #define LANGUAGE(id, source, sample) {G_STRINGIFY(id),	G_STRUCT_OFFSET(union _LangPool, POOLSTRFIELD(__LINE__))},
+#endif /* __ARMCC__ */
+
 #include "pango-language-sample-table.h"
 #undef LANGUAGE
   /* One extra entry with no final comma, to make it C89-happy */
